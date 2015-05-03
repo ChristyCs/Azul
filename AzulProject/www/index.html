@@ -1,21 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="favicon.ico" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-    console.log("Hello world");
-});
-</script>
+<script src="js/game.js"></script>
+<script src="js/gameObject.js"></script>
+
 </head>
 <body>
-
-<p>If you click on me, I will disappear.</p>
-<p>Click me away!</p>
-<p>Click me too!</p>
-
+    <!--<div id="Canvas" style="width: 800px; height: 600px; background: #A7A7A7; top: 10%; left:25%; position:absolute;"></div>-->
+    <canvas id="viewport" height="480" width="640" style="background-color: rgb(160,160,160);"></canvas>
+    <script>    
+    $(document).ready(function(){
+//        $('#viewport').css('background-color', 'rgb(158, 167, 184)')
+        Game.initialize();
+        var arr = []
+        var isLimit = false;
+        var limit = 10;
+        $("#viewport").click(function(e){       
+          if(arr.length < limit){
+              arr.push(new gameObject(e.pageX, e.pageY));
+          }
+        })
+        
+        Game.run = (function(){
+            var loops = 0, skipTicks = 1000/Game.fps,
+            maxFrameSkip = 10,
+            nextGameTick = (new Date).getTime();
+            
+            return function(){
+                loops = 0;
+                
+                while((new Date).getTime() > nextGameTick){
+                    Game.update(arr);
+                    nextGameTick += skipTicks;
+                    loops++
+                }
+                Game.draw(arr);
+            }
+        })();
+        
+        (function(){
+            var onEachFrame = function(cb){
+                setInterval(cb, 1000/60);
+            };
+            
+            window.onEachFrame = onEachFrame;
+            
+        })();
+        window.onEachFrame(Game.run);
+    });
+    </script>
 </body>
 </html>
+
 
 <!--<!DOCTYPE html>
 
