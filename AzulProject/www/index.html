@@ -15,14 +15,14 @@
     $(document).ready(function(){
        //$('#viewport').css('background-color', 'rgb(158, 167, 184)')
         Game.initialize();
-        var arr = []
+        var arr = [];
         var isLimit = false;
         var limit = 10;
         $("#viewport").click(function(e){       
           if(arr.length < limit){
               arr.push(new gameObject(e.pageX, e.pageY));
           }
-        })
+        });
         
         Game.run = (function(){
             var loops = 0, skipTicks = 1000/Game.fps,
@@ -35,10 +35,10 @@
                 while((new Date).getTime() > nextGameTick){
                     Game.update(arr);
                     nextGameTick += skipTicks;
-                    loops++
+                    loops++;
                 }
                 Game.draw(arr);
-            }
+            };
         })();
         
         (function(){
