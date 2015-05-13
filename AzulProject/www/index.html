@@ -8,16 +8,17 @@
 <script src="../www/css/index.css"> </script>
 
 </head>
-<body>
+<body style="margin-top: 0px;  margin-left: 0px;  margin-bottom: 0px;  margin-right: 0px;">
+<!-- put this in chrome > more tools > developer tools > apple iphone 5  -->
     <!--<div id="Canvas" style="width: 800px; height: 600px; background: #A7A7A7; top: 10%; left:25%; position:absolute;"></div>-->
-    <canvas id="viewport" height="480" width="640" style="background-color: rgb(160,160,130);"></canvas>
+    <canvas id="viewport" height="568" width="320" style="background-color: rgb(160,160,130);"></canvas>
     <script>       
     $(document).ready(function(){
        //$('#viewport').css('background-color', 'rgb(158, 167, 184)')
         Game.initialize();
         var arr = [];
         var isLimit = false;
-        var limit = 10;
+        var limit = 20;
         $("#viewport").click(function(e){       
           if(arr.length < limit){
               arr.push(new gameObject(e.pageX, e.pageY));
