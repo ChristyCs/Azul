@@ -19,6 +19,10 @@
         var arr = [];
         var isLimit = false;
         var limit = 20;
+        var numberOfSquares =1;
+
+
+        // this won't work after the program runs for about 1 second
         $("#viewport").click(function(e){       
           if(arr.length < limit){
               arr.push(new gameObject(e.pageX, e.pageY));
@@ -29,6 +33,14 @@
             var loops = 0, skipTicks = 1000/Game.fps,
             maxFrameSkip = 10,
             nextGameTick = (new Date).getTime();
+
+            
+            //This is supposed to make a "hill" of a random number of squares high squares
+            numberOfSquares = Math.floor((Math.random()*3)+1);
+                for(var i=0; i<numberOfSquares; i++){
+                arr.push(new gameObject(548, (300-(i*20))));
+                }
+
             
             return function(){
                 loops = 0;
@@ -38,13 +50,15 @@
                     nextGameTick += skipTicks;
                     loops++;
                 }
+
+                //deletes squares when they go out of screen
                 for(var i = 0; i < arr.length; i++){
-                    if(arr[i].x < 0){
+                    if(arr[i].x < -20){
                         arr.splice(i,1);
-                        console.log("deleted item");
+                        
                     }
                 }
-
+                
                 Game.draw(arr);
             };
         })();

@@ -12,7 +12,7 @@ gameObject.prototype.update = function(context){
     var canWidth = canvas.width;
     var canHeight = canvas.height;
     if((this.x+1)+20<canWidth){
-       this.x -= 1; 
+       this.x -= 20; 
     }    
 };
 
