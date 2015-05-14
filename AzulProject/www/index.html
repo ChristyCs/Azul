@@ -11,7 +11,7 @@
 <body style="margin-top: 0px;  margin-left: 0px;  margin-bottom: 0px;  margin-right: 0px;">
 <!-- put this in chrome > more tools > developer tools > apple iphone 5  -->
     <!--<div id="Canvas" style="width: 800px; height: 600px; background: #A7A7A7; top: 10%; left:25%; position:absolute;"></div>-->
-    <canvas id="viewport" height="568" width="320" style="background-color: rgb(160,160,130);"></canvas>
+    <canvas id="viewport" height="320" width="568" style="background-color: rgb(160,160,130);"></canvas>
     <script>       
     $(document).ready(function(){
        //$('#viewport').css('background-color', 'rgb(158, 167, 184)')
@@ -38,6 +38,13 @@
                     nextGameTick += skipTicks;
                     loops++;
                 }
+                for(var i = 0; i < arr.length; i++){
+                    if(arr[i].x < 0){
+                        arr.splice(i,1);
+                        console.log("deleted item");
+                    }
+                }
+
                 Game.draw(arr);
             };
         })();
