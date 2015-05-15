@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+       <link rel="shortcut icon" href="favicon.ico" />
+       <link rel="stylesheet" type="text/css" href="css/index.css">
+       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>        
+    </head>
+    <body>
+        <canvas id="viewport" height="320" width="568" style="background-color: rgb(200,220,255);"></canvas>
+        <script>
+            $(document).ready(function(){
+                var WIDTH = window.innerWidth;
+                var HEIGHT = window.innerHeight;
+                $("#viewport").attr({
+                    'width':WIDTH,
+                    'height':HEIGHT
+                });
+            });
+        </script>
+    </body>
+</html>
