@@ -4,7 +4,8 @@ var gameObject = function(posX, posY){
 };
 
 gameObject.prototype.draw = function(context){
-  context.fillRect(this.x,this.y, 20,20);  
+	context.fillStyle="#5FCB83";
+	context.fillRect(this.x,this.y, 20,20, "red");  
 };
 
 gameObject.prototype.update = function(context){ 

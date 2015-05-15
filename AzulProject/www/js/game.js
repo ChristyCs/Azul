@@ -8,7 +8,7 @@ Game.initialize = function(){
 };
 
 Game.draw = function(array){
-  this.context.clearRect(0,0,640,480);
+  this.context.clearRect(0,0,700, 600);
   for(var i = 0; i < array.length; i++){
       array[i].draw(this.context);
   }  
