@@ -14,9 +14,7 @@ and open the template in the editor.
     </head>
     <body>
         <canvas id="viewport" height="320" width="568" style="background-color: rgb(200,220,255);"></canvas>
-        <script>
-            
-            
+        <script>           
             $(document).ready(function(){               
                 var WIDTH = window.innerWidth;
                 var HEIGHT = window.innerHeight;
@@ -28,13 +26,27 @@ and open the template in the editor.
                 var FRAME_RATE = 50;
                 var GAME_LOOP = new GameEngine.GameLoop(FRAME_RATE);
                 
+               
                 var canvas = $("#viewport").get(0);
                 var GAME_LEVEL = new GameEngine.Level(canvas);
                 var GAME_LOOP_ID = GAME_LOOP.start();
                 console.log(GAME_LOOP_ID);
                 GAME_LEVEL.init(GAME_LOOP_ID, FRAME_RATE);                
                 
-                console.log("Done Creating Base");
+                
+                console.log("Done Creating Base");               
+                 
+                var isPaused = false;
+                $('body').click(function(){  
+                    if(isPaused){
+                        GAME_LOOP.start();
+                        isPaused = false;
+                    }else{
+                        GAME_LOOP.stop();
+                        GAME_LEVEL.loadLevel("js/TestJson.json");
+                        isPaused = true;
+                    }                   
+                });
                 
                 
 //                $('body').on('updateGame', function(gameID, currentGameTick){

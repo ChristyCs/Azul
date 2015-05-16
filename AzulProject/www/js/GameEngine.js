@@ -46,7 +46,7 @@ GameEngine.GameLoop = (function(FRAME_PER_SECOND){
     
     _self.pauseCount = function(){
         if(_self.vars.is_running && _self.vars.last_paused_at){
-            var lastPausedDuration = new Datw().getTime() - _self.vars.last_paused_at;
+            var lastPausedDuration = new Date().getTime() - _self.vars.last_paused_at;
             if(lastPausedDuration){
                 _self.vars.all_paused_time += lastPausedDuration;
             }
@@ -54,7 +54,7 @@ GameEngine.GameLoop = (function(FRAME_PER_SECOND){
         }
         
         if(!_self.vars.is_running && !_self.vars.last_paused_at){
-            _self.vars.last_paused_at = new Data().getTime();
+            _self.vars.last_paused_at = new Date().getTime();
         }
     };    
     
@@ -89,13 +89,13 @@ GameEngine.GameLoop = (function(FRAME_PER_SECOND){
             if(!_self.vars.is_running){
                 _self.vars.is_running = true;
                 _self.gameloop();
-            }
+            }            
             return _self.vars.ID;
         },
         
         stop: function(){
             _self.vars.is_running = false;
-            _self.gameloop();
+            _self.gameloop();            
         },
         
         isRunning: function(){

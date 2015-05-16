@@ -14,6 +14,7 @@ GameEngine.Level = (function(canvas){
     console.log(context);
     
     var _self = this;
+    var array = [];
     
     _self.params = {
         CANVAS_WIDTH : WIDTH,
@@ -26,10 +27,11 @@ GameEngine.Level = (function(canvas){
         frameRate: 0,
         x: 0
     };
+    
     return{
         init: function(gameLoopID, frameRate){
           _self.vars.gameLoopID = gameLoopID;
-          _self.vars.frameRate = frameRate;
+          _self.vars.frameRate = frameRate;          
           
           _self.params.CONTEXT.clearRect(0, 0, _self.params.CANVAS_WIDTH,
             _self.params.CANVAS_HEIGHT);
@@ -41,19 +43,36 @@ GameEngine.Level = (function(canvas){
         updateWorld: function(e, params){
             if(_self.vars.gameLoopID != params.gameID){
                 return;
-            }
-            //console.log("UpdateMethod");
+            }           
+           _self.vars.x++;
         },
         
         displayWorld: function(e, params){
             if(_self.vars.gameLoopID != params.gameID){
                 return;
             }
-            console.log("Render");
-            _self.params.CONTEXT.clearRect(0, 0, _self.params.CANVAS_WIDTH,
+            var gr = _self.params.CONTEXT;
+            
+            gr.clearRect(0, 0, _self.params.CANVAS_WIDTH,
                 _self.params.CANVAS_HEIGHT);
-//            _self.params.CONTEXT.fillRect((_self.vars.x+=1),0, 20,20, "red");
-            //console.log("Render");
+            
+            if(array.length == 0){
+                gr.fillRect(_self.vars.x,0, 20,20);
+            }else{                
+                for(var i = 0; i < array.length; i++){
+                    gr.fillRect(_self.vars.x,i*20,array[i].width, 
+                        array[i].height);
+                }
+            }
+            
+        }, 
+        
+        loadLevel: function(fileName){
+            $.getJSON(fileName, function(data) {
+                var blocks = data.blocks;
+                _self.vars.x = 0;
+                array = blocks;
+            }); 
         }
     };
 });
