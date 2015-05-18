@@ -6,13 +6,9 @@
 
 var GameEngine = this.GameEngine || {};
 
-GameEngine.Level = (function(canvas, SCALE){
-    var WIDTH = canvas.width;
-    var HEIGHT = canvas.height;
-    
-    var context = canvas.getContext('2d');
-    console.log(context);
-    console.log(SCALE);
+GameEngine.Level = (function(context, SCALE){
+    var WIDTH = context.canvas.width;
+    var HEIGHT = context.canvas.height;
     var _self = this;
     var array = [];
     var hasLandScape = false;
@@ -21,14 +17,15 @@ GameEngine.Level = (function(canvas, SCALE){
     _self.params = {
         CANVAS_WIDTH : WIDTH,
         CANVAS_HEIGHT : HEIGHT,
-        CANVAS: canvas,
         CONTEXT: context,
         SCALE: SCALE
     };
+    
     _self.vars = {
         gameLoopID: -1,
         frameRate: 0,        
-        loadedLevel: false
+        loadedLevel: false,
+        game_loop_paused: false
     };
     
     return{

@@ -23,46 +23,32 @@ and open the template in the editor.
                     'height':HEIGHT
                 });
                 
-                var SCALE = HEIGHT / 360 // 360 width bassed of nexus 4 height
-                
+                var SCALE = HEIGHT / 360;// 360 width bassed of nexus 4 height                
                 var FRAME_RATE = 50;
-                var GAME_LOOP = new GameEngine.GameLoop(FRAME_RATE);
-                
-               
                 var canvas = $("#viewport").get(0);
-                canvas.getContext('2d');
-                var GAME_LEVEL = new GameEngine.Level(canvas, SCALE);
+                var context = canvas.getContext('2d');
+                
+                var GAME_LOOP = new GameEngine.GameLoop(FRAME_RATE);              
+                var game_level = new GameEngine.Level(context, SCALE);
                 var GAME_LOOP_ID = GAME_LOOP.start();
-                console.log(GAME_LOOP_ID);
-                GAME_LEVEL.init(GAME_LOOP_ID, FRAME_RATE);                
                 
+                game_level.init(GAME_LOOP_ID, FRAME_RATE);                
+                console.log("Game loop ID: "+GAME_LOOP_ID);
+                console.log("Context: "+context);
+                console.log("Render Scale: "+SCALE);
                 
-                console.log("Done Creating Base");
-                
-                $.getJSON("js/TestJson.json", function(data) {   
-                    if(data.lan === undefined){
-                        console.log("data.landscape");
-                    }
-                                        
-                });
-                 
-                var isPaused = false;
                 $('body').click(function(){  
-                    if(isPaused){
+                    if(game_level.game_loop_paused){
                         GAME_LOOP.start();
-                        isPaused = false;
+                        game_level.game_loop_paused = false;  
+                        console.log("A");
                     }else{
                         GAME_LOOP.stop();
-                        GAME_LEVEL.loadLevel("js/TestJson.json");
-                        isPaused = true;
+                        game_level.loadLevel("js/TestJson.json");
+                        game_level.game_loop_paused = true;
+                        console.log("B");
                     }                   
                 });
-                
-                
-//                $('body').on('updateGame', function(gameID, currentGameTick){
-//                   console.log(gameID+" : "+currentGameTick); 
-//                });
-                
             });
         </script>
     </body>
