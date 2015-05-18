@@ -10,7 +10,7 @@ GameEngine.GameLoop = (function(FRAME_PER_SECOND){
     var _self = this;
     
     _self.params = {
-        'MAX_REFRESH_RATE' : (1000 / 2 / FRAME_PER_SECOND)
+        'MAX_REFRESH_RATE' : (1000 / 2 / FRAME_PER_SECOND),
     };
     
     _self.vars = {

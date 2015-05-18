@@ -23,18 +23,28 @@ and open the template in the editor.
                     'height':HEIGHT
                 });
                 
+                var SCALE = HEIGHT / 360 // 360 width bassed of nexus 4 height
+                
                 var FRAME_RATE = 50;
                 var GAME_LOOP = new GameEngine.GameLoop(FRAME_RATE);
                 
                
                 var canvas = $("#viewport").get(0);
-                var GAME_LEVEL = new GameEngine.Level(canvas);
+                canvas.getContext('2d');
+                var GAME_LEVEL = new GameEngine.Level(canvas, SCALE);
                 var GAME_LOOP_ID = GAME_LOOP.start();
                 console.log(GAME_LOOP_ID);
                 GAME_LEVEL.init(GAME_LOOP_ID, FRAME_RATE);                
                 
                 
-                console.log("Done Creating Base");               
+                console.log("Done Creating Base");
+                
+                $.getJSON("js/TestJson.json", function(data) {   
+                    if(data.lan === undefined){
+                        console.log("data.landscape");
+                    }
+                                        
+                });
                  
                 var isPaused = false;
                 $('body').click(function(){  

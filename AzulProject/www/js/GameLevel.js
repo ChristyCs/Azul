@@ -6,26 +6,29 @@
 
 var GameEngine = this.GameEngine || {};
 
-GameEngine.Level = (function(canvas){
+GameEngine.Level = (function(canvas, SCALE){
     var WIDTH = canvas.width;
     var HEIGHT = canvas.height;
     
     var context = canvas.getContext('2d');
     console.log(context);
-    
+    console.log(SCALE);
     var _self = this;
     var array = [];
+    var hasLandScape = false;
+    var landscape;
     
     _self.params = {
         CANVAS_WIDTH : WIDTH,
         CANVAS_HEIGHT : HEIGHT,
         CANVAS: canvas,
-        CONTEXT: context
+        CONTEXT: context,
+        SCALE: SCALE
     };
     _self.vars = {
         gameLoopID: -1,
-        frameRate: 0,
-        x: 0
+        frameRate: 0,        
+        loadedLevel: false
     };
     
     return{
@@ -43,8 +46,7 @@ GameEngine.Level = (function(canvas){
         updateWorld: function(e, params){
             if(_self.vars.gameLoopID != params.gameID){
                 return;
-            }           
-           _self.vars.x++;
+            }          
         },
         
         displayWorld: function(e, params){
@@ -56,22 +58,23 @@ GameEngine.Level = (function(canvas){
             gr.clearRect(0, 0, _self.params.CANVAS_WIDTH,
                 _self.params.CANVAS_HEIGHT);
             
-            if(array.length == 0){
-                gr.fillRect(_self.vars.x,0, 20,20);
-            }else{                
-                for(var i = 0; i < array.length; i++){
-                    gr.fillRect(_self.vars.x,i*20,array[i].width, 
-                        array[i].height);
-                }
+            if(hasLandScape){
+                gr.drawImage(landscape,0,0);                
             }
             
         }, 
         
         loadLevel: function(fileName){
-            $.getJSON(fileName, function(data) {
-                var blocks = data.blocks;
-                _self.vars.x = 0;
-                array = blocks;
+            $.getJSON(fileName, function(data) {                
+                landscape = new Image(200,200);
+                landscape.src = data.landscape[0].src;                
+                landscape.onload = function(){
+                  $(this).css('max-width', '200');
+                  console.log(this);
+                };               
+                
+                hasLandScape = true;
+                
             }); 
         }
     };
