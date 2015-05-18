@@ -1,10 +1,52 @@
+/* remember to add font files here! */
+
 body {
     margin: 0%;
     padding: 0%;
     overflow: hidden;
 }
-div{}
-#ontop-menu
-{
+/*
+div {}
+#ontop-menu{
 	position: absolute;
+	width: 568px;
+	height:320px;
+}
+h1{}
+#title-menu{
+	font-family: "Bangla MN";
+  	font-size: 30px;
+  	left: 100px;
+    top: 150px;
+  }
+*/
+
+
+#ontop-menu{ /*Div background*/
+	position: absolute;
+	width: 568px;
+	height:320px;
+}
+#title-menu{/*Text */
+font-family: "Bangla MN";
+  font-size: 30px;
+  padding-left: 165px;
+  padding-right: 165px;
+  padding-top: 20px;
+}
+#start-menu{/*Text*/
+font-family: "Bangla MN";
+  font-size: 20px;
+  padding-left: 190px;
+  padding-right: 190px;
+  padding-top: 34px;
+  margin: 0px;
+}
+#exit-menu{/*Text*/
+font-family: "Bangla MN";
+  font-size: 20px;
+  padding-left: 253px;
+  padding-right: 240px;
+  padding-top: 0px;
+  margin: 10px;
 }
