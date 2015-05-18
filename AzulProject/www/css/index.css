@@ -4,49 +4,53 @@ body {
     margin: 0%;
     padding: 0%;
     overflow: hidden;
+    position: absolute;
 }
-/*
-div {}
-#ontop-menu{
-	position: absolute;
-	width: 568px;
-	height:320px;
-}
-h1{}
-#title-menu{
-	font-family: "Bangla MN";
-  	font-size: 30px;
-  	left: 100px;
-    top: 150px;
-  }
-*/
-
-
 #ontop-menu{ /*Div background*/
 	position: absolute;
 	width: 568px;
 	height:320px;
 }
-#title-menu{/*Text */
+#title-menu{/*Text VV */
+  position: absolute;
 font-family: "Bangla MN";
-  font-size: 30px;
-  padding-left: 165px;
-  padding-right: 165px;
-  padding-top: 20px;
+  font-size: 50px;
+  padding-left: 170px;
+  padding-right: 170px;
+
+  left:0px;
+  top:0px;
 }
-#start-menu{/*Text*/
+#title-menu2{
+  position: absolute;
+  font-family: "Bangla MN";
+  font-size: 30px;
+  padding-left: 140px;
+  padding-right: 135px;
+
+  left:0px;
+  top:0px;
+}
+#start-menu{
+  position: absolute;
 font-family: "Bangla MN";
   font-size: 20px;
   padding-left: 190px;
   padding-right: 190px;
   padding-top: 34px;
   margin: 0px;
+  left:0px;
+  top:0px;
 }
-#exit-menu{/*Text*/
+#exit-menu{
+  position: absolute;
 font-family: "Bangla MN";
   font-size: 20px;
   padding-left: 253px;
   padding-right: 240px;
-  padding-top: 0px;
+
   margin: 10px;
+  left:0px;
+  top:0px;
 }
+
