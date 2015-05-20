@@ -13,44 +13,41 @@ body {
 }
 #title-menu{/*Text VV */
   position: absolute;
-font-family: "Bangla MN";
-  font-size: 50px;
-  padding-left: 170px;
-  padding-right: 170px;
-
-  left:0px;
-  top:0px;
+  font-family: "Bangla MN";
+  font-size: 52px;
+  padding-left: 201px;
+  padding-right: 201px;
+  left: -8px;
+  top: -8px;
 }
 #title-menu2{
   position: absolute;
   font-family: "Bangla MN";
-  font-size: 30px;
-  padding-left: 140px;
-  padding-right: 135px;
-
-  left:0px;
-  top:0px;
+  font-size: 40px;
+  padding-left: 220px;
+  padding-right: 220px;
+  left: -27px;
+  top: 44px;
 }
 #start-menu{
-  position: absolute;
-font-family: "Bangla MN";
+    position: absolute;
+  font-family: "Bangla MN";
   font-size: 20px;
   padding-left: 190px;
   padding-right: 190px;
   padding-top: 34px;
   margin: 0px;
-  left:0px;
-  top:0px;
+  top: 121px;
+  left: 20px;
 }
 #exit-menu{
   position: absolute;
-font-family: "Bangla MN";
+  font-family: "Bangla MN";
   font-size: 20px;
   padding-left: 253px;
   padding-right: 240px;
-
   margin: 10px;
-  left:0px;
-  top:0px;
+  left: 0px;
+  top: 190px;
 }
 
