@@ -20,6 +20,9 @@ GameEngine.Level = (function(context, SCALE){
         SCALE: SCALE
     };
     
+    _self.params.CONTEXT.scale(_self.params.SCALE
+        ,_self.params.SCALE);
+    
     _self.vars = {
         gameLoopID: -1,
         frameRate: 0,        
@@ -46,7 +49,7 @@ GameEngine.Level = (function(context, SCALE){
             for(var i = 0; i < layerArray.length; i++){
                 var t = layerArray[i];                
                 if(t.getX() !== undefined){                    
-                    t.setX(t.getX()-(0.2*(i+1)));
+                    t.setX(t.getX()-(0.2*(i+i+1)));
                 }
             }
             
@@ -59,7 +62,7 @@ GameEngine.Level = (function(context, SCALE){
             var gr = _self.params.CONTEXT;
             
             gr.clearRect(0, 0, _self.params.CANVAS_WIDTH,
-                _self.params.CANVAS_HEIGHT);
+                _self.params.CANVAS_HEIGHT);          
             
             for(var i = 0; i < layerArray.length; i++){
                 var t = layerArray[i];
