@@ -11,6 +11,7 @@ and open the template in the editor.
        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>   
        <script type="text/javascript" src="js/GameEngine.js"></script>
        <script type="text/javascript" src="js/GameLevel.js"></script>
+       <script type="text/javascript" src="js/ImageLayer.js"></script>
     </head>
     <body>
         <canvas id="viewport" height="320" width="568" style="background-color: rgb(200,220,255);"></canvas>
@@ -37,18 +38,22 @@ and open the template in the editor.
                 console.log("Context: "+context);
                 console.log("Render Scale: "+SCALE);
                 
-                $('body').click(function(){  
-                    if(game_level.game_loop_paused){
-                        GAME_LOOP.start();
-                        game_level.game_loop_paused = false;  
-                        console.log("A");
-                    }else{
-                        GAME_LOOP.stop();
-                        game_level.loadLevel("js/TestJson.json");
-                        game_level.game_loop_paused = true;
-                        console.log("B");
-                    }                   
-                });
+                GAME_LOOP.stop();
+                game_level.loadLevel("json/Level1.json");
+                GAME_LOOP.start();
+                
+//                $('body').click(function(){  
+//                    if(game_level.game_loop_paused){
+//                        GAME_LOOP.start();
+//                        game_level.game_loop_paused = false;  
+//                        console.log("A");
+//                    }else{
+//                        GAME_LOOP.stop();
+//                        game_level.loadLevel("js/TestJson.json");
+//                        game_level.game_loop_paused = true;
+//                        console.log("B");
+//                    }                   
+//                });
             });
         </script>
     </body>

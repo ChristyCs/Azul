@@ -10,9 +10,8 @@ GameEngine.Level = (function(context, SCALE){
     var WIDTH = context.canvas.width;
     var HEIGHT = context.canvas.height;
     var _self = this;
-    var array = [];
-    var hasLandScape = false;
-    var landscape;
+    
+    var layerArray = [];
     
     _self.params = {
         CANVAS_WIDTH : WIDTH,
@@ -43,7 +42,14 @@ GameEngine.Level = (function(context, SCALE){
         updateWorld: function(e, params){
             if(_self.vars.gameLoopID != params.gameID){
                 return;
-            }          
+            } 
+            for(var i = 0; i < layerArray.length; i++){
+                var t = layerArray[i];                
+                if(t.getX() !== undefined){                    
+                    t.setX(t.getX()-(0.2*(i+1)));
+                }
+            }
+            
         },
         
         displayWorld: function(e, params){
@@ -55,24 +61,54 @@ GameEngine.Level = (function(context, SCALE){
             gr.clearRect(0, 0, _self.params.CANVAS_WIDTH,
                 _self.params.CANVAS_HEIGHT);
             
-            if(hasLandScape){
-                gr.drawImage(landscape,0,0);                
+            for(var i = 0; i < layerArray.length; i++){
+                var t = layerArray[i];
+                if(t.getImage !== undefined){
+                    gr.drawImage(t.getImage(), t.getX(),t.getY());
+                }
             }
+//            if(hasLandScape){
+//                gr.drawImage(landscape,0,0);                
+//            }
             
         }, 
         
-        loadLevel: function(fileName){
-            $.getJSON(fileName, function(data) {                
-                landscape = new Image(200,200);
-                landscape.src = data.landscape[0].src;                
-                landscape.onload = function(){
-                  $(this).css('max-width', '200');
-                  console.log(this);
-                };               
-                
-                hasLandScape = true;
-                
-            }); 
+        loadLevel: function(filename){
+            $.getJSON(filename, function(data){
+                if(data.background !== undefined){
+                    var imageSrc = data.background[0].src;
+                    var backLayer = new ImageLayer();
+                    var image = new Image();
+                    image.src = imageSrc;
+                    image.onload = function(){
+                        console.log("Loaded Background image: "+imageSrc);
+                        backLayer.setImage(this);                        
+                        layerArray.push(backLayer);
+                    };
+                }
+                if(data.middleground !== undefined){                    
+                    var imageSrc = data.middleground[0].src;
+                    var midLayer = new ImageLayer();
+                    var image = new Image();
+                    image.src = imageSrc;
+                    image.onload = function(){
+                        console.log("Loaded Middleground image: "+imageSrc);
+                        midLayer.setImage(this);
+                        layerArray.push(midLayer);
+                    };
+                }
+            });
+//            $.getJSON(fileName, function(data) {                
+//                landscape = new Image(200,200);
+//                landscape.src = data.landscape[0].src;                
+//                landscape.onload = function(){
+//                  $(this).css('max-width', '200');
+//                  console.log(this);
+//                };               
+//                
+//                hasLandScape = true;
+//                
+//            }); 
         }
     };
 });

@@ -1,0 +1,8 @@
+{
+    "background":[
+        {"src": "img/testbckgrnd.jpg"}
+    ],
+    "middleground":[
+        {"src": "img/testfore.png"}
+    ]
+}
