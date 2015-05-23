@@ -1,4 +1,4 @@
-function foreGround(array){
+function foreGround(){
     var groundArray = [];
     
 
@@ -6,7 +6,7 @@ function foreGround(array){
 
 foreGround.prototype = {
     constructor: foreGround,
-   setGroundArray: function(array){
+    setGroundArray: function(array){
         this.groundArray = array;
     }
     getGroundArray: function(){
