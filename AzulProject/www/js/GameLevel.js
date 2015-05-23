@@ -12,7 +12,8 @@ GameEngine.Level = (function(context, SCALE){
     var _self = this;
     
     var layerArray = [];
-    var foreGroundLayer = new foreGround();
+    //this is throwing a weird undefined error.
+    //var foreGroundLayer = new foreGround();
     
     _self.params = {
         CANVAS_WIDTH : WIDTH,
@@ -67,11 +68,14 @@ GameEngine.Level = (function(context, SCALE){
             
             for(var i = 0; i < layerArray.length; i++){
                 var t = layerArray[i];
-                if(t.getImage !== undefined){
+                if(t.getImage !== undefined ){
                     gr.drawImage(t.getImage(), t.getX(),t.getY());
                 }
                 
             }
+            // if(foreGroundLayer.getGroundArray() !== undefined){
+            //     gr.drawforeGround(gr);
+            // }
 //            if(hasLandScape){
 //                gr.drawImage(landscape,0,0);                
 //            }
@@ -120,7 +124,7 @@ GameEngine.Level = (function(context, SCALE){
                         }
                         mapArray.push(row);
                     }
-                    foreGroundLayer.setGroundArray(mapArray);
+                    //foreGroundLayer.setGroundArray(mapArray);
                      
                 }
             });
