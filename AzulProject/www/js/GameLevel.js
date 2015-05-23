@@ -12,6 +12,7 @@ GameEngine.Level = (function(context, SCALE){
     var _self = this;
     
     var layerArray = [];
+    var foreGround = [];
     
     _self.params = {
         CANVAS_WIDTH : WIDTH,
@@ -99,6 +100,24 @@ GameEngine.Level = (function(context, SCALE){
                         midLayer.setImage(this);
                         layerArray.push(midLayer);
                     };
+
+                }
+                if(data.Map !== undefined){
+                    var Map = [];
+                    for(var a =0; a<data.Map.length; a++){
+                        Map.push(data.Map[a]);
+                    }
+                    for(var a =0; a<Map.length; a++){
+                        for(var b =0; b<Map[a].length; a++){
+                            if(Map[a].charAt(b) === "0"){
+
+                            }else if(ap[a].charAt(b) === "1"){
+
+                            }
+                        }
+                    }
+
+                    foreGround = 
                 }
             });
 //            $.getJSON(fileName, function(data) {                
