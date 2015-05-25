@@ -9,45 +9,49 @@ body {
     overflow: hidden;
     position: absolute;
     font-family:BanglaMN;
+    color: rgb(249, 222, 26);
 }
 #ontop-menu{ /*Div background*/
 	position: absolute;
 	width: 568px;
 	height:320px;
 }
-#title-menu{/*Text VV */
+#title-menu {
   position: absolute;
-  font-size: 52px;
+  font-size: 54px;
   padding-left: 201px;
   padding-right: 201px;
-  left: -8px;
-  top: -8px;
+  left: -28px;
+  top: 4px;
+  letter-spacing: 3px;
 }
-#title-menu2{
+#title-menu2 {
   position: absolute;
-  font-size: 40px;
+  font-size: 42px;
   padding-left: 220px;
   padding-right: 220px;
-  left: -27px;
-  top: 44px;
+  left: -45px;
+  top: 72px;
+  letter-spacing: 3px;
 }
-#start-menu{
-    position: absolute;
+#start-menu {
+  position: absolute;
   font-size: 20px;
   padding-left: 190px;
   padding-right: 190px;
   padding-top: 34px;
   margin: 0px;
-  top: 121px;
-  left: 66px;
+  top: 193px;
+  left: -28px;
+  text-transform: uppercase;
 }
-#exit-menu{
+#exit-menu {
   position: absolute;
   font-size: 20px;
   padding-left: 253px;
   padding-right: 240px;
   margin: 10px;
-  left: 0px;
-  top: 190px;
+left: 105px;
+  top: 217px;
+  text-transform: uppercase;
 }
-

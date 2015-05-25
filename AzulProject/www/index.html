@@ -11,35 +11,26 @@
     <!-- put this in chrome > more tools > developer tools > apple iphone 5  -->
     <!--<div id="Canvas" style="width: 800px; height: 600px; background: #A7A7A7; top: 10%; left:25%; position:absolute;"></div>-->
 
-    <div id="ontop-menu" style=""> <!-- to remove menu: add 'visibility: hidden;' to style -->
+    <div id="ontop-menu" style="z-index:2;"> <!-- to remove menu: add 'visibility: hidden;' to style -->
 
         <h1 id="title-menu">SPACE</h1>
         <h1 id="title-menu2">RUNNER</h1>
-        <h1 id="start-menu"><a href="index.html#leveone" target="index.html#levelone">Login</a></h1>
+        <h1 id="start-menu">
+        <!--<a href="index.html#leveone" target="index.html#levelone">-->Login<!--</a>-->
+        </h1>
         <h1 id="exit-menu">Exit</h1>
+        <svg width="600" height="200">
+            <rect x="159" y="35" width="265" height="130" style="fill:none;stroke:rgb(255, 223, 0);stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9">
+                Sorry, your browser does not support inline SVG.  
+        </svg>
 
     </div>
+
+    <img src="img/testbckgrnd-copy.jpg" height="320" style="position:absolute;z-index:1;" alt=""/>
     
     <canvas id="viewport" height="320" width="568" style="background-color: rgb(200,220,255);"></canvas>
 
 <!--
-
-    <script>
-    var c = document.getElementById("viewport");
-    var ctx = c.getContext("2d");
-    //resizes canvas to window size
-    //ctx.canvas.width  = window.innerWidth;
-    //ctx.canvas.height = window.innerHeight;
-        
-    ctx.font = "30px Bangla MN";
-    ctx.fillText("Space Runner",200,100);
-
-    ctx.font = "20px Bangla MN";
-    ctx.fillText("Start Adventure",220,220);
-    ctx.fillText("Exit",280,260); //links to add
-    </script>
-    -->
-
     <script>       
     //
     $(document).ready(function(){
@@ -105,6 +96,6 @@
         window.onEachFrame(Game.run);
     });
     </script>
-   
+   -->
 </body>
 </html>
