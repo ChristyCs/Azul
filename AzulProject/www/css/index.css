@@ -1,10 +1,14 @@
-/* remember to add font files here! */
+@font-face {
+    font-family: BanglaMN;
+    src: url(BanglaMN.ttc);
+  }
 
 body {
     margin: 0%;
     padding: 0%;
     overflow: hidden;
     position: absolute;
+    font-family:BanglaMN;
 }
 #ontop-menu{ /*Div background*/
 	position: absolute;
@@ -13,7 +17,6 @@ body {
 }
 #title-menu{/*Text VV */
   position: absolute;
-  font-family: "Bangla MN";
   font-size: 52px;
   padding-left: 201px;
   padding-right: 201px;
@@ -22,7 +25,6 @@ body {
 }
 #title-menu2{
   position: absolute;
-  font-family: "Bangla MN";
   font-size: 40px;
   padding-left: 220px;
   padding-right: 220px;
@@ -31,18 +33,16 @@ body {
 }
 #start-menu{
     position: absolute;
-  font-family: "Bangla MN";
   font-size: 20px;
   padding-left: 190px;
   padding-right: 190px;
   padding-top: 34px;
   margin: 0px;
   top: 121px;
-  left: 20px;
+  left: 66px;
 }
 #exit-menu{
   position: absolute;
-  font-family: "Bangla MN";
   font-size: 20px;
   padding-left: 253px;
   padding-right: 240px;
