@@ -12,8 +12,8 @@ GameEngine.Level = (function(context, SCALE){
     var _self = this;
     
     var layerArray = [];
-    //this is throwing a weird undefined error.
-    //var foreGroundLayer = new foreGround();
+    //the foreground. it was just easier to make it its own object
+    var foreGroundLayer = new foreGround();
     
     _self.params = {
         CANVAS_WIDTH : WIDTH,
@@ -73,9 +73,10 @@ GameEngine.Level = (function(context, SCALE){
                 }
                 
             }
-            // if(foreGroundLayer.getGroundArray() !== undefined){
-            //     gr.drawforeGround(gr);
-            // }
+
+            if(foreGroundLayer.getGroundArray() !== undefined){
+                foreGroundLayer.drawforeGround(gr);
+            }
 //            if(hasLandScape){
 //                gr.drawImage(landscape,0,0);                
 //            }
@@ -117,14 +118,14 @@ GameEngine.Level = (function(context, SCALE){
                         var row = [];
                         for(var b =0; b<Map[a].length; a++){
                             if(Map[a].charAt(b) === "0"){
-                                row.push(null);
+                                row.push(null); // the sky
                             }else if(Map[a].charAt(b) === "1"){
-                                row.push(new groundObject(b,a));
+                                row.push(new groundObject(b,a)); //a square
                             }
                         }
                         mapArray.push(row);
                     }
-                    //foreGroundLayer.setGroundArray(mapArray);
+                    foreGroundLayer.setGroundArray(mapArray);
                      
                 }
             });
