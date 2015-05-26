@@ -17,10 +17,14 @@ foreGround.prototype = {
     drawforeGround: function(context){
         var array = this.getGroundArray();
         for(var a =0; a<array.length; a++){
-            //checking for null because the sky gets set to null 
-            if(array[a] !== null){
-                var object = array[a];
+            //length is being set to 20 so that we don't load in everything
+            for(var b =0;b<array[a].length; b++){ 
+                if(array[a][b] !== null){
+                //console.log("Should be drawing something")
+                var object = array[a][b];
                 object.draw(context); 
+            }
+            
             }
 
         }
