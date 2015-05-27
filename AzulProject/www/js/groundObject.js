@@ -7,7 +7,7 @@ var groundObject = function(posX, posY, size){
 groundObject.prototype.draw = function(context){
 	context.fillStyle="#AD3333";
 	context.fillRect((this.x*this.size),
-		(this.y*this.size)+(window.innerHeight-(18*this.size)),
+		(this.y*this.size)+(window.innerHeight-(20*this.size)),
 		this.size+1,this.size+1);  
 };
 

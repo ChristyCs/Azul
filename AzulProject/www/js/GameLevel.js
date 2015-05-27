@@ -75,6 +75,7 @@ GameEngine.Level = (function(context, SCALE){
             }
 
             if(foreGroundLayer.getGroundArray() !== undefined){
+                console.log("Drawing foreground");
                 foreGroundLayer.drawforeGround(gr);
             }
 //            if(hasLandScape){
@@ -110,21 +111,25 @@ GameEngine.Level = (function(context, SCALE){
                 }
                 if(data.Map !== undefined){
                     var Map = [];
+
                     for(var a =0; a<data.Map.length; a++){
                         Map.push(data.Map[a]);
                     }
                     var mapArray=[];
                     for(var a =0; a<Map.length; a++){
                         var row = [];
-                        for(var b =0; b<Map[a].length; a++){
-                            if(Map[a].charAt(b) === "0"){
+                        var current = Map[a].RowData;
+
+                        for(var b =0; b<current.length; b++){  
+                            if(current.charAt(b) === "0"){ 
                                 row.push(null); // the sky
-                            }else if(Map[a].charAt(b) === "1"){
-                                row.push(new groundObject(b,a)); //a square
+                            }else if(current.charAt(b) === "1"){
+                                row.push(new groundObject(b,a,16)); //a square
                             }
                         }
                         mapArray.push(row);
                     }
+                    //console.log("Length of array: " + mapArray.length);
                     foreGroundLayer.setGroundArray(mapArray);
                      
                 }
