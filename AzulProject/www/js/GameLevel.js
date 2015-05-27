@@ -54,7 +54,11 @@ GameEngine.Level = (function(context, SCALE){
                     t.setX(t.getX()-(0.2*(i+i+1)));
                 }
             }
-            
+            var gr = _self.params.CONTEXT;
+            //if(foreGroundLayer.getGroundArray() !== undefined){
+               //foreGroundLayer.updateforeGround(gr);
+            //}
+
         },
         
         displayWorld: function(e, params){
@@ -75,7 +79,7 @@ GameEngine.Level = (function(context, SCALE){
             }
 
             if(foreGroundLayer.getGroundArray() !== undefined){
-                console.log("Drawing foreground");
+                //console.log("Drawing foreground");
                 foreGroundLayer.drawforeGround(gr);
             }
 //            if(hasLandScape){

@@ -28,6 +28,17 @@ foreGround.prototype = {
             }
 
         }
+    },
+    updateforeGround: function(context){
+        var array = this.getGroundArray();
+        for(var a =0; a<array.length; a++){
+            for(var b =0;b<array[a].length; b++){ 
+                if(array[a][b] !== null){
+                array[a][b].setX(array[a][b].getX-1);
+                }
+            }
+        }
+       
+        //this.drawforeGround(context);
     }
-    
 };

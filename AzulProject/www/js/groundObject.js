@@ -11,8 +11,20 @@ groundObject.prototype.draw = function(context){
 		this.size+1,this.size+1);  
 };
 
-// garoundObject.prototype.update = function(context){ 
-//   
-//       
-// };
+groundObject.prototype.getX = function(){
+	return this.x;
+};
+
+groundObject.prototype.setX = function(newX){
+	this.x = newX;
+};
+
+groundObject.prototype.getY = function(){
+	return this.y;
+};
+
+groundObject.prototype.getY = function(newY){
+	this.y = newY;
+};
+
 
