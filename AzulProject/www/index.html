@@ -1,101 +1,100 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-    <link rel="shortcut icon" href="favicon.ico" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="js/game.js"></script>
-    <script src="js/gameObject.js"></script>
+    <title>Page Title</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 </head>
 <body>
-    <!-- put this in chrome > more tools > developer tools > apple iphone 5  -->
-    <!--<div id="Canvas" style="width: 800px; height: 600px; background: #A7A7A7; top: 10%; left:25%; position:absolute;"></div>-->
+<!-- Start of first page -->
+<div data-role="page" id="Login">
 
-    <div id="ontop-menu" style="z-index:2;"> <!-- to remove menu: add 'visibility: hidden;' to style -->
-
-        <h1 id="title-menu">SPACE</h1>
-        <h1 id="title-menu2">RUNNER</h1>
-        <h1 id="start-menu">
-        <a href="LevelTest.html">Login</a>
-        </h1>
-        <h1 id="exit-menu">Exit</h1>
-        <svg width="600" height="200">
-            <rect x="159" y="35" width="265" height="130" style="fill:none;stroke:rgb(255, 223, 0);stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9">
-                Sorry, your browser does not support inline SVG.  
-        </svg>
-
-    </div>
-
-    <img src="img/testbckgrnd-copy.jpg" height="320" style="position:absolute;z-index:1;" alt=""/>
+    <div data-role="header">
+        <h1>Login Details</h1>
+    </div><!-- /header -->
     
-    <canvas id="viewport" height="320" width="568" style="background-color: rgb(200,220,255);"></canvas>
+    <div role="main" class="ui-content">
+        
+        <input name="user" id="userID" value="Name" type="text">       
+        <input name="pass" id="userPW" value="Password" type="text">
+        <input type="submit" value="Login" id="loginButton" />
 
-<!--
-    <script>       
-    //
-    $(document).ready(function(){
-       //$('#viewport').css('background-color', 'rgb(158, 167, 184)')
-        Game.initialize();
-        var arr = [];
-        var isLimit = false;
-        var limit = 20;
-        var numberOfSquares =1;
+	<!-- put the result here -->
+	<div id="result" class="functions"></div>
 
+    </div><!-- /content -->
 
-        // this won't work after the program runs for about 1 second
-        $("#viewport").click(function(e){       
-          if(arr.length < limit){
-              arr.push(new gameObject(e.pageX, e.pageY));
+    <div data-role="footer">
+        <h4>Login For...</h4>
+    </div><!-- /footer -->
+</div><!-- /page -->
+
+<script type="text/javascript">
+$(document).bind('pageinit', function() {
+
+ 
+  $.ajaxSetup ({
+    cache: false
+  });
+  
+  $("#loginButton").bind("click", function(event, ui){
+      var jsonUrl = "https://thawing-shore-5561.herokuapp.com/login";
+      var userName = $("#userID").val();
+      var userPassword = $("#userPW").val();      
+      var userDetails = {"user": userName, "password": userPassword};
+      $.post(jsonUrl, userDetails, function(data){
+          console.log(data);
+          if(data.length == 0){
+              $("#result").html("<p><b>Wrong User Name or Password. Please Try Again.</b></p>");
+          }else{
+              window.location = "/LevelTest.html";
           }
-        });
-        
-        Game.run = (function(){
-            var loops = 0, skipTicks = 5500/Game.fps,
-            maxFrameSkip = 10,
-            nextGameTick = (new Date).getTime();
-
-            
-            //This is supposed to make a "hill" of a random number of squares high squares
-            
-
-            
-            return function(){
-                loops = 0;
-                
-                while((new Date).getTime() > nextGameTick){
-                    Game.update(arr);
-                    nextGameTick += skipTicks;
-                    loops++;
-                }
-
-                //deletes squares when they go out of screen
-                for(var i = 0; i < arr.length; i++){
-                    if(arr[i].x < -20){
-                        arr.splice(i,1);
-                        
-                    }
-                }
-                numberOfSquares = Math.floor((Math.random()*5)+1);
-                for(var i=0; i<numberOfSquares; i++){
-                arr.push(new gameObject(500, (300-(i*20))));
-                }
-
-
-                Game.draw(arr);
-            };
-        })();
-        
-        (function(){
-            var onEachFrame = function(cb){
-                setInterval(cb, 1000/60);
-            };
-            
-            window.onEachFrame = onEachFrame;
-            
-        })();
-        window.onEachFrame(Game.run);
-    });
-    </script>
-   -->
+      });      
+  });
+  
+  $("#userID").bind("click", function(event, ui){
+      //console.log("here");
+      $(this).removeAttr('value');
+  });
+  
+  $("#userPW").bind("click", function(event, ui){
+      //console.log("here");
+      $(this).removeAttr('value').attr('type', 'password');
+  });
+  
+//  if(!$("#userID").is("select")){
+//      console.log("here");
+//  }
+  
+//  $( "#button1" ).bind( "click", function(event, ui) {
+//      var jsonUrl = "https://thawing-shore-5561.herokuapp.com/dp";
+//      $.get(jsonUrl, function(data){
+//         console.log(data); 
+//      });
+////    var q = $("#text1").val();
+////    alert("Click "+q);
+////    var jsonUrl = "https://damp-reef-9363.herokuapp.com/quote/"+q;
+////    alert("Fetching result from "+jsonUrl);
+////    $.get(jsonUrl, function(data) {
+////      alert(data.author);
+////      $("#result").html("<p><b>"+data.author+" said "+data.text+"</b></p>");
+////    }, 'json');
+//  });
+//  
+//  $( "#button2" ).bind( "click", function(event, ui) {
+//    alert("Posting a new quote");
+//    var jsonUrl = "https://damp-reef-9363.herokuapp.com/quote";
+//    var newQuote = { "author" : "foo", "text" : "some text" };
+//    $.post(jsonUrl, newQuote, function(data) {
+//      alert("Added quote number " + data.pos + " " + data.author + " " + data.text);
+//    }, 'json');
+//  });
+  
+});
+</script>
 </body>
 </html>
