@@ -36,7 +36,7 @@ body {
 }
 #start-menu {
   position: absolute;
-  font-size: 20px;
+  font-size: auto;
   padding-left: 190px;
   padding-right: 190px;
   padding-top: 34px;
