@@ -24,7 +24,7 @@
         <input type="submit" value="Login" id="loginButton" />
 
 	<!-- put the result here -->
-	<div id="result" class="functions"></div>
+	<div id="result" class="functions" style="text-align: center"></div>
 
     </div><!-- /content -->
 
@@ -54,6 +54,34 @@ $(document).bind('pageinit', function() {
   $(textPass).attr('hastext', false);
   $(textPass).css('color', textNFColor);
   
+  var changeTextFocus = function(){
+      var _self = $(this);
+      var hastext = _self.attr('hastext');    
+      if(hastext === "false"){
+          _self.val("");
+          _self.css('color', textFColor);
+      }
+  };
+  
+  var changeTextNFocus = function(){
+      var _self = $(this);      
+      var text = _self.val();
+      if(!text){
+          _self.val(_self.attr('name'));
+          _self.css('color', textNFColor);
+          _self.attr('hastext', false);
+      }else{
+          _self.attr('hastext',true);
+      }
+      
+  };
+  
+  $(textName).focus(changeTextFocus);  
+  $(textName).focusout(changeTextNFocus);
+  
+  $(textPass).focus(changeTextFocus);
+  $(textPass).focusout(changeTextNFocus);
+  
   $(buttonLogin).bind("click", function(){
      var jsonUrl = mainUrl;
      var userName = $(textName).val();
@@ -63,66 +91,13 @@ $(document).bind('pageinit', function() {
      var hasName = $(textName).attr("hastext");
      var hasPass = $(textPass).attr("hastext");
      if(hasName === "true" && hasPass === "true"){
-         
+         console.log("here");
      }else{
          $(resultLogin).css("color","red");
          var htmlVal = "<p><b>Please Ented User Name And Password</b><p>";
          $(resultLogin).html(htmlVal);
      }
   });
-  
-  $("#loginButton").bind("click", function(event, ui){
-      var jsonUrl = "https://thawing-shore-5561.herokuapp.com/login";
-      var userName = $("#userID").val();
-      var userPassword = $("#userPW").val();      
-      var userDetails = {"user": userName, "password": userPassword};
-      $.post(jsonUrl, userDetails, function(data){
-          console.log(data);
-          if(data.length == 0){
-              $("#result").html("<p><b>Wrong User Name or Password. Please Try Again.</b></p>");
-          }else{
-              window.location = "AzulProject/www/LevelTest.html";
-          }
-      });      
-  });
-  
-  $("#userID").bind("click", function(event, ui){
-      //console.log("here");
-      $(this).removeAttr('value');
-  });
-  
-  $("#userPW").bind("click", function(event, ui){
-      //console.log("here");
-      $(this).removeAttr('value').attr('type', 'password');
-  });
-  
-//  if(!$("#userID").is("select")){
-//      console.log("here");
-//  }
-  
-//  $( "#button1" ).bind( "click", function(event, ui) {
-//      var jsonUrl = "https://thawing-shore-5561.herokuapp.com/dp";
-//      $.get(jsonUrl, function(data){
-//         console.log(data); 
-//      });
-////    var q = $("#text1").val();
-////    alert("Click "+q);
-////    var jsonUrl = "https://damp-reef-9363.herokuapp.com/quote/"+q;
-////    alert("Fetching result from "+jsonUrl);
-////    $.get(jsonUrl, function(data) {
-////      alert(data.author);
-////      $("#result").html("<p><b>"+data.author+" said "+data.text+"</b></p>");
-////    }, 'json');
-//  });
-//  
-//  $( "#button2" ).bind( "click", function(event, ui) {
-//    alert("Posting a new quote");
-//    var jsonUrl = "https://damp-reef-9363.herokuapp.com/quote";
-//    var newQuote = { "author" : "foo", "text" : "some text" };
-//    $.post(jsonUrl, newQuote, function(data) {
-//      alert("Added quote number " + data.pos + " " + data.author + " " + data.text);
-//    }, 'json');
-//  });
   
 });
 </script>
