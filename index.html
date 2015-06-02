@@ -19,8 +19,8 @@
     
     <div role="main" class="ui-content">
         
-        <input name="user" id="userID" value="Name" type="text">       
-        <input name="pass" id="userPW" value="Password" type="text">
+        <input name="Name" id="userID" value="Name" type="text">       
+        <input name="Password" id="userPW" value="Password" type="text">
         <input type="submit" value="Login" id="loginButton" />
 
 	<!-- put the result here -->
@@ -29,16 +29,46 @@
     </div><!-- /content -->
 
     <div data-role="footer">
-        <h4>Login For...</h4>
+        <h4>Login For Space Runner</h4>
     </div><!-- /footer -->
 </div><!-- /page -->
 
 <script type="text/javascript">
-$(document).bind('pageinit', function() {
-
- 
+$(document).bind('pageinit', function() { 
   $.ajaxSetup ({
     cache: false
+  });
+  
+  var mainUrl = "https://rocky-chamber-3053.herokuapp.com";
+  
+  var textNFColor = "rgb(150, 150, 150)";
+  var textFColor = "rgb(0, 0, 0)";
+  var textName = "#userID";
+  var textPass = "#userPW";
+  
+  var buttonLogin = "#loginButton";
+  var resultLogin = "#result";
+  
+  $(textName).attr('hastext', false);
+  $(textName).css('color', textNFColor);
+  $(textPass).attr('hastext', false);
+  $(textPass).css('color', textNFColor);
+  
+  $(buttonLogin).bind("click", function(){
+     var jsonUrl = mainUrl;
+     var userName = $(textName).val();
+     var userPassword = $(textPass).val();
+     var userDetails = {"user": userName, "password": userPassword};
+     
+     var hasName = $(textName).attr("hastext");
+     var hasPass = $(textPass).attr("hastext");
+     if(hasName === "true" && hasPass === "true"){
+         
+     }else{
+         $(resultLogin).css("color","red");
+         var htmlVal = "<p><b>Please Ented User Name And Password</b><p>";
+         $(resultLogin).html(htmlVal);
+     }
   });
   
   $("#loginButton").bind("click", function(event, ui){
