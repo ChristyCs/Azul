@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Page Title</title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
-<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script src="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+  <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 </head>
 <body>
 <!-- Start of first page -->
-<div data-role="page" id="Login">
-
+<div class="pgchng" data-role="page" id="Login">
+ <img class="bground" src="AzulProject/www/img/testbckgrnd.jpg" alt="titleimg" />
+<!--
     <div data-role="header">
-        <h1>Login Details</h1>
-    </div><!-- /header -->
     
+    </div><!-- /header -->
+    <h1 class="title">Space</h1>
+    <h1 class="title secndry">Runner</h1>
     <div role="main" class="ui-content">
         
-        <input name="Name" id="userID" value="Name" type="text">       
-        <input name="Password" id="userPW" value="Password" type="text">
-        <input type="submit" value="Login" id="loginButton" />
+        <input class="texthldr" name="Name" id="userID" value="Name" type="text">       
+        <input class="texthldr" name="Password" id="userPW" value="Password" type="text">
+        <input class="texthldr" type="submit" value="Login" id="loginButton" />
 
 	<!-- put the result here -->
 	<div id="result" class="functions" style="text-align: center"></div>
 
     </div><!-- /content -->
-
+<!--
     <div data-role="footer">
         <h4>Login For Space Runner</h4>
     </div><!-- /footer -->
@@ -94,7 +95,8 @@ $(document).bind('pageinit', function() {
          console.log("here");
      }else{
          $(resultLogin).css("color","red");
-         var htmlVal = "<p><b>Please Ented User Name And Password</b><p>";
+         $(resultLogin).css("font-size","0.8em");
+         var htmlVal = "<p><b>Please enter User Name and Password</b><p>";
          $(resultLogin).html(htmlVal);
      }
   });
