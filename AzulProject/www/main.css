@@ -30,7 +30,6 @@ img{}
 .bground{
 	position: absolute;
 	z-index: -1;
-	height: 320px;
 }
 p{}
 .warning{
