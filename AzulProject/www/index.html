@@ -1,98 +1,105 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Page Title</title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
-<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script src="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+  <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 </head>
 <body>
 <!-- Start of first page -->
-<div data-role="page" id="Login">
-
+<div class="pgchng" data-role="page" id="Login">
+ <img class="bground" src="AzulProject/www/img/testbckgrnd.jpg" alt="titleimg" />
+<!--
     <div data-role="header">
-        <h1>Login Details</h1>
-    </div><!-- /header -->
     
+    </div><!-- /header -->
+    <h1 class="title">Space</h1>
+    <h1 class="title secndry">Runner</h1>
     <div role="main" class="ui-content">
         
-        <input name="user" id="userID" value="Name" type="text">       
-        <input name="pass" id="userPW" value="Password" type="text">
-        <input type="submit" value="Login" id="loginButton" />
+        <input class="texthldr" name="Name" id="userID" value="Name" type="text">       
+        <input class="texthldr" name="Password" id="userPW" value="Password" type="text">
+        <input class="texthldr" type="submit" value="Login" id="loginButton" />
 
 	<!-- put the result here -->
-	<div id="result" class="functions"></div>
+	<div id="result" class="functions" style="text-align: center"></div>
 
     </div><!-- /content -->
-
+<!--
     <div data-role="footer">
-        <h4>Login For...</h4>
+        <h4>Login For Space Runner</h4>
     </div><!-- /footer -->
 </div><!-- /page -->
 
 <script type="text/javascript">
-$(document).bind('pageinit', function() {
-
- 
+$(document).bind('pageinit', function() { 
   $.ajaxSetup ({
     cache: false
   });
   
-  $("#loginButton").bind("click", function(event, ui){
-      var jsonUrl = "https://thawing-shore-5561.herokuapp.com/login";
-      var userName = $("#userID").val();
-      var userPassword = $("#userPW").val();      
-      var userDetails = {"user": userName, "password": userPassword};
-      $.post(jsonUrl, userDetails, function(data){
-          console.log(data);
-          if(data.length == 0){
-              $("#result").html("<p><b>Wrong User Name or Password. Please Try Again.</b></p>");
-          }else{
-              window.location = "LevelTest.html";
-          }
-      });      
+  var mainUrl = "https://rocky-chamber-3053.herokuapp.com";
+  
+  var textNFColor = "rgb(150, 150, 150)";
+  var textFColor = "rgb(0, 0, 0)";
+  var textName = "#userID";
+  var textPass = "#userPW";
+  
+  var buttonLogin = "#loginButton";
+  var resultLogin = "#result";
+  
+  $(textName).attr('hastext', false);
+  $(textName).css('color', textNFColor);
+  $(textPass).attr('hastext', false);
+  $(textPass).css('color', textNFColor);
+  
+  var changeTextFocus = function(){
+      var _self = $(this);
+      var hastext = _self.attr('hastext');    
+      if(hastext === "false"){
+          _self.val("");
+          _self.css('color', textFColor);
+      }
+  };
+  
+  var changeTextNFocus = function(){
+      var _self = $(this);      
+      var text = _self.val();
+      if(!text){
+          _self.val(_self.attr('name'));
+          _self.css('color', textNFColor);
+          _self.attr('hastext', false);
+      }else{
+          _self.attr('hastext',true);
+      }
+      
+  };
+  
+  $(textName).focus(changeTextFocus);  
+  $(textName).focusout(changeTextNFocus);
+  
+  $(textPass).focus(changeTextFocus);
+  $(textPass).focusout(changeTextNFocus);
+  
+  $(buttonLogin).bind("click", function(){
+     var jsonUrl = mainUrl;
+     var userName = $(textName).val();
+     var userPassword = $(textPass).val();
+     var userDetails = {"user": userName, "password": userPassword};
+     
+     var hasName = $(textName).attr("hastext");
+     var hasPass = $(textPass).attr("hastext");
+     if(hasName === "true" && hasPass === "true"){
+         console.log("here");
+     }else{
+         $(resultLogin).css("color","red");
+         $(resultLogin).css("font-size","0.8em");
+         var htmlVal = "<p><b>Please enter User Name and Password</b><p>";
+         $(resultLogin).html(htmlVal);
+     }
   });
-  
-  $("#userID").bind("click", function(event, ui){
-      //console.log("here");
-      $(this).removeAttr('value');
-  });
-  
-  $("#userPW").bind("click", function(event, ui){
-      //console.log("here");
-      $(this).removeAttr('value').attr('type', 'password');
-  });
-  
-//  if(!$("#userID").is("select")){
-//      console.log("here");
-//  }
-  
-//  $( "#button1" ).bind( "click", function(event, ui) {
-//      var jsonUrl = "https://thawing-shore-5561.herokuapp.com/dp";
-//      $.get(jsonUrl, function(data){
-//         console.log(data); 
-//      });
-////    var q = $("#text1").val();
-////    alert("Click "+q);
-////    var jsonUrl = "https://damp-reef-9363.herokuapp.com/quote/"+q;
-////    alert("Fetching result from "+jsonUrl);
-////    $.get(jsonUrl, function(data) {
-////      alert(data.author);
-////      $("#result").html("<p><b>"+data.author+" said "+data.text+"</b></p>");
-////    }, 'json');
-//  });
-//  
-//  $( "#button2" ).bind( "click", function(event, ui) {
-//    alert("Posting a new quote");
-//    var jsonUrl = "https://damp-reef-9363.herokuapp.com/quote";
-//    var newQuote = { "author" : "foo", "text" : "some text" };
-//    $.post(jsonUrl, newQuote, function(data) {
-//      alert("Added quote number " + data.pos + " " + data.author + " " + data.text);
-//    }, 'json');
-//  });
   
 });
 </script>
