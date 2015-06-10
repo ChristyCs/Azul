@@ -1,24 +1,52 @@
 h1{
 	font-size: 30px;
-	
 }
 .title{
-	height: 20px;
 	text-align: center;
 	text-transform: uppercase;
 	z-index: 5;
 	font-family: BanglaMN;
  	color: rgb(249, 222, 26);
-  	letter-spacing: 8px;
-  	font-size: 24px;
+  	letter-spacing: 4px;
+  	font-size: 1.2em;
+  	padding-top: 20px;
+}
+.sec{
+	height: 10px;
+	letter-spacing: 3px;
+	padding-top: 0px;
+}
+h2{
+	text-transform: uppercase;
+	font-size: 1em;
+}
+.planetnav{
+	margin-top: 0px;
+}
+.prevtag{
+	left:17%;
+}
+.nexttag{
+	left:77%;
+}
+.navtag{
+	font-size: 0.6em;
+	position: absolute;
+	top:150px;
+}
+.logouttag{
+	position: absolute;
+	right:20px;
+	top:10px;
+}
+.planetlog{
+	padding-top: 57px;
 }
 div{}
 .ui-content{
 	z-index: 0;
 	width:95%;
 	text-align: center;
-	margin-right: 2%;
-	margin-left:2%;
 	z-index: 5;
 }
 .pgchng{
@@ -28,6 +56,7 @@ img{}
 .bground{
 	position: absolute;
 	z-index: -1;
+	height:410px;
 }
 p{}
 .warning{
