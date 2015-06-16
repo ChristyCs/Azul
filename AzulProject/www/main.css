@@ -9,7 +9,7 @@ h1{
 	z-index: 5;
 	font-family: BanglaMN;
  	color: rgb(249, 222, 26);
-  	letter-spacing: 14px;
+  	letter-spacing: 15px;
 }
 .secndry{
 	letter-spacing: 7px;
@@ -29,7 +29,8 @@ div{}
 img{}
 .bground{
 	position: absolute;
-	z-index: -1;
+	z-index: -1;	
+	height:320px;
 }
 p{}
 .warning{

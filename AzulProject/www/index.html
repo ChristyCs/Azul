@@ -20,21 +20,14 @@
         <input class="texthldr" name="Name" id="userID" value="Name" type="text">       
         <input class="texthldr" name="Password" id="userPW" value="Password" type="text">
         <input class="texthldr" type="submit" value="PROCEED" id="loginButton" />
+        <!-- make this ^^ login link to 
+          missioncontrol.html
+        -->
 
-	<!-- put the result here -->
 	<div id="result" class="functions" style="text-align: center"></div>
 
-    </div><!-- /content -->
-<!--
-    <div data-role="footer">
-        <h4>Login For Space Runner</h4>
-    </div><!-- /footer -->
-</div><!-- /page -->
-<!--class is for css-->
-<div class="tutorial" data-role="page" id="Login">
-
+    </div>
 </div>
-
 
 <script type="text/javascript">
 $(document).bind('pageinit', function() { 
@@ -95,13 +88,14 @@ $(document).bind('pageinit', function() {
      var hasPass = $(textPass).attr("hastext");
      if(hasName === "true" && hasPass === "true"){
          console.log("here");
+         window.open("missioncontrol.html", "_self");
+      /* Temporary fix ^*/
      }else{
          $(resultLogin).css("color","red");
          $(resultLogin).css("font-size","0.8em");
          var htmlVal = "<p><b>Please enter User Name and Password</b></p>";
          $(resultLogin).html(htmlVal);
      }
-     //Henry: can it reload with new css information? ie index.html with new data-role div
   });
   
 });
