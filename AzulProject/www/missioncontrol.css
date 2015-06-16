@@ -75,3 +75,9 @@ p{}
 .warning{
 	font-size: 0.8em;
 }
+.planetfact{
+	font-size:1em;
+}
+.d{
+	display:none;
+}
