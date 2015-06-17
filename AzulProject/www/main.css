@@ -1,5 +1,5 @@
 h1{
-	font-size: 30px;
+	font-size: 33px;
 	
 }
 .title{
@@ -10,6 +10,9 @@ h1{
 	font-family: BanglaMN;
  	color: rgb(249, 222, 26);
   	letter-spacing: 15px;
+}
+.primary{
+	height:50px;
 }
 .secndry{
 	letter-spacing: 7px;
