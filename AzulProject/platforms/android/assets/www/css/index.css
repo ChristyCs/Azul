@@ -1,4 +1,57 @@
+@font-face {
+    font-family: BanglaMN;
+    src: url(BanglaMN.ttc);
+  }
+
 body {
     margin: 0%;
-    padding: 0%    
+    padding: 0%;
+    overflow: hidden;
+    position: absolute;
+    font-family:BanglaMN;
+    color: rgb(249, 222, 26);
+}
+#ontop-menu{ /*Div background*/
+	position: absolute;
+	width: 568px;
+	height:320px;
+}
+#title-menu {
+  position: absolute;
+  font-size: 54px;
+  padding-left: 201px;
+  padding-right: 201px;
+  left: -28px;
+  top: 4px;
+  letter-spacing: 3px;
+}
+#title-menu2 {
+  position: absolute;
+  font-size: 42px;
+  padding-left: 220px;
+  padding-right: 220px;
+  left: -45px;
+  top: 72px;
+  letter-spacing: 3px;
+}
+#start-menu {
+  position: absolute;
+  font-size: auto;
+  padding-left: 190px;
+  padding-right: 190px;
+  padding-top: 34px;
+  margin: 0px;
+  top: 193px;
+  left: -28px;
+  text-transform: uppercase;
+}
+#exit-menu {
+  position: absolute;
+  font-size: 20px;
+  padding-left: 253px;
+  padding-right: 240px;
+  margin: 10px;
+left: 105px;
+  top: 217px;
+  text-transform: uppercase;
 }

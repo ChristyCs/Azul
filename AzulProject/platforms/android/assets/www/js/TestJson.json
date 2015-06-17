@@ -1,0 +1,10 @@
+{
+    "blocks":[
+        {"width": "20", "height": "10"},
+        {"width": "10", "height": "20"}
+    ],
+    
+    "landscape":[
+        {"src": "img/testbckgrnd.jpg"}
+    ]
+}
