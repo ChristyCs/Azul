@@ -11,6 +11,15 @@ h1{
  	color: rgb(249, 222, 26);
   	letter-spacing: 15px;
 }
+.jupitertitle{
+	letter-spacing: 4px;
+}
+.venustitle{
+	letter-spacing: 4px;
+}
+.earthtitle{
+	letter-spacing: 4px;
+}
 .primary{
 	height:50px;
 }
