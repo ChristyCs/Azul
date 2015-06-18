@@ -84,7 +84,7 @@ $(document).bind('pageinit', function() {
   $(textPass).focusout(changeTextNFocus);
   
   $(buttonLogin).bind("click", function(){
-     var jsonUrl = mainUrl;
+     var jsonUrl = mainUrl+"/test";
      var userName = $(textName).val();
      var userPassword = $(textPass).val();
      var userDetails = {"user": userName, "password": userPassword};
@@ -92,14 +92,22 @@ $(document).bind('pageinit', function() {
      var hasName = $(textName).attr("hastext");
      var hasPass = $(textPass).attr("hastext");
      if(hasName === "true" && hasPass === "true"){
-         console.log("here");         
-         $.post(jsonUrl, userDetails)
-                  .success(function(data){
-                      console.log("Success");                      
-                  })
-                  .error(function(data){
-                      console.log("Fail: "+data.responseText);
-                  });
+         console.log("here");    
+         $.get(jsonUrl)
+                 .success(function(data){
+                     console.log(data);
+                 })
+                 .error(function(data){
+                     console.log("Fail:");
+                     console.log(data);
+                 });
+//         $.post(jsonUrl, userDetails)
+//                  .success(function(data){
+//                      console.log("Success: "+data);                      
+//                  })
+//                  .error(function(data){
+//                      console.log("Fail: "+data.responseText);
+//                  });
      }else{
          $(resultLogin).css("color","red");
          $(resultLogin).css("font-size","0.8em");

@@ -5,11 +5,15 @@ var app = express();
 var pg = require('pg');
 var connectionString = process.env.DATABASE_URL;
 
-//app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname));
 app.use(cors());
+
+app.get('/test',function(request, response){
+    response.send("Yus it works");
+});
 
 app.post('/login', function(request, response){
    pg.connect(connectionString, function(err, client, done){
