@@ -12,15 +12,27 @@ app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname));
 app.use(cors());
 
-app.post('/add', function(request, response){
-    var username = 'ballas';
-    var userpassword = '12345';
-    var hashpass;
-    password(userpassword).hash(function(error, hash){
-       if(error){
-           console.log("Failed to hash pass");
-       } 
-       console.log(hash);
+app.post('/add', function(request, response){    
+    pg.connect(connectionString, function(err, client, done){
+        var username = 'ballas';
+        var userpassword = '12345';
+        var hashpass;
+        password(userpassword).hash(function(error, hash){
+           if(error){
+               console.log("Failed to hash pass");
+           } 
+           hashpass = hash;
+        });
+        query = 'INSERT INTO users(username, password) VALUES($1,$2)';
+        client.query(query,[username,hashpass],function(err, result){
+            done();
+            if(err){
+               response.statusCode = 500;
+               response.send(err);
+            }else{
+               response.send(username+" "+hashpass); 
+            }
+        });
     });
 });
 
