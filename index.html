@@ -92,7 +92,14 @@ $(document).bind('pageinit', function() {
      var hasName = $(textName).attr("hastext");
      var hasPass = $(textPass).attr("hastext");
      if(hasName === "true" && hasPass === "true"){
-         console.log("here");
+         console.log("here");         
+         $.post(jsonUrl, userDetails)
+                  .success(function(data){
+                      console.log("Success");                      
+                  })
+                  .error(function(data){
+                      console.log("Fail: "+data.responseText);
+                  });
      }else{
          $(resultLogin).css("color","red");
          $(resultLogin).css("font-size","0.8em");

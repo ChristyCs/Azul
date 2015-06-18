@@ -11,6 +11,25 @@ app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname));
 app.use(cors());
 
+app.post('/login', function(request, response){
+   pg.connect(connectionString, function(err, client, done){
+       var username = request.body.username;
+       var password = request.body.password;
+       var query = 'SELECT username'+
+               'FROM users WHERE username = $1';
+       client.query(query, [username], function(err, result){
+           done();
+           if(err){
+               response.statusCode = 500;
+               response.send("Error: "+err);
+           }else{
+               console.log("Result: "+result);
+               //var s = {"author":author, "text":text};
+               response.send("Result: "+result);
+           }
+       });
+   }); 
+});
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
