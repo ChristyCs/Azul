@@ -15,15 +15,20 @@ app.post('/login', function(request, response){
     pg.connect(connectionString, function(err, client, done){
         var username = request.body.username;
         var query = 'SELECT *'+
-            'FROM users';
+            'FROM users WHERE username = $1';
         
-        client.query(query,function(err, result){
+        client.query(query,[username],function(err, result){
            done();
            if(err){
                response.statusCode = 500;
                response.send(err);
            }else{
-               response.send(result);
+               if(result.rows.length === 0){
+                   response.statusCode = 400;
+                   response.send("User and password wrong");
+               }else{
+                   response.send(result.rows);
+               }               
            }
         });        
     });
