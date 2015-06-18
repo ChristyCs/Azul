@@ -11,13 +11,21 @@ app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname));
 app.use(cors());
 
-app.get('/test',function(request, response){
-    response.send("Yus it works");
-});
-
 app.post('/login', function(request, response){    
     pg.connect(connectionString, function(err, client, done){
-        response.send("Yayayaya");
+        var username = request.body.username;
+        var query = 'SELECT *'+
+            'FROM users';
+        
+        client.query(query,function(err, result){
+           done();
+           if(err){
+               response.statusCode = 500;
+               response.send(err);
+           }else{
+               response.send(result);
+           }
+        });        
     });
 //   pg.connect(connectionString, function(err, client, done){
 //       var username = request.body.username;
