@@ -15,8 +15,10 @@ app.get('/test',function(request, response){
     response.send("Yus it works");
 });
 
-app.post('/login', function(request, response){
-    response.send("Yayayaya");
+app.post('/login', function(request, response){    
+    pg.connect(connectionString, function(err, client, done){
+        response.send("Yayayaya");
+    });
 //   pg.connect(connectionString, function(err, client, done){
 //       var username = request.body.username;
 //       var password = request.body.password;
