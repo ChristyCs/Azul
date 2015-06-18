@@ -12,7 +12,7 @@ var quotes = [
 ];
 
 // make express handle JSON and other requests
-app.use(express.bodyParser());
+app.use(express.body-parser());
 // serve up files from this directory 
 app.use(express.static(__dirname));
 // make sure we use CORS to avoid cross domain problems
