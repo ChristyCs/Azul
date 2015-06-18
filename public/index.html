@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Main Page</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+        <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+    </head>
+    <body>
+        <!--Main div-->
+        <div data-role="page" id="page_Main">
+            <br>
+            <a class="ui-btn" id="main_ButtonLogin">Login</a>
+            <a class="ui-btn" id="main_ButtonCreate">Create Account</a>
+        </div>
+        
+        <!--Login Div-->
+        <div data-role="page" id="page_Login">
+            <div data-role="header" id="login_DivHeader">
+                <a class="ui-btn ui-btn-icon-left ui-icon-carat-l" id="login_ButtonBack">Back</a>
+                <h1>Enter Login Details</h1>                
+            </div>
+            <div data-role="content" id="div_Login" class="ui-content">
+                <input name="Name" id="login_TextUserN" value="Name" type="text" 
+                       data-clear-btn="false">       
+                <input name="Password" id="login_TextUserPW"  value="Password" type="text" 
+                       data-clear-btn="false">                
+                <a class="ui-btn" id="login_ButtonLogin">Login</a>
+                <div id="login_DivResult" class="functions" style="text-align: center"></div>
+            </div>
+        </div>
+        
+        <!--Create Div-->
+        <div data-role="page" id="page_Create">
+            <div data-role="header" id="create_DivHeader">
+                <a class="ui-btn ui-btn-icon-left ui-icon-carat-l" id="create_ButtonBack">Back</a>
+                <h1>Enter New Account Details</h1>                
+            </div>
+            <div data-role="content" id="div_Create" class="ui-content">
+                <input name="Name" id="create_TextUserN" value="Name" type="text" 
+                       data-clear-btn="false">       
+                <input name="Password" id="create_TextUserPW"  value="Password" type="text" 
+                       data-clear-btn="false">
+                <input name="Confirm Password" id="create_TextUserConPW"  value="Confirm Password" type="text" 
+                       data-clear-btn="false">                
+                <a class="ui-btn" id="create_ButtonCreate">Create Account</a>
+                <div id="create_DivResult" class="functions" style="text-align: center"></div>
+            </div>
+        </div>
+        
+        <!--Loading Div-->
+        <div data-role="page" id="page_Loading">
+            <br>
+            <br>
+            <img src="ajax-loader.gif" alt="loader image" 
+                 style="display: block; margin-left: auto;margin-right: auto"/>
+        </div>
+        
+        <script>
+            $(function(){
+                
+                $.ajaxSetup ({
+                    cache: false
+                }); 
+                //URL used for user authentication and creation
+                var URL = "https://rocky-chamber-3053.herokuapp.com";
+                
+                //Main page div
+                var pageMain = "#page_Main";
+                var mainButtonLogin = "#main_ButtonLogin";
+                var mainButtonCreate = "#main_ButtonCreate";
+                
+                //Login page div
+                var pageLogin = "#page_Login";
+                var loginTextUserN = "#login_TextUserN";
+                var loginTextUserPW = "#login_TextUserPW";
+                var loginButtonBack = "#login_ButtonBack";
+                var loginButtonLogin = "#login_ButtonLogin";
+                var loginDivResult = "#login_DivResult";
+                
+                //Create Account page div
+                var createLogin = "#page_Create";
+                var createTextUserN = "#create_TextUserN";
+                var createTextUserPW = "#create_TextUserPW";
+                var createTextUserConPW = "#create_TextUserConPW";
+                var createButtonCreate = "#create_ButtonCreate";
+                var createButtonBack = "#create_ButtonBack";
+                var createDivResult = "#create_DivResult";
+                
+                //Loading page div
+                var pageLoading = "#page_Loading";
+                
+                //Cahnge Text Color and clears when selecting
+                var hasText = "hasText";
+                var textNFColor = "rgb(150, 150, 150)";
+                var textFColor = "rgb(0, 0, 0)";
+              
+                var changeText_Focus = function(){                    
+                    changeText(true, $(this));
+                };
+                var changeText_NFocus = function(){                    
+                    changeText(false, $(this));
+                };       
+                
+                var changeText = function(isFocus, _self){ 
+                    $(loginDivResult).html("");
+                    if(isFocus){
+                        var hastext = _self.data(hasText);    
+                        if(hastext === false){
+                            _self.val("");
+                            _self.css('color', textFColor);
+                        }
+                    }else{                         
+                        var text = _self.val();
+                        if(!text){
+                            _self.val(_self.attr('name'));
+                            _self.css('color', textNFColor);
+                            _self.data(hasText,false);
+                        }else{                            
+                            _self.data(hasText,true);                            
+                        }
+                    }
+                };
+                $(loginTextUserN).data(hasText,false)
+                        .focus(changeText_Focus)
+                        .focusout(changeText_NFocus)
+                        .css('color', textNFColor);
+                
+                $(loginTextUserPW).data(hasText,false)
+                        .focus(changeText_Focus)
+                        .focusout(changeText_NFocus)
+                        .css('color', textNFColor);
+                
+                $(createTextUserN).data(hasText,false)
+                        .focus(changeText_Focus)
+                        .focusout(changeText_NFocus)
+                        .css('color', textNFColor);
+                
+                $(createTextUserPW).data(hasText,false)
+                        .focus(changeText_Focus)
+                        .focusout(changeText_NFocus)
+                        .css('color', textNFColor);
+                
+                $(createTextUserConPW).data(hasText,false)
+                        .focus(changeText_Focus)
+                        .focusout(changeText_NFocus)
+                        .css('color', textNFColor); 
+                             
+                //Button Click functions
+                //Main Buttons
+                $(mainButtonLogin).on('click', function(){
+                    $.mobile.changePage("#page_Login", { transition: "slide", 
+                        reverse: false, changeHash: false });
+                });                
+                $(mainButtonCreate).on('click', function(){
+                    $.mobile.changePage("#page_Create", { transition: "slide", 
+                        reverse: false, changeHash: false });
+                });
+                
+                //Login buttons
+                $(loginButtonBack).on('click', function(){
+                    $(loginDivResult).html("");
+                    $.mobile.changePage("#page_Main", { transition: "slide", 
+                        reverse: true, changeHash: false });
+                });
+                
+                $(loginButtonLogin).on('click', function(){
+                    var jsonUrl = URL+"/login";
+                    var hasName = $(loginTextUserN).data(hasText);
+                    var hasPass = $(loginTextUserPW).data(hasText);
+                    if(hasName && hasPass){
+                        var userName = $(loginTextUserN).val();
+                        var userPassword = $(loginTextUserPW).val();
+                        var userDetails = {"username": userName, "password":userPassword};                        
+                        $.mobile.changePage("#page_Loading", { transition: "none", 
+                            reverse: false, changeHash: false });
+                        
+                        $.post(jsonUrl, userDetails)
+                                .success(function(data){
+                                    console.log("Success");
+                                })
+                                .error(function(data){
+                                    console.log("Error occured with login");
+                                    var htmlVal = "<p><b>Wrong User Name or Password</b><p>";
+                                    $(loginDivResult)
+                                            .css("color","red")
+                                            .css("font-size","0.8em")
+                                            .html(htmlVal);
+                                });
+                    }else{
+                        var htmlVal = "<p><b>Please enter User Name and Password</b><p>";
+                        $(loginDivResult)
+                                .css("color","red")
+                                .css("font-size","0.8em")
+                                .html(htmlVal);
+                    }
+                });
+                
+                //Create buttons
+                $(createButtonBack).on('click', function(){
+                   $.mobile.changePage("#page_Main", { transition: "slide", 
+                        reverse: true, changeHash: false }); 
+                });
+                
+            });
+            
+        </script>
+    </body>
+</html>

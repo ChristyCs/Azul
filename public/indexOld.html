@@ -9,11 +9,28 @@
   <script src="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 </head>
 <body>
-<div class="pgchng" data-role="page" id="Login">
-    <div data-role="header" id="header" style="display: none">
-            <h1 id="heading">Enter Login Details</h1>
+    <div data-role="page" id="main">
+        <a href="#pageLogin" class="ui-btn">Login</a>
+        <a href="#pageCreate" class="ui-btn">Create Account</a>                
     </div>
-    <div role="main" class="ui-content" id="options" style="display: block">
+    <div data-role="page" id="pageLogin">
+        <div data-role="header" class="ui-header">
+            <h1 id="heading">Enter Login Details</h1>
+            <a href="#main" class="ui-btn ui-btn-icon-left ui-icon-carat-l">Back</a>
+        </div>
+        <div data-role="content" role="main" class="ui-content">            
+            <input class="texthldr" name="Name" id="userID" value="Name" type="text">       
+            <input class="texthldr" name="Password" id="userPW" value="Password" type="text">            
+            <!--<input class="ui-btn" type="submit" value="Login" id="loginButton" />--> 
+            <a class="ui-btn" id="loginButton">Login</a> 
+            <div id="result" class="functions" style="text-align: center"></div>
+        </div>               
+    </div>
+    <div data-role="page" id="pageCreate">
+        
+    </div>
+<!--<div class="pgchng" data-role="page" id="Login">    
+    <div data-role="page" class="ui-content" id="options" style="display: block">
         <input class="texthldr" type="submit" value="Login" id="optionLogin"/>
         <input class="texthldr" type="submit" value="Create Account" id="optionCreate"/>
         <script>
@@ -31,7 +48,11 @@
             });            
         </script>
     </div>
-    <div role="main" class="ui-content" id="loginUser" style="display: none">        
+    <div data-role="page" class="ui-content" id="loginUser" style="display: none">
+        <div data-role="header" id="header">
+            <h1 id="heading">Enter Login Details</h1>
+            <a href="#createUser" class="ui-btn-left">Back</a>
+        </div>
         <input class="texthldr" name="Name" id="userID" value="Name" type="text">       
         <input class="texthldr" name="Password" id="userPW" value="Password" type="text">
         <div id="result" class="functions" style="text-align: center"></div>
@@ -46,7 +67,7 @@
             });
         </script>
     </div>
-    <div role="main" class="ui-content" id="createUser" style="display: none">  
+    <div data-role="page" class="ui-content" id="createUser" style="display: none">  
         <input class="texthldr" name="Name" id="createUserID" value="Name" type="text">       
         <input class="texthldr" name="Password" id="createUserPW" value="Password" type="text">
         <input class="texthldr" name="Reenter Password" id="createUserRPW" value="Password" type="text">
@@ -61,12 +82,12 @@
             });
         </script>
     </div>
-    <div role="main" class="ui-content" id="loading" style="display: none">  
+    <div data-role="page" class="ui-content" id="loading" style="display: none">  
         <br>
         <img class="loader" src="ajax-loader.gif" alt="loaderImage" style="display: block; margin-left: auto;margin-right: auto"/>
     </div>
     
-</div><!-- /page -->
+</div> /page -->
 <!--    <img class="bground" src="AzulProject/www/img/testbckgrnd.jpg" alt="titleimg" />-->
 <!--
     <div data-role="footer">
@@ -84,6 +105,12 @@ $(document).bind('pageinit', function() {
     cache: false
   });  
   var mainUrl = "https://rocky-chamber-3053.herokuapp.com";
+  
+  var pageOption = "#pageOption";
+  $(pageOption)
+          .css("display", "table")
+          .css("width","100%")
+          .css("height", "100%");
     
   var divLogin = "#loginUser";
   var divCreate = "#createUser";
@@ -95,8 +122,7 @@ $(document).bind('pageinit', function() {
   var textPass = "#userPW";
   
   var buttonLogin = "#loginButton";
-  var resultLogin = "#result";
-  
+  var resultLogin = "#result"; 
   $(textName).attr('hastext', false);
   $(textName).css('color', textNFColor);
   $(textPass).attr('hastext', false);
