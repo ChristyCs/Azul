@@ -2,7 +2,8 @@ var express = require('express');
 
 // added cors
 var app = express()
-   , cors = require('cors');
+   , cors = require('cors')
+   ,bodyParser = require('body-parser');
 
 var quotes = [
   { author : 'Audrey Hepburn', text : "Nothing is impossible, the word itself says 'I'm possible'!"},
@@ -12,7 +13,7 @@ var quotes = [
 ];
 
 // make express handle JSON and other requests
-app.use(express.body-parser());
+app.use(bodyParser);
 // serve up files from this directory 
 app.use(express.static(__dirname));
 // make sure we use CORS to avoid cross domain problems
