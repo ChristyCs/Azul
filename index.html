@@ -101,13 +101,13 @@ $(document).bind('pageinit', function() {
                      console.log("Fail:");
                      console.log(data);
                  });
-//         $.post(jsonUrl, userDetails)
-//                  .success(function(data){
-//                      console.log("Success: "+data);                      
-//                  })
-//                  .error(function(data){
-//                      console.log("Fail: "+data.responseText);
-//                  });
+         $.post(jsonUrl, userDetails)
+                  .success(function(data){
+                      console.log("Success: "+data);                      
+                  })
+                  .error(function(data){
+                      console.log("Fail: "+data.responseText);
+                  });
      }else{
          $(resultLogin).css("color","red");
          $(resultLogin).css("font-size","0.8em");
