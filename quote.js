@@ -57,7 +57,7 @@ app.post('/login', function(request, response){
                             response.statusCode = 500;
                             response.send(error);
                         }else{
-                            response.send(result.row);
+                            response.send(result);
                             password(result.row[0].password).verifyAgainst(hash, function(error, verified){
                                 if(error){
                                     response.statusCode = 500;
