@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Page Title</title>
+  <title>Login</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="main.css">
   <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
@@ -9,39 +9,86 @@
   <script src="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 </head>
 <body>
-<!-- Start of first page -->
 <div class="pgchng" data-role="page" id="Login">
- <img class="bground" src="AzulProject/www/img/testbckgrnd.jpg" alt="titleimg" />
-<!--
-    <div data-role="header   ">
-    
-    </div><!-- /header -->
-    <h1 class="title">Space</h1>
-    <h1 class="title secndry">Runner</h1>
-    <div role="main" class="ui-content">
-        
+    <div data-role="header" id="header" style="display: none">
+            <h1 id="heading">Enter Login Details</h1>
+    </div>
+    <div role="main" class="ui-content" id="options" style="display: block">
+        <input class="texthldr" type="submit" value="Login" id="optionLogin"/>
+        <input class="texthldr" type="submit" value="Create Account" id="optionCreate"/>
+        <script>
+            $("#optionLogin").on('click', function(){
+                $("#options").css("display","none");
+                $("#header").css("display", "block");
+                $("#heading").html("Enter Login Details");
+                $("#loginUser").css("display", "block");
+            });
+            $("#optionCreate").on('click', function(){
+                $("#options").css("display","none");
+                $("#header").css("display", "block");
+                $("#heading").html("Enter New Account Details");
+                $("#createUser").css("display", "block");
+            })            
+        </script>
+    </div>
+    <div role="main" class="ui-content" id="loginUser" style="display: none">        
         <input class="texthldr" name="Name" id="userID" value="Name" type="text">       
         <input class="texthldr" name="Password" id="userPW" value="Password" type="text">
+        <div id="result" class="functions" style="text-align: center"></div>
         <input class="texthldr" type="submit" value="Login" id="loginButton" />
-
-	<!-- put the result here -->
-	<div id="result" class="functions" style="text-align: center"></div>
-
-    </div><!-- /content -->
+        <input class="texthldr" type="submit" value="Back" id="loginBackButton" />	
+        <script>
+            $("#loginBackButton").on('click', function(){
+                console.log("here");
+                $("#header").css("display", "none");
+                $("#loginUser").css("display", "none");
+                $("#options").css("display","block");                
+            });
+        </script>
+    </div>
+    <div role="main" class="ui-content" id="createUser" style="display: none">  
+        <input class="texthldr" name="Name" id="createUserID" value="Name" type="text">       
+        <input class="texthldr" name="Password" id="createUserPW" value="Password" type="text">
+        <input class="texthldr" name="Reenter Password" id="createUserRPW" value="Password" type="text">
+        <div id="createResult" class="functions" style="text-align: center"></div>
+        <input class="texthldr" type="submit" value="Create Acount" id="createButton" />	
+	<input class="texthldr" type="submit" value="Back" id="createBackButton" />
+        <script>
+            $("#createBackButton").on('click', function(){
+                $("#header").css("display", "none");
+                $("#createUser").css("display", "none");
+                $("#options").css("display","block");                
+            });
+        </script>
+    </div>
+    <div role="main" class="ui-content" id="loading" style="display: none">  
+        <br>
+        <img class="loader" src="ajax-loader.gif" alt="loaderImage" style="display: block; margin-left: auto;margin-right: auto"/>
+    </div>
+    
+</div><!-- /page -->
+<!--    <img class="bground" src="AzulProject/www/img/testbckgrnd.jpg" alt="titleimg" />-->
 <!--
     <div data-role="footer">
         <h4>Login For Space Runner</h4>
     </div><!-- /footer -->
-</div><!-- /page -->
-
+<!--
+    <div data-role="header   ">
+    
+    </div><!-- /header -->
+<!--    <h1 class="title">Space</h1>
+    <h1 class="title secndry">Runner</h1>-->
 <script type="text/javascript">
 $(document).bind('pageinit', function() { 
   $.ajaxSetup ({
     cache: false
-  });
-  
+  });  
   var mainUrl = "https://rocky-chamber-3053.herokuapp.com";
-  
+    
+  var divLogin = "#loginUser";
+  var divCreate = "#createUser";
+  var divLoading = "#loading"
+  var divHeader = "#header"
   var textNFColor = "rgb(150, 150, 150)";
   var textFColor = "rgb(0, 0, 0)";
   var textName = "#userID";
@@ -56,6 +103,7 @@ $(document).bind('pageinit', function() {
   $(textPass).css('color', textNFColor);
   
   var changeTextFocus = function(){
+      $(resultLogin).html("");
       var _self = $(this);
       var hastext = _self.attr('hastext');    
       if(hastext === "false"){
@@ -77,6 +125,14 @@ $(document).bind('pageinit', function() {
       
   };
   
+  var hideDiv = function(item){
+      $(item).css("display","none");
+  };
+  
+  var showDiv = function(item){
+      $(item).css("display","block");
+  };
+  
   $(textName).focus(changeTextFocus);  
   $(textName).focusout(changeTextNFocus);
   
@@ -84,6 +140,7 @@ $(document).bind('pageinit', function() {
   $(textPass).focusout(changeTextNFocus);
   
   $(buttonLogin).bind("click", function(){
+     $(resultLogin).html("");
      var jsonUrl = mainUrl+"/login";
      var userName = $(textName).val();
      var userPassword = $(textPass).val();
@@ -91,14 +148,24 @@ $(document).bind('pageinit', function() {
      var hasName = $(textName).attr("hastext");
      var hasPass = $(textPass).attr("hastext");
      if(hasName === "true" && hasPass === "true"){
-         console.log("here");
+         hideDiv(divLogin);
+         hideDiv(divHeader);
+         showDiv(divLoading);
          $.post(jsonUrl, {"username": userName, "password": userPassword})
                   .success(function(data){
                       console.log("Success:");
                       console.log(data);                      
                   })
                   .error(function(data){
-                      console.log("Fail: "+data.responseText);                      
+                      console.log("Fail: "+data.responseText);
+                      $(resultLogin).css("color","red");
+                      $(resultLogin).css("font-size","0.8em");
+                      var htmlVal = "<p><b>Wrong User Name or Password</b><p>";
+                      $(resultLogin).html(htmlVal);
+                      hideDiv(divLoading);
+                      showDiv(divHeader);
+                      showDiv(divLogin);
+                      
                   });
      }else{
          $(resultLogin).css("color","red");
