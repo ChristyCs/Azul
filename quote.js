@@ -16,23 +16,24 @@ app.get('/test',function(request, response){
 });
 
 app.post('/login', function(request, response){
-   pg.connect(connectionString, function(err, client, done){
-       var username = request.body.username;
-       var password = request.body.password;
-       var query = 'SELECT username'+
-               'FROM users WHERE username = $1';
-       client.query(query, [username], function(err, result){
-           done();
-           if(err){
-               response.statusCode = 500;
-               response.send("Error: "+err);
-           }else{
-               console.log("Result: "+result);
-               //var s = {"author":author, "text":text};
-               response.send("Result: "+result);
-           }
-       });
-   }); 
+    response.send("Yayayaya");
+//   pg.connect(connectionString, function(err, client, done){
+//       var username = request.body.username;
+//       var password = request.body.password;
+//       var query = 'SELECT username'+
+//               'FROM users WHERE username = $1';
+//       client.query(query, [username], function(err, result){
+//           done();
+//           if(err){
+//               response.statusCode = 500;
+//               response.send("Error: "+err);
+//           }else{
+//               console.log("Result: "+result);
+//               //var s = {"author":author, "text":text};
+//               response.send("Result: "+result);
+//           }
+//       });
+//   }); 
 });
 
 app.listen(app.get('port'), function() {
