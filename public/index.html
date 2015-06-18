@@ -193,6 +193,8 @@ and open the template in the editor.
                                             .css("color","red")
                                             .css("font-size","0.8em")
                                             .html(htmlVal);
+                                    $.mobile.changePage("#page_Login", { transition: "none", 
+                                        reverse: false, changeHash: false });
                                 });
                     }else{
                         var htmlVal = "<p><b>Please enter User Name and Password</b><p>";
