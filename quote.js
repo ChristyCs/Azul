@@ -52,24 +52,16 @@ app.post('/login', function(request, response){
                    response.statusCode = 401;
                    response.send("Unauthorized access");
                }else{
-                    password(userpassword).hash(function(error, hash){
+                    password(userpassword).verifyAgainst(result.rows[0].password, function(error, verified){
                         if(error){
                             response.statusCode = 500;
                             response.send(error);
+                        }else if (!verified){
+                            response.statusCode = 401;
+                            response.send("Unauthorized access");
                         }else{
-                            console.log(result.rows[0].password);
-                            password(result.rows[0].password).verifyAgainst(hash, function(error, verified){
-                                if(error){
-                                    response.statusCode = 500;
-                                    response.send(error);
-                                }else if (!verified){
-                                    response.statusCode = 401;
-                                    response.send("Unauthorized access");
-                                }else{
-                                    response.send(result.row.username+" login Success");
-                                }  
-                            }); 
-                        } 
+                            response.send(result.rows[0].username+" login Success");
+                        }
                     });
                 }               
             }
