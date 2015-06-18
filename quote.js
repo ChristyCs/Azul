@@ -20,7 +20,7 @@ app.post('/add', function (request, response) {
             if (error) {
                 console.log("Failed to hash pass");
             }
-            
+            response.send(hash);
             query = 'INSERT INTO users(username, password) VALUES($1,$2)';
             client.query(query, [username, hash], function (err, result) {
                 done();
