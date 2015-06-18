@@ -87,20 +87,18 @@ $(document).bind('pageinit', function() {
      var jsonUrl = mainUrl+"/login";
      var userName = $(textName).val();
      var userPassword = $(textPass).val();
-     var userDetails = {"username": userName, "password": userPassword};
-     
+          
      var hasName = $(textName).attr("hastext");
      var hasPass = $(textPass).attr("hastext");
      if(hasName === "true" && hasPass === "true"){
          console.log("here");
-         $.post(jsonUrl, userDetails)
+         $.post(jsonUrl, {"username": userName, "password": userPassword})
                   .success(function(data){
                       console.log("Success:");
                       console.log(data);                      
                   })
                   .error(function(data){
-                      console.log("Fail: "+data.responseText);
-                      console.log(data);
+                      console.log("Fail: "+data.responseText);                      
                   });
      }else{
          $(resultLogin).css("color","red");

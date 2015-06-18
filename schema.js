@@ -8,6 +8,7 @@ var createQuery = "CREATE TABLE IF NOT EXISTS users"
         +"password varchar(255) not null)";
 //Create a author table
 client.query(createQuery)
-        .on('end',function(){           
+        .on('end',function(){  
+                
                 client.end();            
         });

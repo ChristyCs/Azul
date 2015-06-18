@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var app = express();
 var pg = require('pg');
+var password = require('password-hash-and-salt');
 var connectionString = process.env.DATABASE_URL;
 
 app.use(bodyParser.json());
@@ -11,9 +12,12 @@ app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname));
 app.use(cors());
 
+
+
 app.post('/login', function(request, response){    
     pg.connect(connectionString, function(err, client, done){
         var username = request.body.username;
+        var userpassword = request.body.password;
         var query = 'SELECT *'+
             'FROM users WHERE username = $1';
         
@@ -24,31 +28,31 @@ app.post('/login', function(request, response){
                response.send(err);
            }else{
                if(result.rows.length === 0){
-                   response.statusCode = 400;
-                   response.send("User and password wrong");
+                   response.statusCode = 401;
+                   response.send("Unauthorized access");
                }else{
-                   response.send(result.rows);
+                   password(userpassword).hash(function(error, hash){
+                      if(error){
+                          response.statusCode = 500;
+                          response.send(error);
+                      }else{
+                         password(result.row[0].password).verifyAgainst(hash, function(error, verified){
+                           if(error){
+                               response.statusCode = 500;
+                               response.send(error);
+                           }else if (!verified){
+                               response.statusCode = 401;
+                               response.send("Unauthorized access");
+                           }else{
+                               response.send(result.row.username+" login Success");
+                           }  
+                         }); 
+                      } 
+                   });
                }               
            }
         });        
     });
-//   pg.connect(connectionString, function(err, client, done){
-//       var username = request.body.username;
-//       var password = request.body.password;
-//       var query = 'SELECT username'+
-//               'FROM users WHERE username = $1';
-//       client.query(query, [username], function(err, result){
-//           done();
-//           if(err){
-//               response.statusCode = 500;
-//               response.send("Error: "+err);
-//           }else{
-//               console.log("Result: "+result);
-//               //var s = {"author":author, "text":text};
-//               response.send("Result: "+result);
-//           }
-//       });
-//   }); 
 });
 
 app.listen(app.get('port'), function() {
