@@ -220,7 +220,8 @@ and open the template in the editor.
                 //Create buttons
                 $(createButtonBack).on('click', function(){
                    $.mobile.changePage("#page_Main", { transition: "slide", 
-                        reverse: true, changeHash: false }); 
+                        reverse: true, changeHash: false });
+                   $(createDivResult).html("");
                 });
                 
                 $(createButtonCreate).on('click', function(){
@@ -241,14 +242,21 @@ and open the template in the editor.
                                 .html(htmlVal);                           
                        }else{
                            $.mobile.changePage("#page_Loading", { transition: "none", 
-                                reverse: true, changeHash: false });
+                                reverse: false, changeHash: false });
                            var userDetails = {"username":userName,"password":userPass};
                            $.post(jsonUrl, userDetails)
                                    .success(function(data){
-                                       
+                                       console.log(data);
                                    })
                                    .error(function(data){
-                                       
+                                       console.log(data.responseText);
+                                       var htmlVal = "<p><b>User Name Already in Use</b></p>";
+                                       $(createDivResult)
+                                                .css("color","red")
+                                                .css("font-size","0.8em")
+                                                .html(htmlVal);
+                                       $.mobile.changePage("#page_Create", { transition: "none", 
+                                            reverse: false, changeHash: false });
                                    });
                            
                        }
