@@ -224,7 +224,7 @@ and open the template in the editor.
                 });
                 
                 $(createButtonCreate).on('click', function(){
-                   var jasonUrl = URL+"/create";
+                   var jsonUrl = URL+"/create";
                    var hasName = $(createTextUserN).data(hasText);
                    var hasPass = $(createTextUserPW).data(hasText);
                    var hasConPass = $(createTextUserConPW).data(hasText);
@@ -240,6 +240,16 @@ and open the template in the editor.
                                 .css("font-size","0.8em")
                                 .html(htmlVal);                           
                        }else{
+                           $.mobile.changePage("#page_Loading", { transition: "none", 
+                                reverse: true, changeHash: false });
+                           var userDetails = {"username":userName,"password":userPass};
+                           $.post(jsonUrl, userDetails)
+                                   .success(function(data){
+                                       
+                                   })
+                                   .error(function(data){
+                                       
+                                   });
                            
                        }
                    }else{
