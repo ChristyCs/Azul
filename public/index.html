@@ -99,6 +99,7 @@ and open the template in the editor.
                 
                 //Cahnge Text Color and clears when selecting
                 var hasText = "hasText";
+                var isPassword = "isPassword";
                 var textNFColor = "rgb(150, 150, 150)";
                 var textFColor = "rgb(0, 0, 0)";
               
@@ -111,11 +112,16 @@ and open the template in the editor.
                 
                 var changeText = function(isFocus, _self){ 
                     $(loginDivResult).html("");
+                    $(createDivResult).html("");
                     if(isFocus){
                         var hastext = _self.data(hasText);    
                         if(hastext === false){
                             _self.val("");
                             _self.css('color', textFColor);
+                            if(_self.data(isPassword)){
+                                console.log("here");
+                                _self.attr("type","password");
+                            }
                         }
                     }else{                         
                         var text = _self.val();
@@ -123,32 +129,38 @@ and open the template in the editor.
                             _self.val(_self.attr('name'));
                             _self.css('color', textNFColor);
                             _self.data(hasText,false);
+                            _self.attr("type","text");
                         }else{                            
                             _self.data(hasText,true);                            
                         }
                     }
                 };
                 $(loginTextUserN).data(hasText,false)
+                        .data(isPassword,false)
                         .focus(changeText_Focus)
                         .focusout(changeText_NFocus)
                         .css('color', textNFColor);
                 
                 $(loginTextUserPW).data(hasText,false)
+                        .data(isPassword,true)
                         .focus(changeText_Focus)
                         .focusout(changeText_NFocus)
                         .css('color', textNFColor);
                 
                 $(createTextUserN).data(hasText,false)
+                        .data(isPassword,false)
                         .focus(changeText_Focus)
                         .focusout(changeText_NFocus)
                         .css('color', textNFColor);
                 
                 $(createTextUserPW).data(hasText,false)
+                        .data(isPassword,true)
                         .focus(changeText_Focus)
                         .focusout(changeText_NFocus)
                         .css('color', textNFColor);
                 
                 $(createTextUserConPW).data(hasText,false)
+                        .data(isPassword,true)
                         .focus(changeText_Focus)
                         .focusout(changeText_NFocus)
                         .css('color', textNFColor); 
@@ -209,6 +221,34 @@ and open the template in the editor.
                 $(createButtonBack).on('click', function(){
                    $.mobile.changePage("#page_Main", { transition: "slide", 
                         reverse: true, changeHash: false }); 
+                });
+                
+                $(createButtonCreate).on('click', function(){
+                   var jasonUrl = URL+"/create";
+                   var hasName = $(createTextUserN).data(hasText);
+                   var hasPass = $(createTextUserPW).data(hasText);
+                   var hasConPass = $(createTextUserConPW).data(hasText);
+                   
+                   if(hasName && hasPass && hasConPass){
+                       var userName = $(createTextUserN).val();
+                       var userPass = $(createTextUserPW).val();
+                       var userConPass = $(createTextUserConPW).val();
+                       if(!(userPass === userConPass)){
+                           var htmlVal = "<p><b>Passwords Do Not Match</b></p>";
+                           $(createDivResult)
+                                .css("color","red")
+                                .css("font-size","0.8em")
+                                .html(htmlVal);                           
+                       }else{
+                           
+                       }
+                   }else{
+                       var htmlVal = "<p><b>Please Enter Required Details</b></p>";
+                       $(createDivResult)
+                                .css("color","red")
+                                .css("font-size","0.8em")
+                                .html(htmlVal);
+                   }
                 });
                 
             });
