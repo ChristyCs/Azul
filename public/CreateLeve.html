@@ -17,7 +17,18 @@ and open the template in the editor.
                 margin: 0%;
                 padding: 0%;
                 height:100vh;
-                overflow: hidden;
+                //overflow: hidden;
+            }
+            canvas {
+                width: 568px;
+                height: 320px;
+                display: block;
+                position:relative;
+                top:0;
+                left: 0;
+                right:0;
+                bottom: 0;
+                margin: auto;              
             }
         </style>
     </head>
@@ -26,21 +37,33 @@ and open the template in the editor.
             <div class="ui-widget-header" id="header">
                 <button id="header_button">Options</button>
             </div>
-            <div data-role="main" class="ui-widget-content" id="panelMain" style="background: #ffffff;min-height: 500px; height: 95vh">
-                <div class="ui-widget-content" style="background: #555555;width: 70%;height: 50%">
-                    
+            <div data-role="main" class="ui-widget-content" id="panelMain" style="background: #dddddd;min-height: 500px; height: 95vh">
+                <div class="ui-widget-content" id="main_panelLeft" style="background: #eeeeee;height: 100%; float: left;">
+                    <canvas id="canvas" style="background-color: rgb(0,0,0);"></canvas> 
                 </div>
-                <div class="ui-widget-content" style="background: #cccccc;position: relative;width: 30%; height: 100%">
+                <div class="ui-widget-content" id="main_panelRight" style="background: #eeeeee; width: 250px;height: 100%;float: right;">
                     
                 </div>
             </div>
         </div>
         <script>
             $(function(){
+                var CANVAS_WIDTH = 568;
+                var CANVAS_HEIGHT = 320;
+                
                 $( "#header_button" ).button({
                     icons:{primary: "ui-icon-gear"}                    
                 });
-                               
+                $(window).on('resize', function(){
+                   var m_width = $("#panelMain").width();                        
+                   var p_width = $("#main_panelRight").width();
+                   $("#main_panelLeft")
+                        .width(m_width-p_width-4);
+                });
+                var m_width = $("#panelMain").width();                        
+                var p_width = $("#main_panelRight").width();                
+                $("#main_panelLeft")
+                        .width(m_width-p_width-4);                                
             });
         </script>
     </body>
