@@ -7,7 +7,7 @@ and open the template in the editor.
 <html>
     <head>
         <title>Level Test</title>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script type="text/javascript" src="http://cdn.gamequeryjs.com/jquery.gamequery.js"></script>        
         <style type="text/css">            
             html,body{                
@@ -31,17 +31,114 @@ and open the template in the editor.
                 var PLAYGROUND = "#playGround";
                 var PLAYGROUND_WIDTH = $(PLAYGROUND).width();
                 var PLAYGROUND_HEIGHT = $(PLAYGROUND).height();
-                //console.log(PLAYGROUND_WIDTH+" "+PLAYGROUND_HEIGHT);
+                
                 //--------------------------------------------------------------
                 //--    Main Declaration
-                //--------------------------------------------------------------
-                var testImage = new $.gQ.Animation({imageURL: "ajax-loader.gif"});
+                //--------------------------------------------------------------                
+                var keyUp = false;
+                var keyDown = false;
+                var keyLeft = false;
+                var keyRight = false;
+                
+                var gameJson = {
+                    "layers":{
+                        "background":{
+                           "src":"background.png",
+                           "width":"200",
+                           "height":"100",
+                           "posx":"0",
+                           "posy":"0"
+                        },
+                        "midground":{
+                           "src":"midground.png",
+                           "width":"200",
+                           "height":"100",
+                           "posx":"0",
+                           "posy":"0"                            
+                        },
+                        "foreground":{
+                           "src":"foreground.png",
+                           "width":"200",
+                           "height":"100",
+                           "posx":"0",
+                           "posy":"0"                            
+                        }
+                    }
+                };
+                var background = new $.gQ.Animation({imageURL: gameJson.layers.background.src});
+                
+                
+                var ball = new $.gQ.Animation({imageURL: "ball.png"});
+                
+                $(PLAYGROUND).playground({height:PLAYGROUND_HEIGHT, width:PLAYGROUND_WIDTH});
+                //$.playground().addSprite("bacground",{animation: testImage,posx: 20, posy: 20, width: 50});
+                $.playground().addGroup("balls",{height:PLAYGROUND_HEIGHT,width:PLAYGROUND_WIDTH})
+                        .addSprite("ball1",{animation: ball,posx: 20,posy:20})
+                        .addSprite("ball2",{animation: ball,posx: 55,posy:45})
+                        .end();
                 
                 //--------------------------------------------------------------
                 //--    Game Mechanincs
                 //--------------------------------------------------------------
-                $("#playground").playground({height:PLAYGROUND_HEIGHT, width:PLAYGROUND_WIDTH});
+                $.playground().registerCallback(function(){
+                    updateKeys();                    
+//                    if(keyUp){
+//                        var newPos = ($("#testImage").y()-5);
+//                        $("#testImage").y(newPos);
+//                    }
+//                    if(keyDown){
+//                        var newPos = ($("#testImage").y()+5);
+//                        $("#testImage").y(newPos);
+//                    }
+//                    if(keyLeft){
+//                        var newPos = ($("#testImage").x()-5);
+//                        $("#testImage").x(newPos);
+//                    }
+
+                    if(keyRight){
+                        var newPos = ($("#ball1").x()+1);                        
+                        $("#ball1").x(newPos);
+                        var collided = $("#ball1").collision("#ball2,."+$.gQ.groupCssClass);
+                        console.log(collided.length);
+                                
+                        
+                    }
+                },60);
+                $.playground().startGame();
                 
+                //--------------------------------------------------------------
+                //--    Keyboard
+                //--------------------------------------------------------------
+                var keys = [];
+                for(var i = 0; i < 256; i++){
+                    keys.push(false);
+                }                
+                var updateKeys = function(){
+                    keyUp = keys[87];
+                    keyDown = keys[83];
+                    keyLeft = keys[65];
+                    keyRight = keys[68];                    
+                };
+                
+                var keydown = function(e){
+                    if(e.keyCode<keys.length){
+                        keys[e.keyCode] = true;
+                    }
+                };
+                
+                var keyup = function(e){
+                    if(e.keyCode<keys.length){
+                        keys[e.keyCode] = false;
+                    }
+                };
+                
+                $(document).keydown(function(e){
+                    keydown(e);
+                });
+                $(document).keyup(function(e){                    
+                    keyup(e);
+                });
+                               
             });
         </script>
     </body>
