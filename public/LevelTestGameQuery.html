@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Level Test</title>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+        <script type="text/javascript" src="http://cdn.gamequeryjs.com/jquery.gamequery.js"></script>        
+        <style type="text/css">            
+            html,body{                
+                margin: 0;
+                padding: 0;
+                background: white;
+            }
+            #playGround{
+                background-color: rgb(200,200,200);
+                width: 568px;
+                height: 320px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="playGround">
+            
+        </div>
+        <script>
+            $(function(){
+                var PLAYGROUND = "#playGround";
+                var PLAYGROUND_WIDTH = $(PLAYGROUND).width();
+                var PLAYGROUND_HEIGHT = $(PLAYGROUND).height();
+                //console.log(PLAYGROUND_WIDTH+" "+PLAYGROUND_HEIGHT);
+                //--------------------------------------------------------------
+                //--    Main Declaration
+                //--------------------------------------------------------------
+                var testImage = new $.gQ.Animation({imageURL: "ajax-loader.gif"});
+                
+                //--------------------------------------------------------------
+                //--    Game Mechanincs
+                //--------------------------------------------------------------
+                $("#playground").playground({height:PLAYGROUND_HEIGHT, width:PLAYGROUND_WIDTH});
+                
+            });
+        </script>
+    </body>
+</html>
