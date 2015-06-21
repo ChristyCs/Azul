@@ -9,6 +9,7 @@ and open the template in the editor.
         <title>Main Page</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="main.css">
         <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
         <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
@@ -17,8 +18,20 @@ and open the template in the editor.
         <!--Main div-->
         <div data-role="page" id="page_Main">
             <br>
+            <!--
+            <svg width="100%" height="100%" style="position:absolute;left:0%;top:0px">
+                <rect x="20%" y="13.5%" width="190px" height="90px" style="fill:none;stroke:rgb(255, 223, 0);stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9">
+                Your browser does not support SVG
+                </rect>
+            </svg>
+            <!-- Currently messy ^ -->
+            
+
+            <h1 class="main-title">Planet</h1>
+            <h1 class="sec-title">Runner</h1>
             <a class="ui-btn" id="main_ButtonLogin">Login</a>
             <a class="ui-btn" id="main_ButtonCreate">Create Account</a>
+
         </div>
         
         <!--Login Div-->
@@ -62,7 +75,7 @@ and open the template in the editor.
             <img src="ajax-loader.gif" alt="loader image" 
                  style="display: block; margin-left: auto;margin-right: auto"/>
         </div>
-        
+
         <script>
             $(function(){
                 

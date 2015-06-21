@@ -5,3 +5,38 @@
     margin-right: 8% !important;
     margin-left: 8% !important;
 }*/
+
+@font-face {
+    font-family: BanglaMN;
+    src: url(font/BanglaMN.ttc);
+}
+
+h1{}
+.main-title{
+	font-size: 2em;
+	text-transform: uppercase;
+	text-align: center;
+	font-family: src: url(font/BanglaMN.ttc);
+	letter-spacing: 3.0px;
+	margin:0px;
+}
+.sec-title{
+	font-size: 2em;
+	text-transform: uppercase;
+	text-align: center;
+	font-family: src: url(font/BanglaMN.ttc),BanglaMN,Roboto;
+	letter-spacing: 2.0px;
+	margin:0px;
+	padding-bottom: 0%;
+}
+a{}
+.ui-btn{
+	font-size: 1em;
+}
+div{}
+#page_Main{
+	position: absolute;
+	background: url("../AzulProject/www/img/testbckgrnd-copy.jpg");
+	background-repeat: no-repeat;
+
+}
