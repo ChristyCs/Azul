@@ -64,5 +64,13 @@ div{}
 	background: url("content/bground.jpg");
 	background-repeat: no-repeat;
 }
-
-
+img{}
+.spacedude{
+	width:75px;
+	height:75px;
+	border:0;
+	padding-left:38%;
+	padding-right: 38.5%;
+	padding-bottom: 38.5%;
+	padding-top:15%;
+}
