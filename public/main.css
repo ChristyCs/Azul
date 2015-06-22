@@ -37,7 +37,9 @@ h1{}
 }
 .ui-title{
 	color:blue;
-	font-family: Times, url(BanglaMN.ttc);
+	font-family: , url(BanglaMN.ttc);
+	margin-left: 0px;
+	margin-right: 0px;
 }
 a{}
 .ui-btn{
@@ -50,5 +52,16 @@ div{}
 	position: absolute;
 	background: url("../AzulProject/www/img/testbckgrnd-copy.jpg");
 	background-repeat: no-repeat;
-
 }
+#page_Create{
+	position: absolute;
+	background: url("../AzulProject/www/img/testbckgrnd-copy.jpg");
+	background-repeat: no-repeat;
+}
+#page_Login{
+	position: absolute;
+	background: url("../AzulProject/www/img/testbckgrnd-copy.jpg");
+	background-repeat: no-repeat;
+}
+
+
