@@ -8,17 +8,17 @@
 
 @font-face {
     font-family: BanglaMN;
-    src: url(Bangla-MN.ttc);
+    src: url(content/angla-MN.ttc);
 }
 body{
-	font-family: url(BanglaMN.ttc);
+	font-family: BanglaMN;
 }
 h1{}
 .main-title{
 	font-size: 2em;
 	text-transform: uppercase;
 	text-align: center;
-	font-family: url(BanglaMN.ttc);
+	font-family: url(content/BanglaMN.ttc);
 	letter-spacing: 3.0px;
 	margin:0px;
 	color:yellow;
@@ -28,7 +28,7 @@ h1{}
 	font-size: 2em;
 	text-transform: uppercase;
 	text-align: center;
-	font-family: url(BanglaMN.ttc);
+	font-family: url(content/BanglaMN.ttc);
 	letter-spacing: 2.0px;
 	padding-bottom: 0%;
 	color:yellow;
@@ -37,7 +37,7 @@ h1{}
 }
 .ui-title{
 	color:blue;
-	font-family: , url(BanglaMN.ttc);
+	font-family: url(content/BanglaMN.ttc);
 	margin-left: 0px;
 	margin-right: 0px;
 }
@@ -46,21 +46,22 @@ a{}
 	font-size: 1em;
 	margin-top: 40px;
 	opacity:0.9;
+
 }
 div{}
 #page_Main{
 	position: absolute;
-	background: url("../AzulProject/www/img/testbckgrnd-copy.jpg");
+	background: url("content/bground.jpg");
 	background-repeat: no-repeat;
 }
 #page_Create{
 	position: absolute;
-	background: url("../AzulProject/www/img/testbckgrnd-copy.jpg");
+	background: url("content/bground.jpg");
 	background-repeat: no-repeat;
 }
 #page_Login{
 	position: absolute;
-	background: url("../AzulProject/www/img/testbckgrnd-copy.jpg");
+	background: url("content/bground.jpg");
 	background-repeat: no-repeat;
 }
 
