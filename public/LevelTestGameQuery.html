@@ -19,12 +19,22 @@ and open the template in the editor.
                 background-color: rgb(200,200,200);
                 width: 568px;
                 height: 320px;
+                position: relative;                
+            }
+            svg{
+                background: rgb(100,0,200);
+                position: absolute;
+                left: 0px;
+                z-index: 0;
             }
         </style>
     </head>
     <body>
         <div id="playGround">
-            
+            <svg id="svg" height="250" width="500">
+                <polygon points="220,10 300,210 170,250 123,234" style="fill:lime;stroke:purple;stroke-width:1" />
+                <polygon points="230,10 330,210 130,260 130,234" style="fill:lime;stroke:purple;stroke-width:1" />
+            </svg>            
         </div>
         <script>
             $(function(){
@@ -34,25 +44,25 @@ and open the template in the editor.
                 
                 //--------------------------------------------------------------
                 //--    Main Declaration
-                //--------------------------------------------------------------                
-                var keyUp = false;
-                var keyDown = false;
-                var keyLeft = false;
-                var keyRight = false;
-                
+                //--------------------------------------------------------------   
                 var gameJson = {
+                    "limit":{
+                        "start":0,
+                        "left":0,
+                        "right":1950
+                    },
                     "layers":{
                         "background":{
                            "src":"background.png",
-                           "width":"200",
-                           "height":"100",
+                           "width":"2500",
+                           "height":"320",
                            "posx":"0",
                            "posy":"0"
                         },
                         "midground":{
                            "src":"midground.png",
-                           "width":"200",
-                           "height":"100",
+                           "width":"5000",
+                           "height":"320",
                            "posx":"0",
                            "posy":"0"                            
                         },
@@ -65,23 +75,75 @@ and open the template in the editor.
                         }
                     }
                 };
-                var background = new $.gQ.Animation({imageURL: gameJson.layers.background.src});
                 
+                var keyUp = false;
+                var keyDown = false;
+                var keyLeft = false;
+                var keyRight = false;
+                
+                var START_POS_X = gameJson.limit.start;
+                var CUR_POS_X = gameJson.limit.start;               
+                
+                var DIRECTION_SPEED_F = 10.0;
+                var DIRECTION_SPEED_M = DIRECTION_SPEED_F/2.0;
+                var DIRECTION_SPEED_B = DIRECTION_SPEED_M/2.0;
+                
+                console.log(DIRECTION_SPEED_F);
+                console.log(DIRECTION_SPEED_M);
+                console.log(DIRECTION_SPEED_B);
+                
+                
+                var background = new $.gQ.Animation({imageURL: gameJson.layers.background.src});
+                var midground = new $.gQ.Animation({imageURL: gameJson.layers.midground.src});
                 
                 var ball = new $.gQ.Animation({imageURL: "ball.png"});
                 
-                $(PLAYGROUND).playground({height:PLAYGROUND_HEIGHT, width:PLAYGROUND_WIDTH});
+                $(PLAYGROUND).playground({height: PLAYGROUND_HEIGHT, width:PLAYGROUND_WIDTH});
                 //$.playground().addSprite("bacground",{animation: testImage,posx: 20, posy: 20, width: 50});
-                $.playground().addGroup("balls",{height:PLAYGROUND_HEIGHT,width:PLAYGROUND_WIDTH})
-                        .addSprite("ball1",{animation: ball,posx: 20,posy:20})
-                        .addSprite("ball2",{animation: ball,posx: 55,posy:45})
-                        .end();
-                
+                $.playground()//.addGroup("backgrounds",{height: 320, width: 2500})
+                        .addSprite("background",{animation: background, height: gameJson.layers.background.height,width: gameJson.layers.background.width})
+                        .addSprite("midground",{animation: midground, posy: 45, height: gameJson.layers.midground.height,width: gameJson.layers.midground.width});
+                        //.end();      
+                $("#svg").css("background","none");
                 //--------------------------------------------------------------
                 //--    Game Mechanincs
                 //--------------------------------------------------------------
                 $.playground().registerCallback(function(){
-                    updateKeys();                    
+                    updateKeys();
+                    if(keyRight){
+                        CUR_POS_X += DIRECTION_SPEED_B;
+                        if(CUR_POS_X >= gameJson.limit.right){
+                            CUR_POS_X -= DIRECTION_SPEED_B;
+                        }else{
+                            console.log(CUR_POS_X);
+                            var backX = ($("#background").x())-DIRECTION_SPEED_B;
+                            $("#background").x(backX);
+                            var midX = ($("#midground").x())-DIRECTION_SPEED_M;
+                            $("#midground").x(midX);
+                        }
+                    }
+                    if(keyLeft){
+                        CUR_POS_X -= DIRECTION_SPEED_B;
+                        if(CUR_POS_X <= gameJson.limit.left){
+                            CUR_POS_X += DIRECTION_SPEED_B;
+                        }else{
+                            var backX = ($("#background").x())+DIRECTION_SPEED_B;
+                            $("#background").x(backX);
+                            var midX = ($("#midground").x())+DIRECTION_SPEED_M;
+                            $("#midground").x(midX);
+                        }
+                    }
+                    
+//                    $("#background").x(($("#background").x())-DIRECTION_SPEED_B);
+//                    $("#midground").x(($("#midground").x())-DIRECTION_SPEED_M);
+
+                    
+                    //var svgX = parseFloat($("#svg").css("left"));
+                    //var newX = svgX-5;
+                    //console.log(svgX);
+                    //$("#svg").css("left",(svgX-5)+"px");
+                    //var newX = svgX - 5;
+                    //$("#svg").attr("transform","translate("+newX+",0)");
 //                    if(keyUp){
 //                        var newPos = ($("#testImage").y()-5);
 //                        $("#testImage").y(newPos);
@@ -94,15 +156,6 @@ and open the template in the editor.
 //                        var newPos = ($("#testImage").x()-5);
 //                        $("#testImage").x(newPos);
 //                    }
-
-                    if(keyRight){
-                        var newPos = ($("#ball1").x()+1);                        
-                        $("#ball1").x(newPos);
-                        var collided = $("#ball1").collision("#ball2,."+$.gQ.groupCssClass);
-                        console.log(collided.length);
-                                
-                        
-                    }
                 },60);
                 $.playground().startGame();
                 
@@ -131,12 +184,40 @@ and open the template in the editor.
                         keys[e.keyCode] = false;
                     }
                 };
+                var isPointInPoly = function (poly, pt){
+                    for(var c = false, i = -1, l = poly.length, j = l - 1; ++i < l; j = i)
+                        ((poly[i].y <= pt.y && pt.y < poly[j].y) || (poly[j].y <= pt.y && pt.y < poly[i].y))
+                        && (pt.x < (poly[j].x - poly[i].x) * (pt.y - poly[i].y) / (poly[j].y - poly[i].y) + poly[i].x)
+                        && (c = !c);
+                    return c;
+                };
                 
                 $(document).keydown(function(e){
                     keydown(e);
                 });
                 $(document).keyup(function(e){                    
                     keyup(e);
+                });
+                $(document).click(function(e){                   
+                   //console.log(e.offsetX+" "+e.offsetY);
+                   var rect = $("#svg")[0].createSVGRect();
+                   rect.x = e.offsetX;
+                   rect.y = e.offsetY;
+                   rect.width=rect.height=1;
+                   var hits = $("#svg")[0].getIntersectionList(rect,null);
+                   if(hits.length >0){
+                       //console.log(hits[0].animatedPoints);
+                       var isCollide = false;
+                       for(var i = 0; i < hits.length;i++){
+                           if(isPointInPoly(hits[i].animatedPoints,
+                        {"x":e.offsetX,"y":e.offsetY})){
+                            isCollide = true;
+                            break;
+                        }
+                       }
+                       console.log(isCollide);
+                   }
+                   //console.log(hits);
                 });
                                
             });
