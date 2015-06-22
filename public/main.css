@@ -8,30 +8,42 @@
 
 @font-face {
     font-family: BanglaMN;
-    src: url(font/BanglaMN.ttc);
+    src: url(Bangla-MN.ttc);
 }
-
+body{
+	font-family: url(BanglaMN.ttc);
+}
 h1{}
 .main-title{
 	font-size: 2em;
 	text-transform: uppercase;
 	text-align: center;
-	font-family: src: url(font/BanglaMN.ttc);
+	font-family: url(BanglaMN.ttc);
 	letter-spacing: 3.0px;
 	margin:0px;
+	color:yellow;
+	opacity: 0.65;
 }
 .sec-title{
 	font-size: 2em;
 	text-transform: uppercase;
 	text-align: center;
-	font-family: src: url(font/BanglaMN.ttc),BanglaMN,Roboto;
+	font-family: url(BanglaMN.ttc);
 	letter-spacing: 2.0px;
-	margin:0px;
 	padding-bottom: 0%;
+	color:yellow;
+	opacity: 0.65;
+	margin-top:0px;
+}
+.ui-title{
+	color:blue;
+	font-family: Times, url(BanglaMN.ttc);
 }
 a{}
 .ui-btn{
 	font-size: 1em;
+	margin-top: 40px;
+	opacity:0.9;
 }
 div{}
 #page_Main{
