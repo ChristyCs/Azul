@@ -19,6 +19,7 @@ h1{}
 	text-transform: uppercase;
 	text-align: center;
 	font-family: url(content/BanglaMN.ttc);
+	/* :/  */
 	letter-spacing: 3.0px;
 	margin:0px;
 	color:yellow;
