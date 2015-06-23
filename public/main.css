@@ -19,11 +19,10 @@ h1{}
 	text-transform: uppercase;
 	text-align: center;
 	font-family: url(content/BanglaMN.ttc);
-	/* :/  */
 	letter-spacing: 3.0px;
 	margin:0px;
 	color:yellow;
-	opacity: 0.65;
+	opacity: 0.8;
 }
 .sec-title{
 	font-size: 2em;
@@ -33,7 +32,7 @@ h1{}
 	letter-spacing: 2.0px;
 	padding-bottom: 0%;
 	color:yellow;
-	opacity: 0.65;
+	opacity: 0.8;
 	margin-top:0px;
 }
 .ui-title{
@@ -42,12 +41,14 @@ h1{}
 	margin-left: 0px;
 	margin-right: 0px;
 }
-.mission-planetname{
-	text-transform: uppercase;
-	position: absolute;
-	left: 34.7%;
-	top: 18%;
-	font-size: 1em;
+.mission-planetname {
+  text-transform: uppercase;
+  position: absolute;
+  left: 32.7%;
+  top: 15%;
+  font-size: 1.8em;
+  color: lightblue;
+  font-family: monospace;
 }
 a{}
 .ui-btn{
@@ -57,19 +58,26 @@ a{}
 
 }
 div{}
-#page_Main{
+
+/*#page_Main{
 	position: absolute;
 	background: url("content/bground.jpg");
 	background-repeat: no-repeat;
+}*/ 
+#page_Main {
+    position: absolute;
+    background: url("content/mission-bground.png");
+    background-repeat: round;
 }
+
 #page_Create{
 	position: absolute;
-	background: url("content/bground.jpg");
+    background: url("content/mission-bground.png");
 	background-repeat: no-repeat;
 }
 #page_Login{
 	position: absolute;
-	background: url("content/bground.jpg");
+    background: url("content/mission-bground.png");
 	background-repeat: no-repeat;
 }
 #div_Login{
@@ -90,15 +98,15 @@ div{}
   	top: 60%;
 }
 #mission_ButtonBack {
-  width: 126px;
-  height: 43px;
+  width: 69px;
+  height: 11px;
   position: absolute;
-  left: 12%;
-  top: 0%;
+  left: 16%;
+  top: -12%;
   text-transform: uppercase;
   padding: 15px;
-  padding-left: 50px;
-  padding-top: 9px;
+  padding-left: 34px;
+  padding-top: 7px;
 }
 #fact-scroll-up-btn {
    width: 100px;
@@ -160,8 +168,10 @@ p{}
   position: absolute;
   font-size: 0.8em;
   left: 30%;
-  top: 29%;
+  top: 29.5%;
   width: 60%;
+  font-family: monospace;
+  color: lightblue;
 }
 .mission-facts-2 {
   position: absolute;
