@@ -45,7 +45,7 @@ h1{}
 	text-transform: uppercase;
 	position: absolute;
 	left: 34.7%;
-	top: 29%;
+	top: 18%;
 	font-size: 1em;
 }
 a{}
@@ -79,14 +79,39 @@ div{}
 	height:80px;
 	position: absolute;
 	left: 20%;
-  	top: 73%;
+  	top: 60%;
 }
 #planet-scroll-right-btn{
 	width:80px;
 	height:80px;
 	position: absolute;
 	left: 60%;
-  	top: 73%;
+  	top: 60%;
+}
+#mission_ButtonBack {
+  width: 126px;
+  height: 43px;
+  position: absolute;
+  left: 12%;
+  top: 0%;
+  text-transform: uppercase;
+  padding: 15px;
+  padding-left: 50px;
+  padding-top: 9px;
+}
+#fact-scroll-up-btn {
+   width: 100px;
+   height: 100px;
+   position: absolute;
+   left: 83%;
+   top: 12%;
+}
+#fact-scroll-down-btn{
+   width: 100px;
+   height: 100px;
+   position: absolute;
+   left: 83%;
+   top: 43%;
 }
 img{}
 .spacedude{
@@ -112,9 +137,9 @@ img{}
 }
 .mission-earth-planet {
   position: absolute;
-  left: 4.5%;
-  top: 34.5%;
-  width: 21.4%;
+  left: 4%;
+  top: 20.5%;
+  width: 22.4%;
 }
 .mission-mars-planet {
   position: absolute;
@@ -134,21 +159,21 @@ p{}
   position: absolute;
   font-size: 0.8em;
   left: 30%;
-  top: 42%;
-  width: 65%;
+  top: 29%;
+  width: 60%;
 }
 .mission-facts-2 {
   position: absolute;
   font-size: 0.8em;
   left: 30%;
-  top: 42%;
-  width: 65%;
+  top: 29%;
+  width: 60%;
 }
 .mission-facts-3 {
   position: absolute;
   font-size: 0.8em;
   left: 30%;
-  top: 42%;
-  width: 65%;
+  top: 29%;
+  width: 60%;
 }
 
