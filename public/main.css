@@ -8,7 +8,7 @@
 
 @font-face {
     font-family: BanglaMN;
-    src: url(content/angla-MN.ttc);
+    src: url(Bangla-MN.ttc);
 }
 body{
 	font-family: BanglaMN;
@@ -41,6 +41,13 @@ h1{}
 	margin-left: 0px;
 	margin-right: 0px;
 }
+.mission-planetname{
+	text-transform: uppercase;
+	position: absolute;
+	left: 34.7%;
+	top: 29%;
+	font-size: 1em;
+}
 a{}
 .ui-btn{
 	font-size: 1em;
@@ -64,6 +71,23 @@ div{}
 	background: url("content/bground.jpg");
 	background-repeat: no-repeat;
 }
+#div_Login{
+	padding:0px;
+}
+#planet-scroll-left-btn{
+	width:80px;
+	height:80px;
+	position: absolute;
+	left: 20%;
+  	top: 73%;
+}
+#planet-scroll-right-btn{
+	width:80px;
+	height:80px;
+	position: absolute;
+	left: 60%;
+  	top: 73%;
+}
 img{}
 .spacedude{
 	width:75px;
@@ -74,3 +98,57 @@ img{}
 	padding-bottom: 38.5%;
 	padding-top:15%;
 }
+.mission-bg{
+	position: absolute;
+	padding:0px;
+	width:100%;
+	/*transform: rotate(90deg);*/
+}
+.mission-hud{
+	position: absolute;
+	padding:0px;
+	width:100%;
+	  /*transform: rotate(90deg);*/
+}
+.mission-earth-planet {
+  position: absolute;
+  left: 4.5%;
+  top: 34.5%;
+  width: 21.4%;
+}
+.mission-mars-planet {
+  position: absolute;
+  left: 6%;
+  top: 36%;
+  width: 18.4%;
+  display:none;
+}
+p{}
+.mission-facts{
+	position: absolute;
+	left: 69%;
+  	top: 40%;
+	font-size:0.8em;
+}
+.mission-facts-1 {
+  position: absolute;
+  font-size: 0.8em;
+  left: 30%;
+  top: 42%;
+  width: 65%;
+}
+.mission-facts-2 {
+  position: absolute;
+  font-size: 0.8em;
+  left: 30%;
+  top: 42%;
+  width: 65%;
+}
+.mission-facts-3 {
+  position: absolute;
+  font-size: 0.8em;
+  left: 30%;
+  top: 42%;
+  width: 65%;
+}
+
