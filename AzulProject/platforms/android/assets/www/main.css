@@ -1,0 +1,53 @@
+h1{
+	font-size: 33px;
+	
+}
+.title{
+	height: 25px;
+	text-align: center;
+	text-transform: uppercase;
+	z-index: 5;
+	font-family: BanglaMN;
+ 	color: rgb(249, 222, 26);
+  	letter-spacing: 15px;
+}
+.jupitertitle{
+	letter-spacing: 4px;
+	font-size: 1em;
+}
+.venustitle{
+	letter-spacing: 4px;
+	font-size: 1em;
+}
+.earthtitle{
+	letter-spacing: 4px;
+	font-size: 1em;
+}
+.primary{
+	height:50px;
+}
+.secndry{
+	letter-spacing: 7px;
+}
+div{}
+.ui-content{
+	z-index: 0;
+	width:50%;
+	text-align: center;
+	margin-right: 20%;
+	margin-left:20%;
+	z-index: 5;
+}
+.pgchng{
+	z-index: +1;
+}
+img{}
+.bground{
+	position: absolute;
+	z-index: -1;	
+	height:320px;
+}
+p{}
+.warning{
+	font-size: 0.8em;
+}

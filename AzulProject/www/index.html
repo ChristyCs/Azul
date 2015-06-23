@@ -31,9 +31,9 @@ and open the template in the editor.
     </head>
     <body>
         <div id="playGround">
-            <svg id="svg" height="250" width="500">
-                <polygon points="100,20 100,70 150,70 150,20" style="fill:lime;stroke:purple;stroke-width:1" />
-                <polygon points="200,20 200,70 250,70 250,20" style="fill:lime;stroke:purple;stroke-width:1" />
+            <svg id="svg" height="200" width="200">
+                <polygon points="0,20 0,70 50,70 50,20" style="fill:lime;stroke:purple;stroke-width:1" />
+                <polygon points="70,20 70,70 120,70 120,20" style="fill:lime;stroke:purple;stroke-width:1" />
             </svg>            
         </div>
         <script>
@@ -110,18 +110,18 @@ and open the template in the editor.
                 //--------------------------------------------------------------
                 $.playground().registerCallback(function(){
                     updateKeys();
-                    if(keyRight){
-                        CUR_POS_X += DIRECTION_SPEED_B;
-                        if(CUR_POS_X >= gameJson.limit.right){
-                            CUR_POS_X -= DIRECTION_SPEED_B;
-                        }else{
+                   // if(keyRight){
+                   //     CUR_POS_X += DIRECTION_SPEED_B;
+                   //     if(CUR_POS_X >= gameJson.limit.right){
+                    //        CUR_POS_X -= DIRECTION_SPEED_B;
+                    //    }else{
                             //console.log(CUR_POS_X);
                             var backX = ($("#background").x())-DIRECTION_SPEED_B;
                             $("#background").x(backX);
                             var midX = ($("#midground").x())-DIRECTION_SPEED_M;
                             $("#midground").x(midX);
-                        }
-                    }
+                   //     }
+                   // }
                     if(keyLeft){
                         CUR_POS_X -= DIRECTION_SPEED_B;
                         if(CUR_POS_X <= gameJson.limit.left){
