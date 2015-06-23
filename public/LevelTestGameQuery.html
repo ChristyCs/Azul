@@ -8,6 +8,8 @@ and open the template in the editor.
     <head>
         <title>Level Test</title>
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css"/>
+        <script src="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
         <script type="text/javascript" src="http://cdn.gamequeryjs.com/jquery.gamequery.js"></script>        
         <style type="text/css">            
             html,body{                
@@ -21,21 +23,29 @@ and open the template in the editor.
                 height: 320px;
                 position: relative;                
             }
-            svg{
-                background: rgb(100,0,200);
+            #svg{
+                background: rgb(100,100,100);
                 position: absolute;
+                opacity: 0.3;
                 left: 0px;
                 z-index: 1;
             }
         </style>
     </head>
     <body>
-        <div id="playGround">
-            <svg id="svg" height="250" width="500">
+        <div>
+            <div id="playGround" style="left: 120px">
+            <svg id="svg" height="320" width="568">
                 <polygon points="100,20 100,70 150,70 150,20" style="fill:lime;stroke:purple;stroke-width:1" />
-                <polygon points="200,20 200,70 250,70 250,20" style="fill:lime;stroke:purple;stroke-width:1" />
+                <polygon points=" 108,176 210,92 300,190 429,113 475,204" style="fill:lime;stroke:purple;stroke-width:1" />
+                <line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0);stroke-width:2"/>
             </svg>            
-        </div>
+            </div>
+            <div style="width:120px">
+                <input type="submit" value="Create Polygon" id="CreatePoly"/>
+                <input type="submit" value="Save" id="SaveSvg"/>
+            </div> 
+        </div>               
         <script>
             $(function(){
                 var PLAYGROUND = "#playGround";
@@ -108,9 +118,11 @@ and open the template in the editor.
                 //--------------------------------------------------------------
                 //--    Game Mechanincs
                 //--------------------------------------------------------------
+                var svg;
                 $.playground().registerCallback(function(){
                     updateKeys();
                     if(keyRight){
+                        $("#playGround").append(svg);
                         CUR_POS_X += DIRECTION_SPEED_B;
                         if(CUR_POS_X >= gameJson.limit.right){
                             CUR_POS_X -= DIRECTION_SPEED_B;
@@ -120,7 +132,9 @@ and open the template in the editor.
                             $("#background").x(backX);
                             var midX = ($("#midground").x())-DIRECTION_SPEED_M;
                             $("#midground").x(midX);
-                        }
+                            var svgX = parseFloat($("#svg").css("left"))-DIRECTION_SPEED_F;
+                            $("#svg").css("left",svgX);
+                        }                       
                     }
                     if(keyLeft){
                         CUR_POS_X -= DIRECTION_SPEED_B;
@@ -131,6 +145,8 @@ and open the template in the editor.
                             $("#background").x(backX);
                             var midX = ($("#midground").x())+DIRECTION_SPEED_M;
                             $("#midground").x(midX);
+                            var svgX = parseFloat($("#svg").css("left"))+DIRECTION_SPEED_F;
+                            $("#svg").css("left",svgX);
                         }
                     }
                     
@@ -198,27 +214,48 @@ and open the template in the editor.
                 $(document).keyup(function(e){                    
                     keyup(e);
                 });
-                $(document).click(function(e){                   
-                   //console.log($("#svg")[0]);
-                   var rect = $("#svg")[0].createSVGRect();
-                   rect.x = e.clientX;
-                   rect.y = e.clientY;
-                   rect.width=rect.height=1;
-                   var hits = $("#svg")[0].getIntersectionList(rect,null);
-                   if(hits.length >0){
-                       //console.log(hits[0].animatedPoints);
-                       var isCollide = false;
-                       for(var i = 0; i < hits.length;i++){
-                           if(isPointInPoly(hits[i].animatedPoints,
-                        {"x":e.offsetX,"y":e.offsetY})){
-                            isCollide = true;
-                            break;
+                var points = [];
+                $("#CreatePoly").on("click",function(){
+                    if(points.length > 2){                        
+                        $(".svgLine").remove(); 
+                        var pts = "";
+                        for(var i = 0; i < points.length;i++){
+                            pts+= " "+points[i].x+","+points[i].y;
                         }
-                       }
-                       alert(isCollide);
-                   }
-                   //console.log(hits);
+                        var polygon = document.createElementNS('http://www.w3.org/2000/svg','polygon');
+                        polygon.setAttribute('class','svgPoly');
+                        polygon.setAttribute('points',pts);
+                        $("#svg").append(polygon);                        
+                        points = []; 
+                    }      
+                    console.log($("#svg")[0]);
                 });
+                
+                $("#SaveSvg").on("click",function(){
+                    svg = $("#svg")[0];
+                    $("#svg").remove();
+                });
+                
+                $("#svg").on("click",function(e){
+                                      
+                    points.push({"x":e.offsetX,"y":e.offsetY});
+                    if(points.length > 1){
+                        for(var i = 0; i < points.length-1;i++){
+                            var x1 = points[i].x;
+                            var y1 = points[i].y;
+                            var x2 = points[i+1].x;
+                            var y2 = points[i+1].y;
+                            var newLine = document.createElementNS('http://www.w3.org/2000/svg','line');                            
+                            newLine.setAttribute('class','svgLine');
+                            newLine.setAttribute('x1',x1);
+                            newLine.setAttribute('y1',y1);
+                            newLine.setAttribute('x2',x2);
+                            newLine.setAttribute('y2',y2);
+                            newLine.setAttribute('style','stroke:rgb(255,0,0);stroke-width:2');
+                            $("#svg").append(newLine);                            
+                        }
+                    }
+                });                
                                
             });
         </script>

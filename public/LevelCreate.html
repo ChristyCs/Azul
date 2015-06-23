@@ -6,96 +6,107 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <title>Level Create</title>        
+        <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css"/>
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <script type="text/javascript" src="http://cdn.gamequeryjs.com/jquery.gamequery.js"></script>   
         <style>
-            #parent_Panel{
-                background: rgb(100,0,100);
-                height: 98vh;
-                min-height: 500px;
-                
-                //overflow: hidden;
+            #page1_header{
+                text-align: center;
             }
-            #main_panelMain{
-                background: rgb(50,0,100);
-                display: block;
+            #canvasBlock{
+                width:75%;
+                text-align: center
+            }
+            #buttonBlock{
+                width:25%
+            }
+            #playground{
+                background-color: rgb(200,200,200);
                 position: relative;
-                margin: 0%;
-                padding: 0%;
-            }
-            #main_panelLeft{
-                position: absolute;
-                opacity: 0.5;
-                left: 0px;
-                top: 0px;
-                width: 50px;
-                height: 100%;
-                margin: 0%;
-                padding: 0%;
-            }
-            #main_panelMid{
-                position: absolute;
-                opacity: 0.5;
-                left: 50px;
-                top: 0px;
-                height: 100%;
-                margin: 0%;
-                padding: 0%;
-            }
-            #main_panelRight{
-                background: rgb(200,200,200);
-                opacity: 0.5;
-                position: absolute;
-                height: 100%;
-                top: 200px;
-                width: 250px;
-                margin: 0%;
-                padding: 0%;
-            }
+                margin: 0 auto;
+                width: 568px;
+                height: 320px;
+            }            
         </style>
     </head>
     <body>
-        <div class="ui-widget" id="parent_Panel">
-            <div class="ui-widget-header" id="header" style="text-align: center">
-                <h2>Level Creator</h2>                
+        <div data-role="page" data-theme="a">
+            <div data-role="header" id="page1_header">
+                <h1>Level Create</h1>                                
             </div>
-            <div class="ui-widget-content" id="main_panelMain">
-                <div class="ui-widget-content" id="main_panelLeft">
+            <div class="ui-content" id="page1_main">
+                <div class="ui-grid-a">
+                    <div class="ui-block-a" id="canvasBlock">
+                        <div id="playground">
+                            
+                        </div>                        
+                    </div>
+                    <div class="ui-block-b" id="buttonBlock">                        
+                        <div class="ui-body ui-body-a" id="bblock_Loading">
+                            <input type="text" id="text_backgroundName" 
+                                placeholder="Background" data-corners="false"/>
+                            <input type="text" id="text_midgroundName" 
+                                placeholder="Midground" data-corners="false"/>
+                            <input type="text" id="text_foregroundName" 
+                                placeholder="Foreground" data-corners="false"/>
+                            <input type="button" id="butt_loadBackground" value="Load" 
+                                data-corners="false"/>
+                        </div> 
+                        <div class="ui-body ui-body-a">
+                            <input type="button" id="butt_startPoly"
+                                   value="Start Polygon" data-corners="false">
+                            <input type="button" id="butt_endPoly"
+                                   value="End Polygon" data-corners="false">
+                        </div>
+                        
+                    </div>
                     
                 </div>
-                <div class="ui-widget-content" id="main_panelMid">
-                    
-                </div>
-                <div class="ui-widget-content" id="main_panelRight">
-                    
-                </div>
+            </div>
+            <div data-role="footer" id="page1_footer">
+                <h1>Space Runner Level Creator</h1> 
             </div>
         </div>
         <script>
             $(function(){
-               var main_panelMain = "#main_panelMain";
-               var main_panelLeft = "#main_panelLeft";
-               var main_panelMid = "#main_panelMid";
-               var main_panelRight = "#main_panelRight";
-               
-               var setMainPanelHeight = function(){
-                   var mainPanelHeight = $('#parent_Panel').height()-$('#header').height();
-                   $(main_panelMain).css("height",mainPanelHeight);                       
-                   var midPanelWidth = $(main_panelMain).width()-300;
-                   $(main_panelMid).css("width",midPanelWidth);
-                   var rightPanelLeft = midPanelWidth+50;
-                   $(main_panelRight).css("left",rightPanelLeft);
-               };
-               setMainPanelHeight();
-               $(window).on('resize',function(){
-                   setMainPanelHeight();
-               });
-               
-                       
+                var PLAYGROUND = "#playground";
+                var PLAYGROUND_WIDTH = $(PLAYGROUND).width();
+                var PLAYGROUND_HEIGHT = $(PLAYGROUND).height();
+                $(PLAYGROUND).playground({height: PLAYGROUND_HEIGHT, width:PLAYGROUND_WIDTH});
+                $.playground().startGame();
+                
+                var background;
+                var midground;
+                var foreground;
+                
+                var loadBackground = "#butt_loadBackground";
+                var textBackgroundName = "#text_backgroundName";
+                var textMidgroundName = "#text_midgroundName";
+                var textForegroundName = "#text_foregroundName";
+                
+                //--------------------------------------------------------------
+                //--    Buttons
+                //--------------------------------------------------------------
+                
+                $(loadBackground).on('click',function(){
+                    if($(textBackgroundName).val()){
+                        $("#background").remove();
+                        background = new $.gQ.Animation({imageURL: $(textBackgroundName).val()});
+                        $.playground().addSprite("background",{animation: background, height: 320, width: 2500});
+                    }   
+                    if($(textMidgroundName).val()){
+                        $("#midground").remove();
+                        midground = new $.gQ.Animation({imageURL: $(textMidgroundName).val()});
+                        $.playground().addSprite("midground",{animation: midground, height: 320, width: 2500});
+                    }
+                    if($(textForegroundName).val()){
+                        $("#foreground").remove();
+                        foreground = new $.gQ.Animation({imageURL: $(textForegroundName).val()});
+                        $.playground().addSprite("foreground",{animation: foreground, height: 320, width: 2500});
+                    }
+                });
             });
         </script>
     </body>
