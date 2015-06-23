@@ -9,10 +9,11 @@ and open the template in the editor.
         <title>Main Page</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="main.css">
+       
         <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
         <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+         <link rel="stylesheet" type="text/css" href="main.css">
     </head>
     <body>
         <!--Main div-->
@@ -52,7 +53,7 @@ and open the template in the editor.
             </div>
             <div data-role="content" id="div_Login" class="ui-content">
                 <input name="Name" id="login_TextUserN" type="text" 
-                       data-clear-btn="false" placeholder="Name">       
+                      data-clear-btn="false" placeholder="Name">       
                 <input name="Password" id="login_TextUserPW" type="password" 
                        data-clear-btn="false" placeholder="Password">                
                 <a class="ui-btn" id="login_ButtonLogin">Login</a>
@@ -76,8 +77,29 @@ and open the template in the editor.
                 <a class="ui-btn" id="create_ButtonCreate">Create Account</a>
                 <div id="create_DivResult" class="functions" style="text-align: center"></div>
             </div>
+        </div> 
+
+        <!--Mission Control Div-->
+        <div data-role="page" id="page_MissionControl">
+            <div data-role="header" id="missioncontrol_DivHeader">
+                <a class="ui-btn ui-btn-icon-left ui-icon-carat-l" id="mission_ButtonBack">Logout</a>
+                <h1></h1> <!--"Enter Login Details" -->            
+            </div>
+            <div data-role="content" id="div_Login" class="ui-content">
+                <img src="content/mission-bground.png" alt="missionbg" class="mission-bg"/>
+                <img src="content/hud.png" alt="missionhud" class="mission-hud"/>
+                <img src="content/earth.png" alt="earthplanet" class="mission-earth-planet"/>
+                <img src="content/mars.png" alt="earthplanet" class="mission-mars-planet"/>
+                <h1 class="mission-planetname">Planet: Earth</h1>
+                <p class="mission-facts-1"> Fact 1 </p>
+                <p class="mission-facts-2"> Fact 2 </p>
+                <p class="mission-facts-3"> Fact 3 </p>
+                <div id="planet-scroll-left-btn"> </div>
+                <div id="planet-scroll-right-btn"> </div>
+                
+            </div>
         </div>
-        
+
         <!--Loading Div-->
         <div data-role="page" id="page_Loading">
             <br>
@@ -139,6 +161,7 @@ and open the template in the editor.
                 });
                 
                 $(loginButtonLogin).on('click', function(){
+
                     var jsonUrl = URL+"/login";
                     var hasName = $(loginTextUserN).val();
                     var hasPass = $(loginTextUserPW).val();
@@ -148,6 +171,15 @@ and open the template in the editor.
                         var userDetails = {"username": userName, "password":userPassword};                        
                         $.mobile.changePage("#page_Loading", { transition: "none", 
                             reverse: false, changeHash: false });
+
+/*
+                        $( window ).on( "orientationchange", function( event ) {
+  $( "#orientation" ).text( "This device is in " + event.orientation + " mode!" );
+});
+*/
+
+                        $.mobile.changePage("#page_MissionControl", { 
+                         reverse: false, changeHash: false });
                         
                         $.post(jsonUrl, userDetails)
                                 .success(function(data){
