@@ -10,7 +10,6 @@ and open the template in the editor.
         <title>Main Page</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       
         <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
         <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
@@ -33,16 +32,13 @@ and open the template in the editor.
                 Your browser does not support SVG
                 </rect>
             </svg>
-           
             <br>
-
             <h1 class="main-title">Planet</h1>
             <h1 class="sec-title">Runner</h1>
             <a class="ui-btn" id="main_ButtonLogin" 
                 style="margin-top: 60px;">Login</a>
             <a class="ui-btn" id="main_ButtonCreate"
                 style="margin-top: 13px;">Create Account</a>
-
             <img src="content/spacedude.gif" alt="spacedude" class="spacedude">
         </div>
         
@@ -82,10 +78,14 @@ and open the template in the editor.
 
         <!--Mission Control Div-->
         <div data-role="page" id="page_MissionControl">
-            <div data-role="header" id="missioncontrol_DivHeader">
-                <a class="ui-btn ui-btn-icon-left ui-icon-carat-l" id="mission_ButtonBack">Logout</a>
-                <h1></h1> <!--"Enter Login Details" -->            
+            <!--<div data-role="header" id="missioncontrol_DivHeader">
+                <!--<a class="ui-btn ui-btn-icon-left ui-icon-carat-l" id="mission_ButtonBack">Logout</a>
+                <h1></h1> <!--"Enter Login Details" 
             </div>
+            -->
+            <!-- include div and css with information to 
+                Please turn your phone to horizontal mode!
+            -->
             <div data-role="content" id="div_Login" class="ui-content">
                 <img src="content/mission-bground.png" alt="missionbg" class="mission-bg"/>
                 <img src="content/hud.png" alt="missionhud" class="mission-hud"/>
@@ -98,6 +98,9 @@ and open the template in the editor.
             -->
                 <div id="planet-scroll-left-btn"> </div>
                 <div id="planet-scroll-right-btn"> </div>
+                <div id="mission_ButtonBack">Logout</div>
+                <div id="fact-scroll-up-btn"> </div>
+                <div id="fact-scroll-down-btn"> </div>
                 
             </div>
         </div>
