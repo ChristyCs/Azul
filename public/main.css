@@ -132,20 +132,23 @@ p{}
 }
 .mission-facts-1 {
   position: absolute;
-  font-size: 0.5em;
+  font-size: 0.8em;
   left: 30%;
-  top: 47%;
+  top: 42%;
+  width: 65%;
 }
 .mission-facts-2 {
   position: absolute;
-  font-size: 0.5em;
-  left: 54%;
-  top: 47%;
+  font-size: 0.8em;
+  left: 30%;
+  top: 42%;
+  width: 65%;
 }
 .mission-facts-3 {
   position: absolute;
-  font-size: 0.5em;
-  left: 78%;
-  top: 47%;
+  font-size: 0.8em;
+  left: 30%;
+  top: 42%;
+  width: 65%;
 }
 
