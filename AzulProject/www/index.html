@@ -1,105 +1,226 @@
 <!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html>
-<head>
-  <title>Page Title</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="main.css">
-  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
-  <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-  <script src="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
-</head>
-<body>
+    <head>
+        <title>Level Test</title>
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="http://cdn.gamequeryjs.com/jquery.gamequery.js"></script>        
+        <style type="text/css">            
+            html,body{                
+                margin: 0;
+                padding: 0;
+                background: white;
+            }
+            #playGround{
+                background-color: rgb(200,200,200);
+                width: 568px;
+                height: 320px;
+                position: relative;                
+            }
+            svg{
+                background: rgb(100,0,200);
+                position: absolute;
+                left: 0px;
+                z-index: 1;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="playGround">
+            <svg id="svg" height="250" width="500">
+                <polygon points="100,20 100,70 150,70 150,20" style="fill:lime;stroke:purple;stroke-width:1" />
+                <polygon points="200,20 200,70 250,70 250,20" style="fill:lime;stroke:purple;stroke-width:1" />
+            </svg>            
+        </div>
+        <script>
+            $(function(){
+                var PLAYGROUND = "#playGround";
+                var PLAYGROUND_WIDTH = $(PLAYGROUND).width();
+                var PLAYGROUND_HEIGHT = $(PLAYGROUND).height();
+                
+                //--------------------------------------------------------------
+                //--    Main Declaration
+                //--------------------------------------------------------------   
+                var gameJson = {
+                    "limit":{
+                        "start":0,
+                        "left":0,
+                        "right":1950
+                    },
+                    "layers":{
+                        "background":{
+                           "src":"background.png",
+                           "width":"2500",
+                           "height":"320",
+                           "posx":"0",
+                           "posy":"0"
+                        },
+                        "midground":{
+                           "src":"midground.png",
+                           "width":"5000",
+                           "height":"320",
+                           "posx":"0",
+                           "posy":"0"                            
+                        },
+                        "foreground":{
+                           "src":"foreground.png",
+                           "width":"200",
+                           "height":"100",
+                           "posx":"0",
+                           "posy":"0"                            
+                        }
+                    }
+                };
+                
+                var keyUp = false;
+                var keyDown = false;
+                var keyLeft = false;
+                var keyRight = false;
+                
+                var START_POS_X = gameJson.limit.start;
+                var CUR_POS_X = gameJson.limit.start;               
+                
+                var DIRECTION_SPEED_F = 10.0;
+                var DIRECTION_SPEED_M = DIRECTION_SPEED_F/2.0;
+                var DIRECTION_SPEED_B = DIRECTION_SPEED_M/2.0;
+                
+                console.log(DIRECTION_SPEED_F);
+                console.log(DIRECTION_SPEED_M);
+                console.log(DIRECTION_SPEED_B);
+                
+                
+                var background = new $.gQ.Animation({imageURL: gameJson.layers.background.src});
+                var midground = new $.gQ.Animation({imageURL: gameJson.layers.midground.src});
+                
+                var ball = new $.gQ.Animation({imageURL: "ball.png"});
+                
+                $(PLAYGROUND).playground({height: PLAYGROUND_HEIGHT, width:PLAYGROUND_WIDTH});
+                //$.playground().addSprite("bacground",{animation: testImage,posx: 20, posy: 20, width: 50});
+                $.playground()//.addGroup("backgrounds",{height: 320, width: 2500})
+                        .addSprite("background",{animation: background, height: gameJson.layers.background.height,width: gameJson.layers.background.width})
+                        .addSprite("midground",{animation: midground, posy: 20, height: gameJson.layers.midground.height,width: gameJson.layers.midground.width});
+                        //.end();      
+                //$("#svg").css("background","none");
+                //--------------------------------------------------------------
+                //--    Game Mechanincs
+                //--------------------------------------------------------------
+                $.playground().registerCallback(function(){
+                    updateKeys();
+                    if(keyRight){
+                        CUR_POS_X += DIRECTION_SPEED_B;
+                        if(CUR_POS_X >= gameJson.limit.right){
+                            CUR_POS_X -= DIRECTION_SPEED_B;
+                        }else{
+                            //console.log(CUR_POS_X);
+                            var backX = ($("#background").x())-DIRECTION_SPEED_B;
+                            $("#background").x(backX);
+                            var midX = ($("#midground").x())-DIRECTION_SPEED_M;
+                            $("#midground").x(midX);
+                        }
+                    }
+                    if(keyLeft){
+                        CUR_POS_X -= DIRECTION_SPEED_B;
+                        if(CUR_POS_X <= gameJson.limit.left){
+                            CUR_POS_X += DIRECTION_SPEED_B;
+                        }else{
+                            var backX = ($("#background").x())+DIRECTION_SPEED_B;
+                            $("#background").x(backX);
+                            var midX = ($("#midground").x())+DIRECTION_SPEED_M;
+                            $("#midground").x(midX);
+                        }
+                    }
+                    
+//                    $("#background").x(($("#background").x())-DIRECTION_SPEED_B);
+//                    $("#midground").x(($("#midground").x())-DIRECTION_SPEED_M);
 
-<div class="pgchng" data-role="page" id="Login">
- <img class="bground" src="img/testbckgrnd.jpg" alt="titleimg" />
-
-    <h1 class="title">Space</h1>
-    <h1 class="title secndry">Runner</h1>
-     <svg width="500" height="200" style="position:absolute;left:-8px;top:-42px">
-            <rect x="172" y="52" width="235" height="100" style="fill:none;stroke:rgb(255, 223, 0);stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9">
-            Your browser does not support SVG
-        </svg>
-    <div role="main" class="ui-content">
-        
-        <input class="texthldr" name="Name" id="userID" value="Name" type="text">       
-        <input class="texthldr" name="Password" id="userPW" value="Password" type="text">
-        <input class="texthldr" type="submit" value="PROCEED" id="loginButton" />
-
-	<div id="result" class="functions" style="text-align: center"></div>
-
-    </div>
-</div>
-
-<script type="text/javascript">
-$(document).bind('pageinit', function() { 
-  $.ajaxSetup ({
-    cache: false
-  });
-  
-  var mainUrl = "https://rocky-chamber-3053.herokuapp.com";
-  
-  var textNFColor = "rgb(150, 150, 150)";
-  var textFColor = "rgb(0, 0, 0)";
-  var textName = "#userID";
-  var textPass = "#userPW";
-  
-  var buttonLogin = "#loginButton";
-  var resultLogin = "#result";
-  
-  $(textName).attr('hastext', false);
-  $(textName).css('color', textNFColor);
-  $(textPass).attr('hastext', false);
-  $(textPass).css('color', textNFColor);
-  
-  var changeTextFocus = function(){
-      var _self = $(this);
-      var hastext = _self.attr('hastext');    
-      if(hastext === "false"){
-          _self.val("");
-          _self.css('color', textFColor);
-      }
-  };
-  
-  var changeTextNFocus = function(){
-      var _self = $(this);      
-      var text = _self.val();
-      if(!text){
-          _self.val(_self.attr('name'));
-          _self.css('color', textNFColor);
-          _self.attr('hastext', false);
-      }else{
-          _self.attr('hastext',true);
-      }
-      
-  };
-  
-  $(textName).focus(changeTextFocus);  
-  $(textName).focusout(changeTextNFocus);
-  
-  $(textPass).focus(changeTextFocus);
-  $(textPass).focusout(changeTextNFocus);
-  
-  $(buttonLogin).bind("click", function(){
-     var jsonUrl = mainUrl;
-     var userName = $(textName).val();
-     var userPassword = $(textPass).val();
-     var userDetails = {"user": userName, "password": userPassword};
-     
-     var hasName = $(textName).attr("hastext");
-     var hasPass = $(textPass).attr("hastext");
-     if(hasName === "true" && hasPass === "true"){
-         console.log("here");
-         window.open("missioncontrol.html", "_self");
-      /* Temporary fix ^*/
-     }else{
-         $(resultLogin).css("color","red");
-         $(resultLogin).css("font-size","0.8em");
-         var htmlVal = "<p><b>Please enter User Name and Password</b></p>";
-         $(resultLogin).html(htmlVal);
-     }
-  });
-  
-});
-</script>
-</body>
+                    
+                    //var svgX = parseFloat($("#svg").css("left"));
+                    //var newX = svgX-5;
+                    //console.log(svgX);
+                    //$("#svg").css("left",(svgX-5)+"px");
+                    //var newX = svgX - 5;
+                    //$("#svg").attr("transform","translate("+newX+",0)");
+//                    if(keyUp){
+//                        var newPos = ($("#testImage").y()-5);
+//                        $("#testImage").y(newPos);
+//                    }
+//                    if(keyDown){
+//                        var newPos = ($("#testImage").y()+5);
+//                        $("#testImage").y(newPos);
+//                    }
+//                    if(keyLeft){
+//                        var newPos = ($("#testImage").x()-5);
+//                        $("#testImage").x(newPos);
+//                    }
+                },60);
+                $.playground().startGame();
+                
+                //--------------------------------------------------------------
+                //--    Keyboard
+                //--------------------------------------------------------------
+                var keys = [];
+                for(var i = 0; i < 256; i++){
+                    keys.push(false);
+                }                
+                var updateKeys = function(){
+                    keyUp = keys[87];
+                    keyDown = keys[83];
+                    keyLeft = keys[65];
+                    keyRight = keys[68];                    
+                };
+                
+                var keydown = function(e){
+                    if(e.keyCode<keys.length){
+                        keys[e.keyCode] = true;
+                    }
+                };
+                
+                var keyup = function(e){
+                    if(e.keyCode<keys.length){
+                        keys[e.keyCode] = false;
+                    }
+                };
+                var isPointInPoly = function (poly, pt){
+                    for(var c = false, i = -1, l = poly.length, j = l - 1; ++i < l; j = i)
+                        ((poly[i].y <= pt.y && pt.y < poly[j].y) || (poly[j].y <= pt.y && pt.y < poly[i].y))
+                        && (pt.x < (poly[j].x - poly[i].x) * (pt.y - poly[i].y) / (poly[j].y - poly[i].y) + poly[i].x)
+                        && (c = !c);
+                    return c;
+                };
+                
+                $(document).keydown(function(e){
+                    keydown(e);
+                });
+                $(document).keyup(function(e){                    
+                    keyup(e);
+                });
+                $(document).click(function(e){                   
+                   //console.log($("#svg")[0]);
+                   var rect = $("#svg")[0].createSVGRect();
+                   rect.x = e.clientX;
+                   rect.y = e.clientY;
+                   rect.width=rect.height=1;
+                   var hits = $("#svg")[0].getIntersectionList(rect,null);
+                   if(hits.length >0){
+                       //console.log(hits[0].animatedPoints);
+                       var isCollide = false;
+                       for(var i = 0; i < hits.length;i++){
+                           if(isPointInPoly(hits[i].animatedPoints,
+                        {"x":e.offsetX,"y":e.offsetY})){
+                            isCollide = true;
+                            break;
+                        }
+                       }
+                       alert(isCollide);
+                   }
+                   //console.log(hits);
+                });
+                               
+            });
+        </script>
+    </body>
 </html>

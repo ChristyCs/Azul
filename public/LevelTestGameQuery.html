@@ -25,15 +25,15 @@ and open the template in the editor.
                 background: rgb(100,0,200);
                 position: absolute;
                 left: 0px;
-                z-index: 0;
+                z-index: 1;
             }
         </style>
     </head>
     <body>
         <div id="playGround">
             <svg id="svg" height="250" width="500">
-                <polygon points="220,10 300,210 170,250 123,234" style="fill:lime;stroke:purple;stroke-width:1" />
-                <polygon points="230,10 330,210 130,260 130,234" style="fill:lime;stroke:purple;stroke-width:1" />
+                <polygon points="100,20 100,70 150,70 150,20" style="fill:lime;stroke:purple;stroke-width:1" />
+                <polygon points="200,20 200,70 250,70 250,20" style="fill:lime;stroke:purple;stroke-width:1" />
             </svg>            
         </div>
         <script>
@@ -102,9 +102,9 @@ and open the template in the editor.
                 //$.playground().addSprite("bacground",{animation: testImage,posx: 20, posy: 20, width: 50});
                 $.playground()//.addGroup("backgrounds",{height: 320, width: 2500})
                         .addSprite("background",{animation: background, height: gameJson.layers.background.height,width: gameJson.layers.background.width})
-                        .addSprite("midground",{animation: midground, posy: 45, height: gameJson.layers.midground.height,width: gameJson.layers.midground.width});
+                        .addSprite("midground",{animation: midground, posy: 20, height: gameJson.layers.midground.height,width: gameJson.layers.midground.width});
                         //.end();      
-                $("#svg").css("background","none");
+                //$("#svg").css("background","none");
                 //--------------------------------------------------------------
                 //--    Game Mechanincs
                 //--------------------------------------------------------------
@@ -115,7 +115,7 @@ and open the template in the editor.
                         if(CUR_POS_X >= gameJson.limit.right){
                             CUR_POS_X -= DIRECTION_SPEED_B;
                         }else{
-                            console.log(CUR_POS_X);
+                            //console.log(CUR_POS_X);
                             var backX = ($("#background").x())-DIRECTION_SPEED_B;
                             $("#background").x(backX);
                             var midX = ($("#midground").x())-DIRECTION_SPEED_M;
@@ -199,10 +199,10 @@ and open the template in the editor.
                     keyup(e);
                 });
                 $(document).click(function(e){                   
-                   //console.log(e.offsetX+" "+e.offsetY);
+                   //console.log($("#svg")[0]);
                    var rect = $("#svg")[0].createSVGRect();
-                   rect.x = e.offsetX;
-                   rect.y = e.offsetY;
+                   rect.x = e.clientX;
+                   rect.y = e.clientY;
                    rect.width=rect.height=1;
                    var hits = $("#svg")[0].getIntersectionList(rect,null);
                    if(hits.length >0){
@@ -215,7 +215,7 @@ and open the template in the editor.
                             break;
                         }
                        }
-                       console.log(isCollide);
+                       alert(isCollide);
                    }
                    //console.log(hits);
                 });
