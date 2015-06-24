@@ -16,7 +16,7 @@ body{
 }
 h1{}
 .main-title{
-	font-size: 2em;
+	font-size: 1.8em;
 	text-transform: uppercase;
 	text-align: center;
 	font-family: url(content/BanglaMN.ttc);
@@ -24,9 +24,10 @@ h1{}
 	margin:0px;
 	color:yellow;
 	opacity: 0.8;
+	padding-top: 7px;
 }
 .sec-title{
-	font-size: 2em;
+	font-size: 1.8em;
 	text-transform: uppercase;
 	text-align: center;
 	font-family: url(content/BanglaMN.ttc);
@@ -35,6 +36,7 @@ h1{}
 	color:yellow;
 	opacity: 0.8;
 	margin-top:0px;
+	padding-top: 3px;
 }
 .ui-title{
 	color:blue;
