@@ -16,19 +16,39 @@ and open the template in the editor.
                 text-align: center;
             }
             #canvasBlock{
-                width:75%;
-                text-align: center
+                width:62.5%;
+                min-height: 350px;
+                text-align: center;
+                position: relative;
             }
-            #buttonBlock{
-                width:25%
+            #buttonBlockLeft{
+                width:18.75%
+            }
+            #buttonBlockRight{
+                width:18.75%
             }
             #playground{
+                margin: 0 auto;
                 background-color: rgb(200,200,200);
-                position: relative;
+                position: absolute;
                 margin: 0 auto;
                 width: 568px;
                 height: 320px;
-            }            
+            }   
+            #divSlider{
+                position: absolute;
+                top: 320px;                
+            }
+            #collision_zone{
+                background: none;
+                position: absolute;
+                opacity: 0.3;
+                left: 0px;
+                height: 320px;
+                width: 100px;               
+                z-index: 1;
+            }
+            
         </style>
     </head>
     <body>
@@ -36,15 +56,50 @@ and open the template in the editor.
             <div data-role="header" id="page1_header">
                 <h1>Level Create</h1>                                
             </div>
-            <div class="ui-content" id="page1_main">
-                <div class="ui-grid-a">
-                    <div class="ui-block-a" id="canvasBlock">
-                        <div id="playground">
-                            
+            <div class="ui-content" id="pane1_main">
+                <div class="ui-grid-b" id="panel_col">
+                    <div class="ui-block-c" id="buttonBlockLeft">                        
+                        <div class="ui-body ui-body-a">
+                            Set Bounds
+                            <input type="text" id="bounds_textleft" placeholder="Left"
+                                   data-corners="false"/>
+                            <input type="text" id="bounds_textright" placeholder="Right"
+                                   data-corners="false"/>
+                            <input type="button" id="bounds_buttonsubmit" value="Set Bounds"
+                                   data-corners="false"/>
+                        </div> 
+                        <div class="ui-body ui-body-a">
+                            Create Polygon                            
+                            <input type="button" id="butt_startPoly"
+                                   value="Start Polygon" data-corners="false">
+                            <input type="button" id="butt_endPoly"
+                                   value="End Polygon" data-corners="false">
+                        </div>
+                        <div class="ui-body ui-body-a">
+                            Polygon List
+                            <div class="ui-content" id="polygon_divlist" style="padding-left: 0; padding-right: 0">
+                                
+                            </div>
                         </div>                        
                     </div>
-                    <div class="ui-block-b" id="buttonBlock">                        
+                    <div class="ui-block-b" id="canvasBlock">                                              
+                        <div id="playground">
+                            <svg id="collision_zone">
+                                
+                            </svg>
+                        </div>
+                        <div class="ui-content" id="divSlider">
+                            <div style="width:560px">
+                                <form>
+                                    <input id="slider" type="range" min="0" max="100" value="0">
+                                </form>  
+                            </div>                                                                                  
+                        </div>  
+                        
+                    </div>
+                    <div class="ui-block-c" id="buttonBlockRight">                        
                         <div class="ui-body ui-body-a" id="bblock_Loading">
+                            Load Background
                             <input type="text" id="text_backgroundName" 
                                 placeholder="Background" data-corners="false"/>
                             <input type="text" id="text_midgroundName" 
@@ -55,10 +110,31 @@ and open the template in the editor.
                                 data-corners="false"/>
                         </div> 
                         <div class="ui-body ui-body-a">
-                            <input type="button" id="butt_startPoly"
-                                   value="Start Polygon" data-corners="false">
-                            <input type="button" id="butt_endPoly"
-                                   value="End Polygon" data-corners="false">
+                            Load Player Image
+                            <input type="text" id="player_imgsrc" 
+                                   placeholder="Player Img" data-corners="false">
+                            <input type="text" id="player_scale" 
+                                   placeholder="Player Scale" data-corners="false">
+                            <input type="submit" id="player_submitimg" 
+                                   value="Load" data-corners="false">
+                        </div>
+                        <div class="ui-body ui-body-a">
+                            Set Player Pos                            
+                            <div class="ui-grid-a">
+                                <div class="ui-block-a" style="padding-right: 2px;">
+                                    <input type="text" id="player_posx" 
+                                           placeholder="Pos X" data-corners="false">
+                                </div>
+                                <div class="ui-block-b" style="padding-left: 2px;">
+                                    <input type="text" id="player_posy" 
+                                           placeholder="Pos Y" data-corners="false">
+                                </div>
+                            </div>
+                            
+                            <input type="checkbox" id="player_posclick">
+                            <label for="player_posclick">Enable Mouse Click</label>
+                            <input type="submit" id="player_possubmit" value="Set Pos"
+                                   data-corners="false">
                         </div>
                         
                     </div>
@@ -74,23 +150,82 @@ and open the template in the editor.
                 var PLAYGROUND = "#playground";
                 var PLAYGROUND_WIDTH = $(PLAYGROUND).width();
                 var PLAYGROUND_HEIGHT = $(PLAYGROUND).height();
-                $(PLAYGROUND).playground({height: PLAYGROUND_HEIGHT, width:PLAYGROUND_WIDTH});
-                $.playground().startGame();
+                $(PLAYGROUND).playground({height: PLAYGROUND_HEIGHT, width:PLAYGROUND_WIDTH});                
+                var setCanvasPos = function(){
+                    var canvasPanelWidth = ($("#canvasBlock").width())/2.0;
+                    $(PLAYGROUND).css("left",(canvasPanelWidth-(568/2.0)));                    
+                };
+                setCanvasPos();               
+                $(window).on('resize',function(){
+                    setCanvasPos();
+                });                
                 
                 var background;
                 var midground;
                 var foreground;
+                var player;
                 
+                var directionStepForeground = 4.0;
+                var directionStepMidground = directionStepForeground/2.0;
+                var directionStepBackground = directionStepMidground/2.0;
+                var unitsMax = 100;
+                var unitsMin = 0;
+                var unitOld = 0;                
+                
+                //Load Images
                 var loadBackground = "#butt_loadBackground";
                 var textBackgroundName = "#text_backgroundName";
+                $(textBackgroundName).val("content/background.png");
                 var textMidgroundName = "#text_midgroundName";
+                $(textMidgroundName).val("content/midground.png");
                 var textForegroundName = "#text_foregroundName";
+                $(textForegroundName).val("content/fground.png");
+                
+                //SetBounds
+                var bounds_left = "#bounds_textleft";
+                $(bounds_left).val(0);
+                var bounds_right = "#bounds_textright";
+                $(bounds_right).val(50);
+                var bounds_submit = "#bounds_buttonsubmit";
+                
+                //Polygon
+                var collisionZone = "#collision_zone";
+                var startPolygon = "#butt_startPoly";
+                var endPolygon = "#butt_endPoly";
+                var polygons = [];
+                
+                //Player Pos
+                var playerPosX = "#player_posx";
+                var playerPosY = "#player_posy";
+                var pEnableMouse = "#player_posclick";
+                var playerSubmitPos ="#player_possubmit";
+                
+                //Load Player Image
+                var playerImgsrc = "#player_imgsrc";
+                $(playerImgsrc).val("content/spacedude.gif");
+                var playerScale = "#player_scale";
+                $(playerScale).val("0.2");
+                var playerLoad = "#player_submitimg";
+                
+                //Slider
+                var slider = "#slider";               
                 
                 //--------------------------------------------------------------
                 //--    Buttons
-                //--------------------------------------------------------------
+                //--------------------------------------------------------------         
+                var setBounds = function(){
+                    if($(bounds_right).val() && $(bounds_left).val()){
+                        unitsMin = $(bounds_left).val();
+                        unitsMax = $(bounds_right).val();
+                        $(slider).attr("min",unitsMin);
+                        $(slider).attr("max",unitsMax);
+                        $(slider).val(unitsMin);
+                        $(slider).slider("refresh");
+                        $(collisionZone).css("width",(unitsMax*directionStepForeground)+568);                       
+                    }
+                };
                 
-                $(loadBackground).on('click',function(){
+                var loadBackgroundFunc = function(){                    
                     if($(textBackgroundName).val()){
                         $("#background").remove();
                         background = new $.gQ.Animation({imageURL: $(textBackgroundName).val()});
@@ -105,8 +240,109 @@ and open the template in the editor.
                         $("#foreground").remove();
                         foreground = new $.gQ.Animation({imageURL: $(textForegroundName).val()});
                         $.playground().addSprite("foreground",{animation: foreground, height: 320, width: 2500});
+                    }             
+                };
+                
+                
+                var loadPlayerFunc = function(){                    
+                    if($(playerImgsrc).val() && $(playerScale).val()){
+                        $("#player").remove();
+                        player = new $.gQ.Animation({imageURL: $(playerImgsrc).val()});
+                        $.playground().addSprite("player",{animation: player, height: 250, width:250});
+                        $("#player").scale($(playerScale).val(),true);
+                        //$("#player").css("background","rgb(100,100,100)");
+                        console.log($("#player"));
+                        console.log($("#player").x());
+                        console.log($("#player").scale());
+                        console.log($("#player").wh());
                     }
+                };
+                
+                var startFunction = function(){
+                    setBounds();
+                    loadBackgroundFunc();                   
+                    loadPlayerFunc();
+                    $.playground().startGame();
+                };
+                startFunction();
+                
+                $(bounds_submit).on('click',function(){                    
+                    setBounds();
                 });
+                
+                $(loadBackground).on('click',function(){
+                    loadBackgroundFunc();                                                        
+                });
+                
+                $(playerLoad).on('click',function(){
+                    loadPlayerFunc();                    
+                });
+                
+                $(collisionZone).on('click',function(e){                    
+                    if($(startPolygon).is(':disabled')){                       
+                        polygons.push({"x":e.offsetX,"y":e.offsetY});
+                        if(polygons.length > 1){
+                            for(var i = 0; i < polygons.length-1;i++){
+                                var x1 = polygons[i].x;
+                                var y1 = polygons[i].y;
+                                var x2 = polygons[i+1].x;
+                                var y2 = polygons[i+1].y;
+                                var newLine = document.createElementNS('http://www.w3.org/2000/svg','line');                            
+                                newLine.setAttribute('class','col_line');
+                                newLine.setAttribute('x1',x1);
+                                newLine.setAttribute('y1',y1);
+                                newLine.setAttribute('x2',x2);
+                                newLine.setAttribute('y2',y2);
+                                newLine.setAttribute('style','stroke:rgb(255,0,0);stroke-width:2');
+                                $(collisionZone).append(newLine);                            
+                            }
+                        }
+                    }else if($(pEnableMouse).is(":checked")){
+                        $(playerPosX).val(e.offsetX);
+                        $(playerPosY).val(e.offsetY);
+                    }
+                    
+                });
+                
+                $(endPolygon).on('click',function(){
+                    $(startPolygon).button('enable');
+                    if(polygons.length > 2){                        
+                        $(".col_line").remove(); 
+                        var pts = "";
+                        for(var i = 0; i < polygons.length;i++){
+                            pts+= " "+polygons[i].x+","+polygons[i].y;
+                        }
+                        var polygon = document.createElementNS('http://www.w3.org/2000/svg','polygon');
+                        polygon.setAttribute('class','svgPoly');
+                        polygon.setAttribute('points',pts);
+                        polygon.setAttribute('style','stroke:rgb(255,0,0);stroke-width:2');
+                        $(collisionZone).append(polygon);                       
+                    }                        
+                    polygons = [];                     
+                });
+                
+                $(startPolygon).on('click',function(){
+                    $(this).button('disable');
+                });
+                
+                
+                //--------------------------------------------------------------
+                //--    Game Logic
+                //--------------------------------------------------------------
+                $.playground().registerCallback(function(){                    
+                    if($(slider).val() !== unitOld){
+                        var unit = $(slider).val();
+                        unitOld = unit;
+                        $("#background").x(-directionStepBackground*unit);                        
+                        $("#midground").x(-directionStepMidground*unit);
+                        $("#foreground").x(-directionStepForeground*unit);
+                        $("#player").x(-directionStepForeground*unit);
+                        $(collisionZone).css("left",-directionStepForeground*unit);
+                    }
+                },60); 
+                
+                
+                
             });
         </script>
     </body>
