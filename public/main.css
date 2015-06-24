@@ -98,12 +98,12 @@ div{}
 	left: 60%;
   	top: 60%;
 }
-.mission_ButtonBack {
+#mission_ButtonBack {
   width: 69px;
   height: 11px;
   position: absolute;
   left: 16%;
-  top: 0%;
+  top: -12%;
   text-transform: uppercase;
   padding: 15px;
   padding-left: 34px;
