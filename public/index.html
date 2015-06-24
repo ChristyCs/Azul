@@ -336,9 +336,13 @@ and open the template in the editor.
                                 .css("font-size","0.8em")
                                 .html(htmlVal);                           
                        }else{
+
                            $.mobile.changePage("#page_Loading", { transition: "none", 
                                 reverse: false, changeHash: false });
+                           console.log("need to redirect to home!, Currently sitting on loading!");
                            var userDetails = {"username":userName,"password":userPass};
+                        /*  $.mobile.changePage("#page_Main") , { transition: "none", 
+                                reverse: false, changeHash: false }); */
                            $.post(jsonUrl, userDetails)
                                    .success(function(data){
                                        console.log(data);
@@ -353,6 +357,8 @@ and open the template in the editor.
                                        $.mobile.changePage("#page_Create", { transition: "none", 
                                             reverse: false, changeHash: false });
                                    });
+
+
                            
                        }
                    }else{
@@ -367,6 +373,7 @@ and open the template in the editor.
             });
             
         </script>
+
 
 
     </body>
