@@ -146,11 +146,20 @@ img{}
 	  /*transform: rotate(90deg);*/
 }
 .mission-earth-planet {
+  animation-name: earth;
+  animation-iteration-count: infinite;
+  animation-duration: 4s;
   position: absolute;
   left: 4%;
   top: 20.5%;
   width: 22.4%;
 }
+
+@keyframes earth {
+     0%  {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+
 .mission-mars-planet {
   position: absolute;
   left: 6%;
