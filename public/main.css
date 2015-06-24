@@ -45,7 +45,7 @@ h1{}
 .mission-planetname {
   text-transform: uppercase;
   position: absolute;
-  left: 32.7%;
+  left: 28.7%;
   top: 15%;
   font-size: 1.8em;
   color: lightblue;
@@ -83,6 +83,9 @@ div{}
 }
 #div_Login{
 	padding:0px;
+}
+#div_Login2{
+  padding:0px;
 }
 #neptune-scroll-left-btn{
 	width:80px;
@@ -176,29 +179,52 @@ img{}
 	width:100%;
 	  /*transform: rotate(90deg);*/
 }
-.mission-earth-planet {
-  animation-name: earth;
+.mission-neptune-planet {
+  animation-name: neptune;
   animation-iteration-count: infinite;
   animation-duration: 60s;
   animation-timing-function: linear;
   position: absolute;
   left: 4%;
-  top: 20.5%;
+  top: 19.5%;
   width: 22.4%;
 }
 
-@keyframes earth {
+@keyframes neptune {
+     0%  {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+.mission-uranus-planet {
+  animation-name: uranus;
+  animation-iteration-count: infinite;
+  animation-duration: 60s;
+  animation-timing-function: linear;
+  position: absolute;
+  left: 4%;
+  top: 19.5%;
+  width: 22.4%;
+}
+
+@keyframes uranus {
+     0%  {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+.mission-saturn-planet {
+  animation-name: saturn;
+  animation-iteration-count: infinite;
+  animation-duration: 60s;
+  animation-timing-function: linear;
+  position: absolute;
+  left: 4%;
+  top: 19.5%;
+  width: 22.4%;
+}
+
+@keyframes saturn {
      0%  {transform: rotate(0deg);}
     100% {transform: rotate(360deg);}
 }
 
-.mission-mars-planet {
-  position: absolute;
-  left: 6%;
-  top: 36%;
-  width: 18.4%;
-  display:none;
-}
 p{}
 .mission-facts{
 	position: absolute;
