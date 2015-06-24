@@ -84,39 +84,39 @@ div{}
 #div_Login{
 	padding:0px;
 }
-#planet-scroll-left-btn{
+.planet-scroll-left-btn{
 	width:80px;
 	height:80px;
 	position: absolute;
 	left: 20%;
   	top: 60%;
 }
-#planet-scroll-right-btn{
+.planet-scroll-right-btn{
 	width:80px;
 	height:80px;
 	position: absolute;
 	left: 60%;
   	top: 60%;
 }
-#mission_ButtonBack {
+.mission_ButtonBack {
   width: 69px;
   height: 11px;
   position: absolute;
   left: 16%;
-  top: -12%;
+  top: 0%;
   text-transform: uppercase;
   padding: 15px;
   padding-left: 34px;
   padding-top: 7px;
 }
-#fact-scroll-up-btn {
+.fact-scroll-up-btn {
    width: 100px;
    height: 100px;
    position: absolute;
    left: 83%;
    top: 12%;
 }
-#fact-scroll-down-btn{
+.fact-scroll-down-btn{
    width: 100px;
    height: 100px;
    position: absolute;
@@ -148,7 +148,8 @@ img{}
 .mission-earth-planet {
   animation-name: earth;
   animation-iteration-count: infinite;
-  animation-duration: 4s;
+  animation-duration: 60s;
+  animation-timing-function: linear;
   position: absolute;
   left: 4%;
   top: 20.5%;

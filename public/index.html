@@ -77,7 +77,7 @@ and open the template in the editor.
         </div> 
 
         <!--Mission Control Div-->
-        <div data-role="page" data-theme="b" id="page_MissionControl">
+        <div data-role="page" data-theme="b" id="page_MissionControl_Neptune">
             <!--<div data-role="header" id="missioncontrol_DivHeader">
                 <!--<a class="ui-btn ui-btn-icon-left ui-icon-carat-l" id="mission_ButtonBack">Logout</a>
                 <h1></h1> <!--"Enter Login Details" 
@@ -85,7 +85,7 @@ and open the template in the editor.
             -->
             <!-- include div and css with information to 
                 Please turn your phone to horizontal mode!
-            -->
+            --> 
             <div data-role="content" id="div_Login" class="ui-content">
                 <img src="content/mission-bground.png" alt="missionbg" class="mission-bg"/>
                 <img src="content/hud.png" alt="missionhud" class="mission-hud"/>
@@ -97,13 +97,28 @@ and open the template in the editor.
                <!-- <p class="mission-facts-2"> The planet's inner core is made from rock and ice, surrounded by a heavy atmosphere of hydrogen, helium and methane gases. Neptune has fierce supersonic winds, resulting from the extremely dense atmosphere, which keep the planet cold and dark. </p>
                 <p class="mission-facts-3"> It has 13 official moons and a planetary ring system consisting of mostly ice and small rocks. </p>
             -->
-                <div id="planet-scroll-left-btn"> </div>
-                <div id="planet-scroll-right-btn"> </div>
-                <div class="ui-btn ui-btn-icon-left ui-icon-carat-l" id="mission_ButtonBack">   Logout</div>
-                <div id="fact-scroll-up-btn"> </div>
-                <div id="fact-scroll-down-btn"> </div>
+                <div class="planet-scroll-left-btn"> </div>
+                <div class="planet-scroll-right-btn"> </div>
+                <div class="mission_ButtonBack">   Logout</div>
+                <div class="fact-scroll-up-btn"> </div>
+                <div class="fact-scroll-down-btn"> </div>
                 
             </div>
+        </div>
+        <div data-role="page" data-theme="b" id="page_MissionControl_Uranus">
+            <div data-role="content" id="div_Login2" class="ui-content">
+                 <img src="content/mission-bground.png" alt="missionbg" class="mission-bg"/>
+                <img src="content/hud.png" alt="missionhud" class="mission-hud"/>
+                <img src="content/mars.png" alt="earthplanet" class="mission-earth-planet"/>
+                <h1 class="mission-planetname">Planet: Uranus</h1>
+                <p class="mission-facts-1">Play the Uranus Level to complete the mission</p>
+            
+               <div class="planet-scroll-left-btn"> </div>
+                <div class="planet-scroll-right-btn"> </div>
+                <div class="mission_ButtonBack">Logout</div>
+                <div class="fact-scroll-up-btn"> </div>
+                <div class="fact-scroll-down-btn"> </div>
+            </div> 
         </div>
 
         <!--Loading Div-->
@@ -148,7 +163,12 @@ and open the template in the editor.
                 //Loading page div
                 var pageLoading = "#page_Loading";                               
                 //Mission Control div
-                var logoutButtonBack = "#mission_ButtonBack";
+                var logoutButtonBack = "mission_ButtonBack";
+                var planetLeftButton = "planet-scroll-left-btn";
+                var planetRightButton = "planet-scroll-right-btn";
+                var factUpButton = "fact-scroll-up-btn";
+                var factDownButton = "fact-scroll-down-btn";
+
 
                 //Button Click functions
                 //Main Buttons
@@ -192,9 +212,6 @@ and open the template in the editor.
   $( "#orientation" ).text( "This device is in " + event.orientation + " mode!" );
 });
 */
-
-                        $.mobile.changePage("#page_MissionControl", { 
-                         reverse: false, changeHash: false });
                         
                         $.post(jsonUrl, userDetails)
                                 .success(function(data){
@@ -210,6 +227,10 @@ and open the template in the editor.
                                     $.mobile.changePage("#page_Login", { transition: "none", 
                                         reverse: false, changeHash: false });
                                 });
+ 
+                        $.mobile.changePage("#page_MissionControl_Neptune", { 
+                         reverse: false, changeHash: false });
+
                     }else{
                         var htmlVal = "<p><b>Please enter User Name and Password</b><p>";
                         $(loginDivResult)
