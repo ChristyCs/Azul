@@ -84,19 +84,50 @@ div{}
 #div_Login{
 	padding:0px;
 }
-.planet-scroll-left-btn{
+#neptune-scroll-left-btn{
 	width:80px;
 	height:80px;
 	position: absolute;
 	left: 20%;
   	top: 60%;
 }
-.planet-scroll-right-btn{
+
+#neptune-scroll-right-btn{
 	width:80px;
 	height:80px;
 	position: absolute;
 	left: 60%;
   	top: 60%;
+}
+#uranus-scroll-left-btn{
+  width:80px;
+  height:80px;
+  position: absolute;
+  left: 20%;
+    top: 60%;
+}
+
+#uranus-scroll-right-btn{
+  width:80px;
+  height:80px;
+  position: absolute;
+  left: 60%;
+    top: 60%;
+}
+#saturn-scroll-left-btn{
+  width:80px;
+  height:80px;
+  position: absolute;
+  left: 20%;
+    top: 60%;
+}
+
+#saturn-scroll-right-btn{
+  width:80px;
+  height:80px;
+  position: absolute;
+  left: 60%;
+    top: 60%;
 }
 #mission_ButtonBack {
   width: 69px;

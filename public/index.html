@@ -89,7 +89,7 @@ and open the template in the editor.
             <div data-role="content" id="div_Login" class="ui-content">
                 <img src="content/mission-bground.png" alt="missionbg" class="mission-bg"/>
                 <img src="content/hud.png" alt="missionhud" class="mission-hud"/>
-                <img src="content/earth.png" alt="earthplanet" class="mission-earth-planet"/>
+                <img src="content/neptune.png" alt="earthplanet" class="mission-earth-planet"/>
                 <img src="content/mars.png" alt="earthplanet" class="mission-mars-planet"/>
                 <h1 class="mission-planetname">Planet: Neptune</h1>
                 <p class="mission-facts-1">Play the Neptune Level to complete the mission</p>
@@ -97,11 +97,11 @@ and open the template in the editor.
                <!-- <p class="mission-facts-2"> The planet's inner core is made from rock and ice, surrounded by a heavy atmosphere of hydrogen, helium and methane gases. Neptune has fierce supersonic winds, resulting from the extremely dense atmosphere, which keep the planet cold and dark. </p>
                 <p class="mission-facts-3"> It has 13 official moons and a planetary ring system consisting of mostly ice and small rocks. </p>
             -->
-                <div class="planet-scroll-left-btn"> </div>
-                <div class="planet-scroll-right-btn"> </div>
+                <div id="neptune-scroll-left-btn"> </div>
+                <div id="neptune-scroll-right-btn"> </div>
                 <div class="ui-btn ui-btn-icon-left ui-icon-carat-l" id="mission_ButtonBack">   Logout</div>
-                <div class="fact-scroll-up-btn"> </div>
-                <div class="fact-scroll-down-btn"> </div>
+                <div id="fact-scroll-up-btn"> </div>
+                <div id="fact-scroll-down-btn"> </div>
                 
             </div>
         </div>
@@ -109,18 +109,33 @@ and open the template in the editor.
             <div data-role="content" id="div_Login2" class="ui-content">
                  <img src="content/mission-bground.png" alt="missionbg" class="mission-bg"/>
                 <img src="content/hud.png" alt="missionhud" class="mission-hud"/>
-                <img src="content/mars.png" alt="earthplanet" class="mission-earth-planet"/>
+                <img src="content/uranus.png" alt="earthplanet" class="mission-earth-planet"/>
                 <h1 class="mission-planetname">Planet: Uranus</h1>
                 <p class="mission-facts-1">Play the Uranus Level to complete the mission</p>
             
-               <div class="planet-scroll-left-btn"> </div>
-                <div class="planet-scroll-right-btn"> </div>
+               <div id="uranus-scroll-left-btn"> </div>
+                <div id="uranus-scroll-right-btn"> </div>
                 <div class="ui-btn ui-btn-icon-left ui-icon-carat-l" id="mission_ButtonBack">Logout</div>
-                <div class="fact-scroll-up-btn"> </div>
-                <div class="fact-scroll-down-btn"> </div>
+                <div id="fact-scroll-up-btn"> </div>
+                <div id="fact-scroll-down-btn"> </div>
             </div> 
         </div>
 
+        <div data-role="page" data-theme="b" id="page_MissionControl_Saturn">
+            <div data-role="content" id="div_Login2" class="ui-content">
+                 <img src="content/mission-bground.png" alt="missionbg" class="mission-bg"/>
+                <img src="content/hud.png" alt="missionhud" class="mission-hud"/>
+                <img src="content/saturn.png" alt="earthplanet" class="mission-earth-planet"/>
+                <h1 class="mission-planetname">Planet: Saturn</h1>
+                <p class="mission-facts-1">Play the Saturn Level to complete the mission</p>
+            
+               <div id="saturn-scroll-left-btn"> </div>
+                <div id="saturn-scroll-right-btn"> </div>
+                <div class="ui-btn ui-btn-icon-left ui-icon-carat-l" id="mission_ButtonBack">Logout</div>
+                <div id="fact-scroll-up-btn"> </div>
+                <div id="fact-scroll-down-btn"> </div>
+            </div> 
+        </div>
         <!--Loading Div-->
         <div data-role="page" id="page_Loading">
             <br>
@@ -164,10 +179,14 @@ and open the template in the editor.
                 var pageLoading = "#page_Loading";                               
                 //Mission Control div
                 var logoutButtonBack = "#mission_ButtonBack";
-                var planetLeftButton = "planet-scroll-left-btn";
-                var planetRightButton = "planet-scroll-right-btn";
-                var factUpButton = "fact-scroll-up-btn";
-                var factDownButton = "fact-scroll-down-btn";
+                var neptuneLeftButton = "#neptune-scroll-left-btn";
+                var neptuneRightButton = "#neptune-scroll-right-btn";
+                var uranusLeftButton = "#uranus-scroll-left-btn";
+                var uranusRightButton = "#uranus-scroll-right-btn";
+                var saturnLeftButton = "#saturn-scroll-left-btn";
+                var saturnRightButton = "#saturn-scroll-right-btn";
+                var factUpButton = "#fact-scroll-up-btn";
+                var factDownButton = "#fact-scroll-down-btn";
 
 
                 //Button Click functions
@@ -182,7 +201,25 @@ and open the template in the editor.
                     $.mobile.changePage("#page_Create", { transition: "slide", 
                         reverse: false, changeHash: false });
                 });
-                
+                //Mission Control buttons
+                $(neptuneRightButton).on('click', function(){
+                     $.mobile.changePage("#page_MissionControl_Uranus", { transition: "slide", 
+                        reverse: false, changeHash: false });
+                }); 
+                $(uranusLeftButton).on('click', function(){
+                     $.mobile.changePage("#page_MissionControl_Neptune", { transition: "slide", 
+                        reverse: true, changeHash: false });
+                });
+                $(uranusRightButton).on('click', function(){
+                     $.mobile.changePage("#page_MissionControl_Saturn", { transition: "slide", 
+                        reverse: false, changeHash: false });
+                });
+                 $(saturnLeftButton).on('click', function(){
+                     $.mobile.changePage("#page_MissionControl_Uranus", { transition: "slide", 
+                        reverse: true, changeHash: false });
+                });
+
+
                 //Login buttons
                 $(logoutButtonBack).on('click', function(){
                     $.mobile.changePage("#page_Main", { transition: "slide", 
