@@ -306,15 +306,19 @@ p{}
   position: absolute;
   font-size: 0.8em;
   left: 30%;
-  top: 29%;
+  top: 29.5%;
   width: 60%;
+  font-family:monospace;
+  color:lightblue;
 }
 .mission-facts-3 {
   position: absolute;
   font-size: 0.8em;
   left: 30%;
-  top: 29%;
+  top: 29.5%;
   width: 60%;
+  font-family:monospace;
+  color:lightblue;
 }
 
 
