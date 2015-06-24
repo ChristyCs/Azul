@@ -18,7 +18,7 @@ and open the template in the editor.
             }
             #canvasBlock{
                 width:62.5%;
-                min-height: 400px;
+                min-height: 600px;
                 text-align: center;
                 position: relative;
             }
@@ -28,11 +28,9 @@ and open the template in the editor.
             #buttonBlockRight{
                 width:18.75%
             }
-            #playground{
-                margin: 0 auto;
+            #playground{                
                 background-color: rgb(200,200,200);
-                position: absolute;
-                margin: 0 auto;
+                position: absolute;                
                 width: 568px;
                 height: 320px;
             }   
@@ -48,7 +46,7 @@ and open the template in the editor.
                 left: 0px;
                 height: 320px;
                 width: 100px;               
-                z-index: 1;
+                z-index: 1;                
             }
             #div_slider{
                 width: 560px;
@@ -57,6 +55,14 @@ and open the template in the editor.
             }            
             #player{
                // background-size: 100%;
+            }
+            #sprite_layout{
+                background:rgb(220,220,220); 
+                position: absolute; 
+                top:400px; 
+                width: 568px; 
+                height: 200px;
+                overflow-y: scroll;
             }
             
         </style>
@@ -90,7 +96,18 @@ and open the template in the editor.
                         </div>
                         <div data-role="collapsible">
                             <h1>Polygon List</h1>
-                        </div>                                                
+                        </div>
+                        <div data-role="collapsible">
+                            <h1>Add Sprite</h1>
+                            <input type="text" id="sprite_src" 
+                                   placeholder="Sprite Source" data-corners="false">
+                            <input type="text" id="sprite_name" 
+                                   placeholder="Sprite Name" data-corners="false">
+                            <input type="button" id="sprite_submit" 
+                                   value="Add Sprite" data-corners="false">
+                            <input type="button" id="sprite_lremove" 
+                                   value="Remove Sprite" data-corners="false">
+                        </div>
                     </div>
                     <div class="ui-block-b" id="canvasBlock">                                              
                         <div id="playground">
@@ -104,7 +121,10 @@ and open the template in the editor.
                                     <input id="slider" type="range" min="0" max="100" value="0">
                                 </form>  
                             </div>                                                                                  
-                        </div>                        
+                        </div>
+                        <div id="sprite_layout" >
+                            
+                        </div> 
                     </div>
                     <div class="ui-block-c" id="buttonBlockRight">  
                         <div data-role="collapsible">
@@ -195,7 +215,16 @@ and open the template in the editor.
                             </div>                            
                             <input type="checkbox" id="pl_mouse">
                             <label for="pl_mouse">Enable Mouse Click</label>
-                        </div>                      
+                        </div> 
+                        <div data-role="collapsible">
+                            <h1>Sprite List</h1>
+                            <div data-role="controlgroup" id="sprite_list" style="max-height: 330px; overflow-y: auto"> 
+                                
+                            </div>
+                            <div class='ui-body ui-body-a' >
+                                    <input type='button' id="sprite_remove" value='Remove'>                                    
+                            </div>
+                        </div>
                     </div>                   
                 </div>
             </div>

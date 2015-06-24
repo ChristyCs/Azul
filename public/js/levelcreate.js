@@ -95,7 +95,17 @@ $(window).load(function(){
     var $dvslider = $("#divSlider");
 
     //Collision zone
-    var $colzone = $("#collision_zone");  
+    var $colzone = $("#collision_zone"); 
+    
+    //Sprites
+    var $spsrc = $("#sprite_src");
+    var $spname = $("#sprite_name");
+    var $spsubmit = $("#sprite_submit");
+    var $splist = $("#sprite_list");
+    var $spremove = $("#sprite_remove");
+    var $splayout = $("#sprite_layout");
+    var $splremove = $("#sprite_lremove");
+    var spcur = null;
 
     //--------------------------------------------------------------------------
     //---    Functions
@@ -104,6 +114,7 @@ $(window).load(function(){
         var canPanW = ($("#canvasBlock").width());
         $playground.css("left",((canPanW-playground_width)/2.0));
         $dvslider.css("left",(canPanW-playground_width)/2.0);
+        $splayout.css("left",(canPanW-playground_width)/2.0);
     };   
 
     var setBoundsFunc = function(){        
@@ -164,6 +175,10 @@ $(window).load(function(){
             $colzone.append(polygon);
         }   
         pointlist = [];
+    };
+    
+    var spriteListClickFunc = function(){
+        console.log("here");        
     };
     
     //--------------------------------------------------------------------------
@@ -238,10 +253,32 @@ $(window).load(function(){
                     newLine.setAttribute('x2',x2);
                     newLine.setAttribute('y2',y2);
                     newLine.setAttribute('style','stroke:rgb(255,0,0);stroke-width:2');
-                    $colzone.append(newLine);  
-                    
+                    $colzone.append(newLine);                    
                 }                
             }
+        }else if(spcur != null){
+            var $data = $(spcur);
+            var name = $data.data("name");
+            var width = $data.data("width");
+            var height = $data.data("height");
+            var src = $data.data("src");
+            var group = $data.data("group");
+            var id = Math.ceil(Math.random()*1000)+name;
+            var posx = e.offsetX;
+            var posy = e.offsetY;
+
+            var img = new $.gQ.Animation({imageURL: src});
+            $("#"+group).addSprite(id,{
+                animation: img, 
+                height: height, 
+                width: width,
+                posx: posx,
+                posy: posy});          
+           
+            var div = $("<label for=widget" + id + ">Select</label>"
+                    + "<input class='spriteListItem' data-sprite-id=" + id + " type='checkbox' id=widget" + id + ">");
+            $("#sprite_list").append(div).trigger('create');
+            
         }else if($plemouse.is(':checked')){
             $plposx.val(e.offsetX);
             $plposy.val(e.offsetY);
@@ -250,13 +287,66 @@ $(window).load(function(){
         }        
     });
     
+    $spsubmit.on('click',function(){
+        var name = "Hello wolrd";
+        var url = "content/spacedude.gif";
+        var id = Math.ceil(Math.random()*1000)+(Math.random()*10);    
+        var width = 50;
+        var height = 50;   
+        var groupname = fggroup; 
+        
+        var data = "data-src="+url+" data-w="+width+" data-h="+height+" data-name="+name+" data-group="+groupname+" data-is-selected=false";
+        var style = "style='background-color: rgb(200,200,200); background-image:url("
+                +url+"); background-size: 100%; background-position: center; overflow: auto; text-overflow: ellipsis; float: left;"
+                +"width: 102px; height: 102px; padding: 2px; margin:2px'";
+        var div = "<div id="+id+" "+style+" "+data+" class='spriteLayout'><p>"+name+"</p></div>";        
+        $splayout.append(div);     
+    }); 
+    
+    $splremove.on('click',function(){
+        var list = $("div.spriteLayout");  
+        for(var i = 0; i < list.length; i++){
+            var dv = list[i];
+            if($(dv).data("is-selected")){
+                $(dv).remove();
+                spcur = null;
+                break;
+            }
+        }
+    });
+    
+    $spremove.on('click',function(){        
+        var list = $("input[type=checkbox]").filter(':checked');
+        for(var i = 0; i <list.length; i++){
+            var $item = $(list[i]);
+            var sid = $item.data("sprite-id");
+            $("#"+sid).remove();
+            $item.closest('div').remove();
+        }
+    });
+    
+    $(document).on('click', "div.spriteLayout", function () {        
+        if($(this).data("is-selected")){
+            $(this).css("background-color","rgb(200,200,200)");
+            $(this).data("is-selected",false);
+            spcur = null;
+        }else{
+            if(spcur != null){
+                $(spcur).data("is-selected",false);
+                $(spcur).css("background-color","rgb(200,200,200)");
+            }
+            spcur = this;
+            $(spcur).css("background-color","rgb(220,255,205)");
+            $(spcur).data("is-selected",true);
+        }
+    });
+    
     $(window).on('scroll', function() {
-        var scroll = $(window).scrollTop();
-        var diff = scroll - oldScroll;        
-        oldScroll = scroll;        
+        var scroll = $(window).scrollTop();                
         var py = scroll;        
         $playground.css("top",py);        
         $dvslider.css('top',py+320);
+        $splayout.css("top",(py)+400);
         // Do something
     });
     
@@ -269,7 +359,7 @@ $(window).load(function(){
     });
     
     $.playground().registerCallback(function(){
-        if($slider.val() !== unit_old){
+        if($slider.val() !== unit_old){            
             var unit = $slider.val();
             unit_old = unit;
             $("#"+bggroup).x(-dir_stepbg * unit);
@@ -296,10 +386,10 @@ $(window).load(function(){
     $mgposy.val(30);
     
     $fgsrc.val("content/fground.png");
-    $fgwidth.val(5000);
+    $fgwidth.val(1000);
     $fgheight.val(320);
     $fgposx.val(0);
-    $fgposy.val(30);
+    $fgposy.val(0);
 
     $plsrc.val("content/spacedude.gif");
     $plwidth.val(40);
@@ -336,16 +426,16 @@ $(window).load(function(){
             "groupname": mggroup,
             "img": img_midground            
         });
-//        loadBgFunc({
-//            "src":$fgsrc,
-//            "w": $fgwidth,
-//            "h": $fgheight,
-//            "px": $fgposx,
-//            "py": $fgposy,
-//            "name": fgimg,
-//            "groupname": fggroup,
-//            "img": img_foreground            
-//        });
+        loadBgFunc({
+            "src":$fgsrc,
+            "w": $fgwidth,
+            "h": $fgheight,
+            "px": $fgposx,
+            "py": $fgposy,
+            "name": fgimg,
+            "groupname": fggroup,
+            "img": img_foreground            
+        });
         loadBgFunc({
             "src": $plsrc,
             "w": $plwidth,
