@@ -89,7 +89,9 @@ and open the template in the editor.
             <div data-role="content" id="div_Login" class="ui-content">
                 <img src="content/mission-bground.png" alt="missionbg" class="mission-bg"/>
                 <img src="content/hud.png" alt="missionhud" class="mission-hud"/>
+                <a href = "LevelCreate.html">
                 <img src="content/neptune.png" alt="earthplanet" class="mission-neptune-planet"/>
+                 </a>
                 <h1 class="mission-planetname">Planet: Neptune</h1>
                 <p class="mission-facts-1">Play the Neptune Level to complete the mission!</p>
                 <!--<p class="mission-facts-1"> Neptune is the most distant planet from the Sun in our solar system and 17 times larger than Earth. The planets blue hue is a result of the methane in the outer atmosphere absorbing the red from the sun's light, allowing the blue to bounce back out. </p>-->
@@ -98,9 +100,9 @@ and open the template in the editor.
             -->
                 <div id="neptune-scroll-left-btn"> </div>
                 <div id="neptune-scroll-right-btn"> </div>
-                <div class="ui-btn ui-btn-icon-left ui-icon-carat-l" id="mission_ButtonBack">   Logout</div>
-                <div id="fact-scroll-up-btn"> </div>
-                <div id="fact-scroll-down-btn"> </div>
+               <div class="ui-btn-inline ui-icon-carat-l" id="mission_ButtonBack_Neptune">Logout</div>
+                <div id="neptune-fact-scroll-up-btn"> </div>
+                <div id="neptune-fact-scroll-down-btn"> </div>
                 
             </div>
         </div>
@@ -115,9 +117,9 @@ and open the template in the editor.
             
                <div id="uranus-scroll-left-btn"> </div>
                 <div id="uranus-scroll-right-btn"> </div>
-                <div class="ui-btn ui-btn-icon-left ui-icon-carat-l" id="mission_ButtonBack">Logout</div>
-                <div id="fact-scroll-up-btn"> </div>
-                <div id="fact-scroll-down-btn"> </div>
+                <div class="ui-btn-inline ui-icon-carat-l" id="mission_ButtonBack_Uranus">Logout</div>
+                <div id="uranus-fact-scroll-up-btn"> </div>
+                <div id="uranus-fact-scroll-down-btn"> </div>
             </div> 
         </div>
         <!--Mission Control Div Saturn-->
@@ -131,9 +133,9 @@ and open the template in the editor.
             
                <div id="saturn-scroll-left-btn"> </div>
                 <div id="saturn-scroll-right-btn"> </div>
-                <div class="ui-btn ui-btn-icon-left ui-icon-carat-l" id="mission_ButtonBack">Logout</div>
-                <div id="fact-scroll-up-btn"> </div>
-                <div id="fact-scroll-down-btn"> </div>
+                <div class="ui-btn-inline ui-icon-carat-l" id="mission_ButtonBack_Saturn">Logout</div>
+                <div id="saturn-fact-scroll-up-btn"> </div>
+                <div id="saturn-fact-scroll-down-btn"> </div>
             </div> 
         </div>
         <!--Loading Div-->
@@ -177,16 +179,24 @@ and open the template in the editor.
                 
                 //Loading page div
                 var pageLoading = "#page_Loading";                               
-                //Mission Control div
-                var logoutButtonBack = "#mission_ButtonBack";
+                //Mission Control divs
+                var neptuneLogoutButton = "#mission_ButtonBack_Neptune";
                 var neptuneLeftButton = "#neptune-scroll-left-btn";
                 var neptuneRightButton = "#neptune-scroll-right-btn";
+                var neptunefactUpButton = "#neptune-fact-scroll-up-btn";
+                var neptunefactDownButton = "#neptune-fact-scroll-down-btn";
+
+                var uranusLogoutButton = "#mission_ButtonBack_Uranus";
                 var uranusLeftButton = "#uranus-scroll-left-btn";
                 var uranusRightButton = "#uranus-scroll-right-btn";
+                var uranusfactUpButton = "#uranus-fact-scroll-up-btn";
+                var uranusfactDownButton = "#uranus-fact-scroll-down-btn";
+
+                var saturnLogoutButton = "#mission_ButtonBack_Saturn";
                 var saturnLeftButton = "#saturn-scroll-left-btn";
                 var saturnRightButton = "#saturn-scroll-right-btn";
-                var factUpButton = "#fact-scroll-up-btn";
-                var factDownButton = "#fact-scroll-down-btn";
+                var saturnfactUpButton = "#saturn-fact-scroll-up-btn";
+                var saturnfactDownButton = "#saturn-fact-scroll-down-btn";
 
 
                 //Button Click functions
@@ -201,7 +211,7 @@ and open the template in the editor.
                     $.mobile.changePage("#page_Create", { transition: "slide", 
                         reverse: false, changeHash: false });
                 });
-                //Mission Control buttons
+                //Mission Control switching buttons
                 $(neptuneRightButton).on('click', function(){
                      $.mobile.changePage("#page_MissionControl_Uranus", { transition: "slide", 
                         reverse: false, changeHash: false });
@@ -218,10 +228,36 @@ and open the template in the editor.
                      $.mobile.changePage("#page_MissionControl_Uranus", { transition: "slide", 
                         reverse: true, changeHash: false });
                 });
-
+                //Mission control fact buttons
+                $(neptunefactUpButton).on('click', function(){
+                    console.log("Neptune Up");
+                });
+                $(neptunefactDownButton).on('click', function(){
+                    console.log("Neptune Down");
+                });
+                $(uranusfactUpButton).on('click', function(){
+                    console.log("Uranus Up");
+                });
+                $(uranusfactDownButton).on('click', function(){
+                    console.log("Uranus Down");
+                });
+                $(saturnfactUpButton).on('click', function(){
+                    console.log("Saturn Up");
+                });
+                $(saturnfactDownButton).on('click', function(){
+                    console.log("Saturn Down");
+                });
 
                 //Login buttons
-                $(logoutButtonBack).on('click', function(){
+                $(neptuneLogoutButton).on('click', function(){
+                    $.mobile.changePage("#page_Main", { transition: "slide", 
+                        reverse: true, changeHash: false });
+                });
+                $(uranusLogoutButton).on('click', function(){
+                    $.mobile.changePage("#page_Main", { transition: "slide", 
+                        reverse: true, changeHash: false });
+                });
+                $(saturnLogoutButton).on('click', function(){
                     $.mobile.changePage("#page_Main", { transition: "slide", 
                         reverse: true, changeHash: false });
                 });
