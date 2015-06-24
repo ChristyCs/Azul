@@ -6,9 +6,9 @@ client.connect();
 var createQuery = "CREATE TABLE IF NOT EXISTS users"
         +"(username varchar(255) primary key not null,"
         +"password varchar(511) not null,"
-		+"neptune tinyint,"
-		+"uranus tinyint,"
-	    +"saturn tinyint)";
+		+"neptune varchar(255),"
+		+"uranus varchar(255),"
+	    +"saturn varchar(255))";
 //Create a author table
 client.query(createQuery)
         .on('end',function(){  

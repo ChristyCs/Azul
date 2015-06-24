@@ -36,7 +36,7 @@ and open the template in the editor.
             <h1 class="main-title">Planet</h1>
             <h1 class="sec-title">Runner</h1>
             <a class="ui-btn" id="main_ButtonLogin" 
-                style="margin-top: 60px;">Login</a>
+                style="">Login</a>
             <a class="ui-btn" id="main_ButtonCreate"
                 style="margin-top: 13px;">Create Account</a>
             <img src="content/spacedude.gif" alt="spacedude" class="spacedude">
@@ -78,29 +78,23 @@ and open the template in the editor.
 
         <!--Mission Control Div Neptune-->
         <div data-role="page" data-theme="b" id="page_MissionControl_Neptune">
-            <!--<div data-role="header" id="missioncontrol_DivHeader">
-                <!--<a class="ui-btn ui-btn-icon-left ui-icon-carat-l" id="mission_ButtonBack">Logout</a>
-                <h1></h1> <!--"Enter Login Details" 
-            </div>
-            -->
-            <!-- include div and css with information to 
-                Please turn your phone to horizontal mode!
-            --> 
             <div data-role="content" id="div_Login" class="ui-content">
                 <img src="content/mission-bground.png" alt="missionbg" class="mission-bg"/>
                 <img src="content/hud.png" alt="missionhud" class="mission-hud"/>
-                <a href = "LevelCreate.html">
+                <a href="LevelCreate.html">
                 <img src="content/neptune.png" alt="earthplanet" class="mission-neptune-planet"/>
                  </a>
                 <h1 class="mission-planetname">Planet: Neptune</h1>
-                <p class="mission-facts-1">Play the Neptune Level to complete the mission!</p>
-                <!--<p class="mission-facts-1"> Neptune is the most distant planet from the Sun in our solar system and 17 times larger than Earth. The planets blue hue is a result of the methane in the outer atmosphere absorbing the red from the sun's light, allowing the blue to bounce back out. </p>-->
-               <!-- <p class="mission-facts-2"> The planet's inner core is made from rock and ice, surrounded by a heavy atmosphere of hydrogen, helium and methane gases. Neptune has fierce supersonic winds, resulting from the extremely dense atmosphere, which keep the planet cold and dark. </p>
-                <p class="mission-facts-3"> It has 13 official moons and a planetary ring system consisting of mostly ice and small rocks. </p>
-            -->
+
+                <p class="mission-facts-0">
+                Welcome to Mission Control<br>
+                On your journey to the sun you must retrieve three <b>Fact Fuel</b> on each planet in order to proceed.
+                Good luck on your discovery and happy learning! <br> Click the planet to begin the level
+                <div id="missioncontrol_playerName" class="functions">Captain!</div>
+                </p>
                 <div id="neptune-scroll-left-btn"> </div>
                 <div id="neptune-scroll-right-btn"> </div>
-               <div class="ui-btn-inline ui-icon-carat-l" id="mission_ButtonBack_Neptune">Logout</div>
+                <div class="ui-btn-inline ui-icon-carat-l" id="mission_ButtonBack_Neptune">Logout</div>
                 <div id="neptune-fact-scroll-up-btn"> </div>
                 <div id="neptune-fact-scroll-down-btn"> </div>
                 
@@ -113,7 +107,8 @@ and open the template in the editor.
                 <img src="content/hud.png" alt="missionhud" class="mission-hud"/>
                 <img src="content/uranus.png" alt="earthplanet" class="mission-uranus-planet"/>
                 <h1 class="mission-planetname">Planet: Uranus</h1>
-                <p class="mission-facts-1">Play the Uranus Level to complete the mission</p>
+               <p class="mission-facts-0">Congratulations! You've made it to the second planet, Uranus. <br>
+               Click the planet to begin the level </p>
             
                <div id="uranus-scroll-left-btn"> </div>
                 <div id="uranus-scroll-right-btn"> </div>
@@ -129,8 +124,8 @@ and open the template in the editor.
                 <img src="content/hud.png" alt="missionhud" class="mission-hud"/>
                 <img src="content/saturn.png" alt="earthplanet" class="mission-saturn-planet"/>
                 <h1 class="mission-planetname">Planet: Saturn</h1>
-                <p class="mission-facts-1">Play the Saturn Level to complete the mission</p>
-            
+                <p class="mission-facts-0">Congratulations! You've made it to Saturn: the final frontier, for now. <br>
+               Click the planet to begin the level </p>
                <div id="saturn-scroll-left-btn"> </div>
                 <div id="saturn-scroll-right-btn"> </div>
                 <div class="ui-btn-inline ui-icon-carat-l" id="mission_ButtonBack_Saturn">Logout</div>
@@ -167,6 +162,7 @@ and open the template in the editor.
                 var loginButtonBack = "#login_ButtonBack";
                 var loginButtonLogin = "#login_ButtonLogin";
                 var loginDivResult = "#login_DivResult";
+
                 
                 //Create Account page div
                 var createLogin = "#page_Create";
@@ -197,6 +193,8 @@ and open the template in the editor.
                 var saturnRightButton = "#saturn-scroll-right-btn";
                 var saturnfactUpButton = "#saturn-fact-scroll-up-btn";
                 var saturnfactDownButton = "#saturn-fact-scroll-down-btn";
+
+                var missioncontrolplayerName = "#missioncontrol_playerName";
 
 
                 //Button Click functions
@@ -267,24 +265,25 @@ and open the template in the editor.
                     $.mobile.changePage("#page_Main", { transition: "slide", 
                         reverse: true, changeHash: false });
                 });
-                
+
                 $(loginButtonLogin).on('click', function(){
 
+                        
                     var jsonUrl = URL+"/login";
                     var hasName = $(loginTextUserN).val();
                     var hasPass = $(loginTextUserPW).val();
                     if(hasName && hasPass){
                         var userName = $(loginTextUserN).val();
+                        var playerName = "Captain " + userName + "!";
+                        $(missioncontrolplayerName).html(playerName);
+                            
+                            console.log("User logged in: "+playerName);
+                            var playerNamed = $(missioncontrolplayerName).val();
+                            //$(missioncontrolplayerName).html(playerName);
                         var userPassword = $(loginTextUserPW).val();
                         var userDetails = {"username": userName, "password":userPassword};                        
                         $.mobile.changePage("#page_Loading", { transition: "none", 
                             reverse: false, changeHash: false });
-
-/*
-                        $( window ).on( "orientationchange", function( event ) {
-  $( "#orientation" ).text( "This device is in " + event.orientation + " mode!" );
-});
-*/
                         
                         $.post(jsonUrl, userDetails)
                                 .success(function(data){
@@ -337,9 +336,13 @@ and open the template in the editor.
                                 .css("font-size","0.8em")
                                 .html(htmlVal);                           
                        }else{
+
                            $.mobile.changePage("#page_Loading", { transition: "none", 
                                 reverse: false, changeHash: false });
+                           console.log("need to redirect to home!, Currently sitting on loading!");
                            var userDetails = {"username":userName,"password":userPass};
+                        /*  $.mobile.changePage("#page_Main") , { transition: "none", 
+                                reverse: false, changeHash: false }); */
                            $.post(jsonUrl, userDetails)
                                    .success(function(data){
                                        console.log(data);
@@ -354,6 +357,8 @@ and open the template in the editor.
                                        $.mobile.changePage("#page_Create", { transition: "none", 
                                             reverse: false, changeHash: false });
                                    });
+
+
                            
                        }
                    }else{
@@ -368,5 +373,8 @@ and open the template in the editor.
             });
             
         </script>
+
+
+
     </body>
 </html>

@@ -1,11 +1,3 @@
-/*.ui-corner-all {
-    border-radius: 0 !important;
-}
-.ui-title {
-    margin-right: 8% !important;
-    margin-left: 8% !important;
-}*/
-
 @font-face {
     font-family: BanglaMN;
     src: url(Bangla-MN.ttc);
@@ -24,7 +16,7 @@ h1{}
 	margin:0px;
 	color:yellow;
 	opacity: 0.8;
-	padding-top: 7px;
+  padding-top: 11px;
 }
 .sec-title{
 	font-size: 1.6em;
@@ -36,7 +28,6 @@ h1{}
 	color:yellow;
 	opacity: 0.8;
 	margin-top:0px;
-	padding-top: 3px;
 }
 .ui-title{
 	color:blue;
@@ -61,6 +52,14 @@ a{}
 
 }
 div{}
+.functions{
+  font-size: 0.8em;
+  position:absolute;
+  left: 57%;
+  top: 32.7%;
+font-family: monospace;
+color:lightblue;
+}
 
 /*#page_Main{
 	position: absolute;
@@ -142,10 +141,11 @@ div{}
   top: 0%;
   text-transform: uppercase;
   padding: 15px;
-  padding-left: 29px;
+    padding-left: 29px;
   padding-top: 14px;
     font-size: 0.6em;
   color: lightblue;
+
 }
 #mission_ButtonBack_Neptune {
   width: 69px;
@@ -155,10 +155,11 @@ div{}
   top: 0%;
   text-transform: uppercase;
   padding: 15px;
-   padding-left: 29px;
+  padding-left: 29px;
   padding-top: 14px;  
   font-size: 0.6em;
   color: lightblue;
+
 }
 #mission_ButtonBack_Saturn {
   width: 69px;
@@ -172,6 +173,7 @@ div{}
   padding-top: 14px;
     font-size: 0.6em;
   color: lightblue;
+
 }
 #neptune-fact-scroll-up-btn {
    width: 100px;
@@ -291,6 +293,15 @@ p{}
   	top: 40%;
 	font-size:0.8em;
 }
+.mission-facts-0 {
+  position: absolute;
+  font-size: 0.8em;
+  left: 30%;
+  top: 29.5%;
+  width: 60%;
+  font-family: monospace;
+  color: lightblue;
+}
 .mission-facts-1 {
   position: absolute;
   font-size: 0.8em;
@@ -304,14 +315,54 @@ p{}
   position: absolute;
   font-size: 0.8em;
   left: 30%;
-  top: 29%;
+  top: 29.5%;
   width: 60%;
+  font-family: monospace;
+  color: lightblue;
 }
-.mission-facts-3 {
+.mission-facts-3{
   position: absolute;
   font-size: 0.8em;
   left: 30%;
-  top: 29%;
+  top: 29.5%;
   width: 60%;
+  font-family: monospace;
+  color: lightblue;
+}
+
+
+/* Responsive iPhone 5 */
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+    
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+    
+      h1{}
+      .main-title{
+        font-size: 2.8em;
+        padding-top: 27px;
+ 
+      }
+      .sec-title{
+        font-size:2.8em;
+      }
+      a{}
+      .ui-btn{}
+      #main_ButtonLogin{
+        margin-top:-10px;
+      }
+
 }
 
