@@ -50,9 +50,9 @@ and open the template in the editor.
             </div>
             <div data-role="content" id="div_Login" class="ui-content">
                 <input name="Name" id="login_TextUserN" type="text" 
-                      data-clear-btn="false" placeholder="Name">       
+                      data-clear-btn="true" placeholder="Name">       
                 <input name="Password" id="login_TextUserPW" type="password" 
-                       data-clear-btn="false" placeholder="Password">                
+                       data-clear-btn="true" placeholder="Password">                
                 <a class="ui-btn" id="login_ButtonLogin">Login</a>
                 <div id="login_DivResult" class="functions" style="text-align: center"></div>
             </div>
@@ -147,9 +147,13 @@ and open the template in the editor.
                 
                 //Loading page div
                 var pageLoading = "#page_Loading";                               
-                
+                //Mission Control div
+                var logoutButtonBack = "#mission_ButtonBack";
+
                 //Button Click functions
                 //Main Buttons
+
+
                 $(mainButtonLogin).on('click', function(){
                     $.mobile.changePage("#page_Login", { transition: "slide", 
                         reverse: false, changeHash: false });
@@ -160,6 +164,11 @@ and open the template in the editor.
                 });
                 
                 //Login buttons
+                $(logoutButtonBack).on('click', function(){
+                    $.mobile.changePage("#page_Main", { transition: "slide", 
+                        reverse: true, changeHash: false });
+                });
+
                 $(loginButtonBack).on('click', function(){
                     $(loginDivResult).html("");
                     $.mobile.changePage("#page_Main", { transition: "slide", 

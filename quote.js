@@ -6,6 +6,7 @@ var pg = require('pg');
 var password = require('password-hash-and-salt');
 var connectionString = process.env.DATABASE_URL;
 
+app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('port', (process.env.PORT || 5000));

@@ -12,6 +12,7 @@
 }
 body{
 	font-family: BanglaMN;
+  overflow: hidden;
 }
 h1{}
 .main-title{
