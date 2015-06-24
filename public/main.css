@@ -16,7 +16,7 @@ body{
 }
 h1{}
 .main-title{
-	font-size: 1.8em;
+	font-size: 1.6em;
 	text-transform: uppercase;
 	text-align: center;
 	font-family: url(content/BanglaMN.ttc);
@@ -27,7 +27,7 @@ h1{}
 	padding-top: 7px;
 }
 .sec-title{
-	font-size: 1.8em;
+	font-size: 1.6em;
 	text-transform: uppercase;
 	text-align: center;
 	font-family: url(content/BanglaMN.ttc);
@@ -47,11 +47,11 @@ h1{}
 .mission-planetname {
   text-transform: uppercase;
   position: absolute;
-  left: 28.7%;
-  top: 15%;
-  font-size: 1.8em;
+  left: 29.7%;
+  top: 19%;
+  font-size: 1em;
   color: lightblue;
-  font-family: monospace;
+  font-family: BanglaMN;
 }
 a{}
 .ui-btn{
@@ -142,8 +142,10 @@ div{}
   top: 0%;
   text-transform: uppercase;
   padding: 15px;
-  padding-left: 34px;
-  padding-top: 7px;
+  padding-left: 29px;
+  padding-top: 14px;
+    font-size: 0.6em;
+  color: lightblue;
 }
 #mission_ButtonBack_Neptune {
   width: 69px;
@@ -153,8 +155,10 @@ div{}
   top: 0%;
   text-transform: uppercase;
   padding: 15px;
-  padding-left: 34px;
-  padding-top: 7px;
+   padding-left: 29px;
+  padding-top: 14px;  
+  font-size: 0.6em;
+  color: lightblue;
 }
 #mission_ButtonBack_Saturn {
   width: 69px;
@@ -164,8 +168,10 @@ div{}
   top: 0%;
   text-transform: uppercase;
   padding: 15px;
-  padding-left: 34px;
-  padding-top: 7px;
+  padding-left: 29px;
+  padding-top: 14px;
+    font-size: 0.6em;
+  color: lightblue;
 }
 #neptune-fact-scroll-up-btn {
    width: 100px;
