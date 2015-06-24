@@ -18,7 +18,7 @@ and open the template in the editor.
             }
             #canvasBlock{
                 width:62.5%;
-                min-height: 350px;
+                min-height: 400px;
                 text-align: center;
                 position: relative;
             }
@@ -68,35 +68,34 @@ and open the template in the editor.
             </div>
             <div class="ui-content" id="pane1_main">
                 <div class="ui-grid-b" id="panel_col">
-                    <div class="ui-block-c" id="buttonBlockLeft">                        
-                        <div class="ui-body ui-body-a">
-                            Set Bounds
-                            <input type="text" id="bounds_left" placeholder="Left"
-                                   data-corners="false"/>
-                            <input type="text" id="bounds_right" placeholder="Right"
-                                   data-corners="false"/>
-                            <input type="button" id="bounds_submit" value="Set Bounds"
-                                   data-corners="false"/>
+                    <div class="ui-block-c" id="buttonBlockLeft"> 
+                        <div data-role="collapsible">
+                            <h1>Set Bounds</h1>                            
+                            <div>                                
+                                <input type="text" id="bounds_left" placeholder="Left"
+                                       data-corners="false"/>
+                                <input type="text" id="bounds_right" placeholder="Right"
+                                       data-corners="false"/>
+                                <input type="button" id="bounds_submit" value="Set Bounds"
+                                       data-corners="false"/>
+                            </div>
                         </div> 
-                        <div class="ui-body ui-body-a">
-                            Create Polygon                            
+                        <div data-role="collapsible">
+                            <h1>Create Polygon</h1>
                             <input type="checkbox" id="poly_start"
                                    data-corners="false">
                             <label for="poly_start">Enable Polygon</label>
                             <input type="button" id="poly_end"
                                    value="End Polygon" data-corners="false">
                         </div>
-                        <div class="ui-body ui-body-a">
-                            Polygon List
-                            <div class="ui-content" id="polygon_divlist" style="padding-left: 0; padding-right: 0">
-                                
-                            </div>
-                        </div>                        
+                        <div data-role="collapsible">
+                            <h1>Polygon List</h1>
+                        </div>                                                
                     </div>
                     <div class="ui-block-b" id="canvasBlock">                                              
                         <div id="playground">
                             <svg id="collision_zone">
-                                
+
                             </svg>
                         </div>
                         <div class="ui-content" id="divSlider">
@@ -107,81 +106,83 @@ and open the template in the editor.
                             </div>                                                                                  
                         </div>                        
                     </div>
-                    <div class="ui-block-c" id="buttonBlockRight">                        
-                        <div class="ui-body ui-body-a" id="bblock_Loading">
+                    <div class="ui-block-c" id="buttonBlockRight">  
+                        <div data-role="collapsible">
+                            <h1>Background</h1>
                             <label>Load Background</label>
                             <input type="text" id="load_bgsrc" 
-                                placeholder="Background" data-corners="false"/>
+                                   placeholder="Background" data-corners="false"/>
                             <div class="ui-grid-a">
                                 <div class="ui-block-a" style="padding-right: 2px">
                                     <input type="number" id="load_bgwidth" 
-                                   placeholder="width" data-corners="false">
+                                           placeholder="width" data-corners="false">
                                     <input type="number" id="load_bgposx" 
-                                   placeholder="X" data-corners="false">
+                                           placeholder="X" data-corners="false">
                                 </div>
                                 <div class="ui-block-b" style="padding-left: 2px">
                                     <input type="number" id="load_bgheight" 
-                                   placeholder="height" data-corners="false">
+                                           placeholder="height" data-corners="false">
                                     <input type="number" id="load_bgposy" 
-                                   placeholder="Y" data-corners="false">
+                                           placeholder="Y" data-corners="false">
                                 </div>
                             </div>
                             <label>Load Midground</label>
                             <input type="text" id="load_mgsrc" 
-                                placeholder="Midground" data-corners="false"/>
+                                   placeholder="Midground" data-corners="false"/>
                             <div class="ui-grid-a">
                                 <div class="ui-block-a" style="padding-right: 2px">
                                     <input type="number" id="load_mgwidth" 
-                                   placeholder="W" data-corners="false">
+                                           placeholder="W" data-corners="false">
                                     <input type="number" id="load_mgposx" 
-                                   placeholder="X" data-corners="false">
+                                           placeholder="X" data-corners="false">
                                 </div>
                                 <div class="ui-block-b" style="padding-left: 2px">
                                     <input type="number" id="load_mgheight" 
-                                   placeholder="H" data-corners="false">
+                                           placeholder="H" data-corners="false">
                                     <input type="number" id="load_mgposy" 
-                                   placeholder="Y" data-corners="false">
+                                           placeholder="Y" data-corners="false">
                                 </div>
                             </div>
                             <label>Load Foreground</label>
                             <input type="text" id="load_fgsrc" 
-                                placeholder="Foreground" data-corners="false"/>
+                                   placeholder="Foreground" data-corners="false"/>
                             <div class="ui-grid-a">
                                 <div class="ui-block-a" style="padding-right: 2px">
                                     <input type="number" id="load_fgwidth" 
-                                   placeholder="W" data-corners="false">
+                                           placeholder="W" data-corners="false">
                                     <input type="number" id="load_fgposx" 
-                                   placeholder="X" data-corners="false">
+                                           placeholder="X" data-corners="false">
                                 </div>
                                 <div class="ui-block-b" style="padding-left: 2px">
                                     <input type="number" id="load_fgheight" 
-                                   placeholder="H" data-corners="false">
+                                           placeholder="H" data-corners="false">
                                     <input type="number" id="load_fgposy" 
-                                   placeholder="Y" data-corners="false">
+                                           placeholder="Y" data-corners="false">
                                 </div>
                             </div>
                             <input type="button" id="load_bgsubmit" value="Load" 
-                                data-corners="false"/>
-                        </div> 
-                        <div class="ui-body ui-body-a">
+                                   data-corners="false"/>
+                        </div>  
+                        <div data-role="collapsible">
+                            <h1>Player Img</h1>
                             Load Player Image
                             <input type="text" id="pl_src" 
                                    placeholder="Player Img" data-corners="false">
                             <div class="ui-grid-a">
                                 <div class="ui-block-a" style="padding-right: 2px">
                                     <input type="number" id="pl_width" 
-                                   placeholder="W" data-corners="false">                                    
+                                           placeholder="W" data-corners="false">                                    
                                 </div>
                                 <div class="ui-block-b" style="padding-left: 2px">
                                     <input type="number" id="pl_height" 
-                                   placeholder="H" data-corners="false">                                    
+                                           placeholder="H" data-corners="false">                                    
                                 </div>
                             </div>                            
                             <input type="submit" id="pl_submit" 
                                    value="Load" data-corners="false">
-                        </div>
-                        <div class="ui-body ui-body-a">
-                            Set Player Pos                            
+                        </div>  
+                        <div data-role="collapsible">
+                            <h1>Player Pos</h1>
                             <div class="ui-grid-a">
                                 <div class="ui-block-a" style="padding-right: 2px;">
                                     <input type="text" id="pl_posx" 
@@ -194,12 +195,8 @@ and open the template in the editor.
                             </div>                            
                             <input type="checkbox" id="pl_mouse">
                             <label for="pl_mouse">Enable Mouse Click</label>
-<!--                            <input type="submit" id="pl_setpos" value="Set Pos"
-                                   data-corners="false">-->
-                        </div>
-                        
-                    </div>
-                    
+                        </div>                      
+                    </div>                   
                 </div>
             </div>
             <div data-role="footer" id="page1_footer">

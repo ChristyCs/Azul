@@ -13,7 +13,10 @@ $(window).load(function(){
     var playground_width = $playground.width();
     var playground_height = $playground.height();
     $playground.playground({height: playground_height, width:playground_width});
-
+    
+    //Scroll
+    var oldScroll = 0;
+    
     //Types
     var bgimg = "bgimg";
     var mgimg = "mgimg";
@@ -89,6 +92,7 @@ $(window).load(function(){
 
     //Slider
     var $slider = $("#slider");
+    var $dvslider = $("#divSlider");
 
     //Collision zone
     var $colzone = $("#collision_zone");  
@@ -99,7 +103,7 @@ $(window).load(function(){
     var resizeEventFunc = function(){
         var canPanW = ($("#canvasBlock").width());
         $playground.css("left",((canPanW-playground_width)/2.0));
-        $("#divSlider").css("left",(canPanW-playground_width)/2.0);
+        $dvslider.css("left",(canPanW-playground_width)/2.0);
     };   
 
     var setBoundsFunc = function(){        
@@ -246,6 +250,20 @@ $(window).load(function(){
         }        
     });
     
+    $(window).on('scroll', function() {
+        var scroll = $(window).scrollTop();
+        var diff = scroll - oldScroll;        
+        oldScroll = scroll;        
+        var py = scroll;        
+        $playground.css("top",py);        
+        $dvslider.css('top',py+320);
+        // Do something
+    });
+    
+    $(window).on('resize',function(){
+        resizeEventFunc();
+    });
+    
     $.loadCallback(function(percent){
 	console.log(percent);        
     });
@@ -256,7 +274,7 @@ $(window).load(function(){
             unit_old = unit;
             $("#"+bggroup).x(-dir_stepbg * unit);
             $("#"+mggroup).x(-dir_stepmg * unit);
-            //$("#foreground").x(-directionStepForeground * unit);                        
+            $("#"+fggroup).x(-dir_stepfg * unit);                        
             $("#"+plgroup).x(-dir_stepfg * unit);
             $colzone.css("left", -dir_stepfg * unit);
         }       
@@ -276,12 +294,18 @@ $(window).load(function(){
     $mgheight.val(320);
     $mgposx.val(0);
     $mgposy.val(30);
+    
+    $fgsrc.val("content/fground.png");
+    $fgwidth.val(5000);
+    $fgheight.val(320);
+    $fgposx.val(0);
+    $fgposy.val(30);
 
     $plsrc.val("content/spacedude.gif");
     $plwidth.val(40);
     $plheight.val(40);
-    $plposx.val(0);
-    $plposy.val(0);
+    $plposx.val(313);
+    $plposy.val(124);
     
     $bbleft.val(0);
     $bbright.val(100);    
@@ -312,6 +336,16 @@ $(window).load(function(){
             "groupname": mggroup,
             "img": img_midground            
         });
+//        loadBgFunc({
+//            "src":$fgsrc,
+//            "w": $fgwidth,
+//            "h": $fgheight,
+//            "px": $fgposx,
+//            "py": $fgposy,
+//            "name": fgimg,
+//            "groupname": fggroup,
+//            "img": img_foreground            
+//        });
         loadBgFunc({
             "src": $plsrc,
             "w": $plwidth,
