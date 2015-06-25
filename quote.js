@@ -87,31 +87,42 @@ app.post('/login', function(request, response){
     pg.connect(connectionString, function(err, client, done){
         var username = request.body.username;
         var userpassword = request.body.password;
-        var query = 'SELECT *'+
-            'FROM users WHERE';
-    
-        var query01 = 'SELECT *'+
-            'FROM users';
-        var query01Func = function(result){
-            console.log("Query 01");
-        };
-        var query02 = 'SELECT username '+
-            'FROM users';
-        var query02Func = function(result){
-            console.log("Query 02");
-        };
-        var queries = [[query01,query01Func],[query02,query02Func]];
-        
-        queries.forEach(function(q){
-            client.query(q[0],function(err, result){
-                if(err){
-                    console.log("!!!!!!!!!!!!!!ERRRRRROOOORRRR!!!!!!!!!!!!!!!");
-                    console.log(err);
-                }else{
-                    q[1](result);
-                }
-            });          
+        var qGetUser = 'SELECT * FROM users WHERE username=$1';
+        var qUpdateSesId = 'UPDATE users SET sessionid=$1 WHERE username=$2';
+        client.query(qGetUser,[username],function(err,result){
+            if(err){
+                response.statusCode = 500;
+                response.send(err);
+            }else{
+                console.log(result);
+            }            
         });
+        
+//        var query = 'SELECT *'+
+//            'FROM users WHERE';
+//    
+//        var query01 = 'SELECT *'+
+//            'FROM users';
+//        var query01Func = function(result){
+//            console.log("Query 01");
+//        };
+//        var query02 = 'SELECT username '+
+//            'FROM users';
+//        var query02Func = function(result){
+//            console.log("Query 02");
+//        };
+//        var queries = [[query01,query01Func],[query02,query02Func]];
+//        
+//        queries.forEach(function(q){
+//            client.query(q[0],function(err, result){
+//                if(err){
+//                    console.log("!!!!!!!!!!!!!!ERRRRRROOOORRRR!!!!!!!!!!!!!!!");
+//                    console.log(err);
+//                }else{
+//                    q[1](result);
+//                }
+//            });          
+//        });
 //        var pass;
 //        client.query(query,[username],function(err, result){
 //           
