@@ -95,7 +95,7 @@ app.post('/login', function(request, response){
         var query01Func = function(result){
             console.log("Query 01");
         };
-        var query02 = 'SELECT usernames'+
+        var query02 = 'SELECT usernames '+
             'FROM users';
         var query02Func = function(result){
             console.log("Query 02");
