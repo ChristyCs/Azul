@@ -85,7 +85,7 @@ app.post('/create', function (request, response) {
 
 app.post('/loggedin',function(request, response){
     
-    response.send(request.sessionID());
+    response.send(request.session);
 });
 
 app.post('/login', function(request, response){    
