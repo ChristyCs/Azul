@@ -83,8 +83,27 @@ app.post('/create', function (request, response) {
     });
 });
 
-app.post('/loggedin',function(request, response){
-    
+app.post('/loggedin',function(request, response){    
+    var date = new Date().toISOString();
+    if(request.session.cookie.expires > date){
+        pg.connect(connectionString, function(err, client, done){
+            var query = 'SELECT username FROM users WHERE sessionid=$1';
+            var sessionid = request.sessionID();
+            client.query(query,[sessionid],function(err,result){
+                if(err){
+                    response.statusCode = 500;
+                    response.send(err);
+                }else{
+                    if(result.rows.length === 0){
+                        response.statusCode = 401;
+                        response.send("Unauthorized access");
+                    }else{
+                        response.send(result);
+                    }
+                }
+            });
+        });
+    }
     response.send(request.session);
 });
 
