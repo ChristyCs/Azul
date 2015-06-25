@@ -115,6 +115,8 @@ app.post('/login', function(request, response){
 //                    });
                 }               
             }
+        }).on('end',function(err, result){
+            response.send(result);
         }); 
         client.query("update users set sessionid=$1 where username=$2",[request.sessionID(),username],function(err, result){
             if(err){
