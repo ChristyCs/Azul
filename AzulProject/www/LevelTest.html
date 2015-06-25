@@ -7,56 +7,29 @@ and open the template in the editor.
 <html>
     <head>
        <link rel="shortcut icon" href="favicon.ico" />
-       <link rel="stylesheet" type="text/css" href="css/index.css">
-       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>   
-       <script type="text/javascript" src="js/GameEngine.js"></script>
-       <script type="text/javascript" src="js/GameLevel.js"></script>
-       <script type="text/javascript" src="js/ImageLayer.js"></script>
-       <script type="text/javascript" src="js/foreGround.js"></script>
-       <script type="text/javascript" src="js/groundObject.js"></script>
+       <link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css"/>
+       <script src="js/jquery-1.11.3.min.js"></script>
+       <script src="js/jquery.mobile-1.4.5.min.js"></script>
+       <script type="text/javascript" src="js/jquery.gamequery.js"></script>       
     </head>
     <body>
-        <canvas id="viewport" height="320" width="568" style="background-color: rgb(200,220,255);"></canvas>
-        <script type="text/javascript">           
-            $(document).ready(function(){               
-                var WIDTH = window.innerWidth;
-                var HEIGHT = window.innerHeight;
-                $("#viewport").attr({
-                    'width':WIDTH,
-                    'height':HEIGHT
-                });
+        <div data-role="page">
+            <div id="playground" style="width: 568; height: 320">
+                <div id="loading" style="width: 100%; height: 100%">
+                    
+                </div>
+            </div>            
+        </div>
+        <script type="text/javascript">
+            $(window).load(function(){
+                var $playground = $("#playground");
+                var p_width = $playground.width();
+                var p_height = $playground.height();
+                $playground.playground({height: p_height,width: p_width});
                 
-                var SCALE = HEIGHT / 568;// 360 width bassed of nexus 4 height                
-                var FRAME_RATE = 50;
-                var canvas = $("#viewport").get(0);
-                var context = canvas.getContext('2d');
                 
-                var GAME_LOOP = new GameEngine.GameLoop(FRAME_RATE);              
-                var game_level = new GameEngine.Level(context, SCALE);
-                var GAME_LOOP_ID = GAME_LOOP.start();
                 
-                game_level.init(GAME_LOOP_ID, FRAME_RATE);                
-                console.log("Game loop ID: "+GAME_LOOP_ID);
-                console.log("Context: "+context);
-                console.log("Render Scale: "+SCALE);
-                
-                GAME_LOOP.stop();
-                game_level.loadLevel("json/Level1.json");
-                GAME_LOOP.start();
-                
-//                $('body').click(function(){  
-//                    if(game_level.game_loop_paused){
-//                        GAME_LOOP.start();
-//                        game_level.game_loop_paused = false;  
-//                        console.log("A");
-//                    }else{
-//                        GAME_LOOP.stop();
-//                        game_level.loadLevel("js/TestJson.json");
-//                        game_level.game_loop_paused = true;
-//                        console.log("B");
-//                    }                   
-//                });
-            });
+            });            
         </script>
     </body>
 </html>
