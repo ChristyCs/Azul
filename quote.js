@@ -2,10 +2,58 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var app = express();
+var expressSession = require('express-session');
 var pg = require('pg');
 var password = require('password-hash-and-salt');
+var cookie = require('cookie');
+var cookieSignature = require('cookie-signature');
+var uuid = require('node-uuid');
 var connectionString = process.env.DATABASE_URL;
 
+app.use(function(req, res, next) {
+ 
+    var sessionId = req.param('sessionId');
+ 
+    // if there was a session id passed add it to the cookies
+    if (sessionId) {
+ 
+        var header = req.headers.cookie;
+ 
+        // sign the cookie so Express Session unsigns it correctly
+        var signedCookie = 's:' + cookieSignature.sign(sessionId, 'keyboard cat');
+ 
+        req.headers.cookie = cookie.serialize('connect.sid', signedCookie);
+ 
+    }
+ 
+    next();
+ 
+});
+app.use(function(req, res, next) {
+ 
+    expressSession({
+        'cookie': {
+            'httpOnly': false,
+            'maxAge': 1000 * 60 * 60 * 24 * 60
+        },
+        'name': 'connect.sid',
+        'secret': 'keyboard cat',
+        'saveUninitialized': true,
+        'genid': function() {
+ 
+            var sessionId = req.param('sessionId');
+ 
+            if (sessionId) {
+                return req.param('sessionId');
+            }
+ 
+            return uuid;
+ 
+        }
+ 
+    })(req, res, next);
+ 
+});
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

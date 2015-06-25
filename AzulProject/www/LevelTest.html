@@ -10,6 +10,7 @@ and open the template in the editor.
        <link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css"/>
        <script src="js/jquery-1.11.3.min.js"></script>
        <script src="js/jquery.mobile-1.4.5.min.js"></script>
+       <script src="js/uuid.js"></script>
        <script type="text/javascript" src="js/jquery.gamequery.js"></script>       
     </head>
     <body>
@@ -22,10 +23,31 @@ and open the template in the editor.
         </div>
         <script type="text/javascript">
             $(window).load(function(){
-                var $playground = $("#playground");
-                var p_width = $playground.width();
-                var p_height = $playground.height();
-                $playground.playground({height: p_height,width: p_width});
+                var sessionId = localStorage.getItem('sessionCookie');
+                
+                if(!sessionId){                    
+                    sessionId = uuid.v4();
+                    localStorage.setItem('sessionCookie', sessionId);
+                }
+                
+                $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+                    // if there is data being sent
+                    // add the sessionId to it
+                    if (options.data) {
+                        options.data += '&sessionId=' + sessionId;
+                    }
+
+                    // if there is no data being sent
+                    // create the data and add the sessionId
+                    else {
+                        options.data = 'sessionId=' + sessionId;
+                    }
+
+                });
+//                var $playground = $("#playground");
+//                var p_width = $playground.width();
+//                var p_height = $playground.height();
+//                $playground.playground({height: p_height,width: p_width});
                 
                 
                 
