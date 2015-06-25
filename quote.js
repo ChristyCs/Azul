@@ -54,9 +54,7 @@ app.use(function(req, res, next) {
     })(req, res, next);
  
 });
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('port', (process.env.PORT || 5000));
@@ -83,6 +81,10 @@ app.post('/create', function (request, response) {
             });
         });
     });
+});
+
+app.post('/loggedin',function(request, response){
+    request.send(request.session());
 });
 
 app.post('/login', function(request, response){    
@@ -126,68 +128,6 @@ app.post('/login', function(request, response){
                 }
             });            
         };
-        
-//        var query = 'SELECT *'+
-//            'FROM users WHERE';
-//    
-//        var query01 = 'SELECT *'+
-//            'FROM users';
-//        var query01Func = function(result){
-//            console.log("Query 01");
-//        };
-//        var query02 = 'SELECT username '+
-//            'FROM users';
-//        var query02Func = function(result){
-//            console.log("Query 02");
-//        };
-//        var queries = [[query01,query01Func],[query02,query02Func]];
-//        
-//        queries.forEach(function(q){
-//            client.query(q[0],function(err, result){
-//                if(err){
-//                    console.log("!!!!!!!!!!!!!!ERRRRRROOOORRRR!!!!!!!!!!!!!!!");
-//                    console.log(err);
-//                }else{
-//                    q[1](result);
-//                }
-//            });          
-//        });
-//        var pass;
-//        client.query(query,[username],function(err, result){
-//           
-//           if(err){
-//               response.statusCode = 500;
-//               response.send(err);
-//           }else{
-//               if(result.rows.length === 0){
-//                   response.statusCode = 401;
-//                   response.send("Unauthorized access");
-//               }else{
-//                   pass = result.rows[0].password;
-////                    password(userpassword).verifyAgainst(result.rows[0].password, function(error, verified){
-////                        if(error){
-////                            response.statusCode = 500;
-////                            response.send(error);
-////                        }else if (!verified){
-////                            response.statusCode = 401;
-////                            response.send("Unauthorized access");
-////                        }else{
-////                            
-////                        }
-////                    });
-//                }               
-//            }
-//        }).on('end',function(err, result){
-//            response.send(result);
-//        }); 
-//        client.query("update users set sessionid=$1 where username=$2",[request.sessionID(),username],function(err, result){
-//            if(err){
-//                response.statusCode = 500;
-//                response.send(err);
-//            }
-//        });
-//        done();
-//        response.send(request.sessionID()+" : "+username+" pass: "+pass);
     });
 });
 
