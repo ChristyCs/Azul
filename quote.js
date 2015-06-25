@@ -54,7 +54,9 @@ app.use(function(req, res, next) {
     })(req, res, next);
  
 });
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('port', (process.env.PORT || 5000));
@@ -94,9 +96,36 @@ app.post('/login', function(request, response){
                 response.statusCode = 500;
                 response.send(err);
             }else{
-                response.send(result);
+                if(result.rows.length === 0){
+                    response.statusCode = 401;
+                    response.send("Unauthorized access");                    
+                }else{
+                    pass = result.rows[0].password;
+                    password(userpassword).verifyAgainst(result.rows[0].password, function(error, verified){
+                        if(error){
+                            response.statusCode = 500;
+                            response.send(error);
+                        }else if (!verified){
+                            response.statusCode = 401;
+                            response.send("Unauthorized access");
+                        }else{
+                            addSessionId();
+                        }
+                    });
+                    
+                }
             }            
         });
+        var addSessionId = function(){            
+            client.query(qUpdateSesId,[request.sessionID(),username],function(err, result){
+                if(err){
+                    response.statusCode = 500;
+                    response.send(err);                    
+                }else{
+                    response.send("user: "+username);
+                }
+            });            
+        };
         
 //        var query = 'SELECT *'+
 //            'FROM users WHERE';
