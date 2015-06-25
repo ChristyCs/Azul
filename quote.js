@@ -106,6 +106,7 @@ app.post('/login', function(request, response){
             client.query(q[0],function(err, result){
                 if(err){
                     console.log("!!!!!!!!!!!!!!ERRRRRROOOORRRR!!!!!!!!!!!!!!!");
+                    console.log(err);
                 }else{
                     q[1](result);
                 }
