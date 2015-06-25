@@ -85,6 +85,7 @@ app.post('/create', function (request, response) {
 
 app.post('/loggedin',function(request, response){    
     var date = new Date().toISOString();
+    console.log(request.session.cookie.expires > date);
     if(request.session.cookie.expires > date){
         pg.connect(connectionString, function(err, client, done){
             var query = 'SELECT username FROM users WHERE sessionid=$1';
