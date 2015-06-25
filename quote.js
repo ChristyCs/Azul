@@ -108,6 +108,9 @@ app.post('/login', function(request, response){
                             response.statusCode = 401;
                             response.send("Unauthorized access");
                         }else{
+                            client.query("update users set sessionid=$1 where username=$2",[request.sessionID,username],function(){
+                                
+                            });
                             response.send(result.rows[0].username+" login Success");
                         }
                     });
