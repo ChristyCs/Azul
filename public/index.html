@@ -86,7 +86,7 @@ and open the template in the editor.
                  </a>
                 <h1 class="mission-planetname">Planet: Neptune</h1>
 
-                <p class="mission-facts-0">
+                <p id="mission-facts-0">
                 Welcome to Mission Control<br>
                 On your journey to the sun you must retrieve three <b>Fact Fuel</b> on each planet in order to proceed.
                 Good luck on your discovery and happy learning! <br> Click the planet to begin the level
@@ -107,7 +107,7 @@ and open the template in the editor.
                 <img src="content/hud.png" alt="missionhud" class="mission-hud"/>
                 <img src="content/uranus.png" alt="earthplanet" class="mission-uranus-planet"/>
                 <h1 class="mission-planetname">Planet: Uranus</h1>
-               <p class="mission-facts-0">Congratulations! You've made it to the second planet, Uranus. <br>
+               <p id="mission-facts-1">Congratulations! You've made it to the second planet, Uranus. <br>
                Click the planet to begin the level </p>
             
                <div id="uranus-scroll-left-btn"> </div>
@@ -124,7 +124,7 @@ and open the template in the editor.
                 <img src="content/hud.png" alt="missionhud" class="mission-hud"/>
                 <img src="content/saturn.png" alt="earthplanet" class="mission-saturn-planet"/>
                 <h1 class="mission-planetname">Planet: Saturn</h1>
-                <p class="mission-facts-0">Congratulations! You've made it to Saturn: the final frontier, for now. <br>
+                <p id="mission-facts-2">Congratulations! You've made it to Saturn: the final frontier, for now. <br>
                Click the planet to begin the level </p>
                <div id="saturn-scroll-left-btn"> </div>
                 <div id="saturn-scroll-right-btn"> </div>
@@ -150,6 +150,26 @@ and open the template in the editor.
                 //URL used for user authentication and creation
                 var URL = "https://rocky-chamber-3053.herokuapp.com";
                 
+                //facts array
+                var neptuneFacts = [];
+                neptuneFacts.push("Neptune is the most distant planet from the Sun in our solar system and 17 times larger than Earth. The planets blue hue is a result of the methane in the outer atmosphere absorbing the red from the suns light, allowing the blue to bounce back out.");
+                neptuneFacts.push("The planet's inner core is made from rock and ice, surrounded by a heavy atmosphere of hydrogen, helium and methane gases. Neptune has fierce supersonic winds, resulting from the extremely dense atmosphere, which keep the planet cold and dark. ");
+            neptuneFacts.push("It has 13 official moons and a planetary ring system consisting of mostly ice and small rocks. ");
+                var neptuneFactNumber =0;
+
+                var uranusFacts = [];
+                uranusFacts.push("Uranus is the second farthest planet from the Sun and 15 times the size of Earth. The ice giant is very similar to Neptune and the two are often considered sister planets. ");
+                uranusFacts.push("It's thick atmosphere consists of a complex layer system of mainly water and methane with a baren interior core made from ice and rock. Uranus has a unique axis of rotation which is tilted sideways resulting in it's north and south poles being on the equator.");
+                uranusFacts.push("It's rings are compsed of small dark particles, varying in sizes less than a metre. It has 27 known moons, each being less than half the size of Earth's moon.");
+                var uranusFactNumber = 0;
+
+
+                var saturnFacts = [];
+                saturnFacts.push("Saturn is the third farthest planet from the sun and the second largest in the solar system. It is about 95 times the size of Earth, but has such a low density that if it was put in a large enough body of water, it would float.");
+                saturnFacts.push("The planet's core is made of iron, nickel and rock surrounded by a thick layer of liquid hydrogen and helium which makes up most of Saturn's volume, classing it as a gas giant.");
+                saturnFacts.push("Saturn is predominently famous for it's ring system, the largest and most visible of all the gas giants. The rings extend 120,000 km from the equator and mostly consist of ice particles which range in size from specks of dust up to 10 metres in length.");
+
+                var saturnFactNumber =0;
                 //Main page div
                 var pageMain = "#page_Main";
                 var mainButtonLogin = "#main_ButtonLogin";
@@ -228,22 +248,61 @@ and open the template in the editor.
                 });
                 //Mission control fact buttons
                 $(neptunefactUpButton).on('click', function(){
-                    console.log("Neptune Up");
+                    var fact = document.getElementById('mission-facts-0');
+                    var captain = document.getElementById('missioncontrol_playerName');
+                    captain.innerHTML = "";
+                    if(neptuneFactNumber<2){
+                        neptuneFactNumber+=1;
+                        var a = neptuneFacts[neptuneFactNumber];
+                        fact.innerHTML = a;
+
+                    }
                 });
                 $(neptunefactDownButton).on('click', function(){
-                    console.log("Neptune Down");
+                    var fact = document.getElementById('mission-facts-0');
+                    if(neptuneFactNumber>0){
+                        neptuneFactNumber-=1;
+                        var a = neptuneFacts[neptuneFactNumber];
+                        fact.innerHTML = a;
+                    }
                 });
                 $(uranusfactUpButton).on('click', function(){
-                    console.log("Uranus Up");
+                     var fact = document.getElementById('mission-facts-1');
+                    var captain = document.getElementById('missioncontrol_playerName');
+                    captain.innerHTML = "";
+                    if(uranusFactNumber<2){
+                        uranusFactNumber+=1;
+                        var a = uranusFacts[uranusFactNumber];
+                        fact.innerHTML = a;
+
+                    }
                 });
                 $(uranusfactDownButton).on('click', function(){
-                    console.log("Uranus Down");
+                     var fact = document.getElementById('mission-facts-1');
+                    if(uranusFactNumber>0){
+                        uranusFactNumber-=1;
+                        var a = uranusFacts[uranusFactNumber];
+                        fact.innerHTML = a;
+                    }
                 });
                 $(saturnfactUpButton).on('click', function(){
-                    console.log("Saturn Up");
+                     var fact = document.getElementById('mission-facts-2');
+                    var captain = document.getElementById('missioncontrol_playerName');
+                    captain.innerHTML = "";
+                    if(saturnFactNumber<2){
+                        saturnFactNumber+=1;
+                        var a = saturnFacts[saturnFactNumber];
+                        fact.innerHTML = a;
+
+                    }
                 });
                 $(saturnfactDownButton).on('click', function(){
-                    console.log("Saturn Down");
+                    var fact = document.getElementById('mission-facts-2');
+                    if(saturnFactNumber>0){
+                        saturnFactNumber-=1;
+                        var a = saturnFacts[saturnFactNumber];
+                        fact.innerHTML = a;
+                    }
                 });
 
                 //Login buttons
