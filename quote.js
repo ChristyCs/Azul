@@ -88,44 +88,65 @@ app.post('/login', function(request, response){
         var username = request.body.username;
         var userpassword = request.body.password;
         var query = 'SELECT *'+
-            'FROM users WHERE username = $1';
+            'FROM users WHERE';
+    
+        var query01 = 'SELECT *'+
+            'FROM users';
+        var query01Func = function(result){
+            console.log("Query 01");
+        };
+        var query02 = 'SELECT usernames'+
+            'FROM users';
+        var query02Func = function(result){
+            console.log("Query 02");
+        };
+        var queries = [[query01,query01Func],[query02,query02Func]];
         
-        var pass;
-        client.query(query,[username],function(err, result){
-           
-           if(err){
-               response.statusCode = 500;
-               response.send(err);
-           }else{
-               if(result.rows.length === 0){
-                   response.statusCode = 401;
-                   response.send("Unauthorized access");
-               }else{
-                   pass = result.rows[0].password;
-//                    password(userpassword).verifyAgainst(result.rows[0].password, function(error, verified){
-//                        if(error){
-//                            response.statusCode = 500;
-//                            response.send(error);
-//                        }else if (!verified){
-//                            response.statusCode = 401;
-//                            response.send("Unauthorized access");
-//                        }else{
-//                            
-//                        }
-//                    });
-                }               
-            }
-        }).on('end',function(err, result){
-            response.send(result);
-        }); 
-        client.query("update users set sessionid=$1 where username=$2",[request.sessionID(),username],function(err, result){
-            if(err){
-                response.statusCode = 500;
-                response.send(err);
-            }
+        queries.forEach(function(q){
+            client.query(q[0],function(err, result){
+                if(err){
+                    console.log("!!!!!!!!!!!!!!ERRRRRROOOORRRR!!!!!!!!!!!!!!!");
+                }else{
+                    q[1](result);
+                }
+            });          
         });
-        done();
-        response.send(request.sessionID()+" : "+username+" pass: "+pass);
+//        var pass;
+//        client.query(query,[username],function(err, result){
+//           
+//           if(err){
+//               response.statusCode = 500;
+//               response.send(err);
+//           }else{
+//               if(result.rows.length === 0){
+//                   response.statusCode = 401;
+//                   response.send("Unauthorized access");
+//               }else{
+//                   pass = result.rows[0].password;
+////                    password(userpassword).verifyAgainst(result.rows[0].password, function(error, verified){
+////                        if(error){
+////                            response.statusCode = 500;
+////                            response.send(error);
+////                        }else if (!verified){
+////                            response.statusCode = 401;
+////                            response.send("Unauthorized access");
+////                        }else{
+////                            
+////                        }
+////                    });
+//                }               
+//            }
+//        }).on('end',function(err, result){
+//            response.send(result);
+//        }); 
+//        client.query("update users set sessionid=$1 where username=$2",[request.sessionID(),username],function(err, result){
+//            if(err){
+//                response.statusCode = 500;
+//                response.send(err);
+//            }
+//        });
+//        done();
+//        response.send(request.sessionID()+" : "+username+" pass: "+pass);
     });
 });
 
