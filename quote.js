@@ -90,6 +90,7 @@ app.post('/login', function(request, response){
         var query = 'SELECT *'+
             'FROM users WHERE username = $1';
         
+        var pass;
         client.query(query,[username],function(err, result){
            
            if(err){
@@ -100,33 +101,29 @@ app.post('/login', function(request, response){
                    response.statusCode = 401;
                    response.send("Unauthorized access");
                }else{
-                    password(userpassword).verifyAgainst(result.rows[0].password, function(error, verified){
-                        if(error){
-                            response.statusCode = 500;
-                            response.send(error);
-                        }else if (!verified){
-                            response.statusCode = 401;
-                            response.send("Unauthorized access");
-                        }else{
-                            
-                            var d = {
-                                "username": username,
-                                "sessionID": request.sessionID
-                            };
-                            response.send(request.sessionID);
-                        }
-                    });
+                   pass = result.rows[0].password;
+//                    password(userpassword).verifyAgainst(result.rows[0].password, function(error, verified){
+//                        if(error){
+//                            response.statusCode = 500;
+//                            response.send(error);
+//                        }else if (!verified){
+//                            response.statusCode = 401;
+//                            response.send("Unauthorized access");
+//                        }else{
+//                            
+//                        }
+//                    });
                 }               
             }
         }); 
-        client.query("update users set sessionid=$1 where username=$2",[request.sessionID,username],function(err, result){
+        client.query("update users set sessionid=$1 where username=$2",[request.sessionID(),username],function(err, result){
             if(err){
                 response.statusCode = 500;
                 response.send(err);
             }
         });
         done();
-        response.send(request.sessionID()+" : "+username);
+        response.send(request.sessionID()+" : "+username+" pass: "+pass);
     });
 });
 
