@@ -126,7 +126,7 @@ app.post('/login', function(request, response){
             }
         });
         done();
-        response.send(request.sessionID+" : "+username);
+        response.send(request.sessionID()+" : "+username);
     });
 });
 
