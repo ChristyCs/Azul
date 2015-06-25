@@ -103,8 +103,7 @@ app.post('/loggedin',function(request, response){
                 }
             });
         });
-    }
-    response.send(request.session);
+    }    
 });
 
 app.post('/login', function(request, response){    
