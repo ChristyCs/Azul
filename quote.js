@@ -113,7 +113,11 @@ app.post('/login', function(request, response){
                             }).on('end',function(){
                                 
                             });
-                            response.send(result.rows[0].username+" login Success "+request.sessionID);
+                            var d = {
+                                "username": username,
+                                "sessionID": request.sessionID
+                            }
+                            response.send(d);
                         }
                     });
                 }               
