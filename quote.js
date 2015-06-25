@@ -76,7 +76,7 @@ app.post('/create', function (request, response) {
                     response.statusCode = 500;
                     response.send(err);
                 } else {                    
-                    response.send(result);
+                    response.send(result.rowCount);
                 }
             });
         });
