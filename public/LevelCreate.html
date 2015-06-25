@@ -71,6 +71,7 @@ and open the template in the editor.
         <div data-role="page" data-theme="a">
             <div data-role="header" id="page1_header">
                 <h1>Level Create</h1>                                
+                <a id="save" class="ui-btn ui-btn-icon-left ui-icon-check">Save</a>
             </div>
             <div class="ui-content" id="pane1_main">
                 <div class="ui-grid-b" id="panel_col">
@@ -103,10 +104,32 @@ and open the template in the editor.
                                    placeholder="Sprite Source" data-corners="false">
                             <input type="text" id="sprite_name" 
                                    placeholder="Sprite Name" data-corners="false">
+                            <input type="number" id="sprite_width" 
+                                   placeholder="Width" data-corners="false">
+                            <input type="number" id="sprite_height" 
+                                   placeholder="Height" data-corners="false">
                             <input type="button" id="sprite_submit" 
                                    value="Add Sprite" data-corners="false">
                             <input type="button" id="sprite_lremove" 
                                    value="Remove Sprite" data-corners="false">
+                        </div>
+                        <div data-role="collapsible">
+                            <h1>Modify Sprite</h1>
+                            <div class="ui-grid-a">
+                                <div class="ui-block-a" style="padding-right: 2px">
+                                    <input type="number" id="sprite_modx"
+                                           placeholder="X" data-corners="false">
+                                    <input type="number" id="sprite_modw"
+                                           placeholder="W" data-corners="false">
+                                </div>
+                                <div class="ui-block-b" style="padding-left: 2px">
+                                    <input type="number" id="sprite_mody"
+                                           placeholder="Y" data-corners="false">
+                                    <input type="number" id="sprite_modh"
+                                           placeholder="H" data-corners="false">
+                                </div>
+                            </div>
+                            <input type="button" id="sprite_modify" data-corners="flase" value="Apply Mod">
                         </div>
                     </div>
                     <div class="ui-block-b" id="canvasBlock">                                              

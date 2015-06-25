@@ -100,12 +100,22 @@ $(window).load(function(){
     //Sprites
     var $spsrc = $("#sprite_src");
     var $spname = $("#sprite_name");
+    var $spwidth = $("#sprite_width");
+    var $spheight = $("#sprite_height");
     var $spsubmit = $("#sprite_submit");
     var $splist = $("#sprite_list");
     var $spremove = $("#sprite_remove");
     var $splayout = $("#sprite_layout");
     var $splremove = $("#sprite_lremove");
+    var $spmod = $("#sprite_modify");
+    var $spmodx = $("#sprite_modx");
+    var $spmody = $("#sprite_mody");
+    var $spmodw = $("#sprite_modw");
+    var $spmodh = $("#sprite_modh");
     var spcur = null;
+    
+    //save
+    var $save = $("#save");
 
     //--------------------------------------------------------------------------
     //---    Functions
@@ -284,15 +294,20 @@ $(window).load(function(){
             $plposy.val(e.offsetY);
             $("#"+plimg).x($plposx.val());
             $("#"+plimg).y($plposy.val());
-        }        
+        }
+        var list = $("input[type=checkbox]").filter(':checked');
+        if(list.length > 0){
+            $spmodx.val(e.offsetX);
+            $spmody.val(e.offsetY);
+        }
     });
     
     $spsubmit.on('click',function(){
-        var name = "Hello wolrd";
-        var url = "content/spacedude.gif";
+        var name = $spname.val();
+        var url = $spsrc.val();
         var id = Math.ceil(Math.random()*1000)+(Math.random()*10);    
-        var width = 50;
-        var height = 50;   
+        var width = $spwidth.val();
+        var height = $spheight.val();   
         var groupname = fggroup; 
         
         var data = "data-src="+url+" data-w="+width+" data-h="+height+" data-name="+name+" data-group="+groupname+" data-is-selected=false";
@@ -302,6 +317,14 @@ $(window).load(function(){
         var div = "<div id="+id+" "+style+" "+data+" class='spriteLayout'><p>"+name+"</p></div>";        
         $splayout.append(div);     
     }); 
+    
+    $splist.on('click',function(){
+        if(spcur != null){
+            $(spcur).css("background-color","rgb(200,200,200)");
+            $(spcur).data("is-selected",false);
+            spcur = null;
+        }
+    });
     
     $splremove.on('click',function(){
         var list = $("div.spriteLayout");  
@@ -322,6 +345,61 @@ $(window).load(function(){
             var sid = $item.data("sprite-id");
             $("#"+sid).remove();
             $item.closest('div').remove();
+        }
+    });
+    
+    $spmod.on('click',function(){
+        var list = $("input[type=checkbox]").filter(':checked');
+        var width = $spmodw.val();
+        var height = $spmodh.val();
+        var x = $spmodx.val();
+        var y = $spmody.val();
+        for(var i = 0; i < list.length;i++){
+            var $item = $(list[i]);
+            var $sp = $("#"+$item.data("sprite-id"));            
+            $sp.wh(width, height);
+            $sp.x(x);
+            $sp.y(y);
+        }
+    });
+    
+    $save.on('click',function(){
+        var polygons = $colzone[0];
+        var $player = $("#"+plgroup);
+        var plist = $player.children();
+        var pllist = [];
+        for(var i = 0; i < plist.length; i++){
+            var p = plist[i];
+            console.log($(p));
+            var x = $(p).x();
+            var y = $(p).y();
+            var w = $(p).w();
+            var h = $(p).h();
+            var data = {
+                "x":x,
+                "y":y,
+                "w":w,
+                "h":h
+            };
+            console.log(data);
+        }
+        
+        var flist = $("#"+fggroup).children();
+        for(var i = 0; i < flist.length; i++){
+            var f = flist[i];
+            console.log($(f).x());
+        }
+        
+        var mlist = $("#"+mggroup).children();
+        for(var i = 0 ; i<mlist.length;i++){
+            var m = mlist[i];
+            console.log($(m).css("background-image"));
+        }
+        
+        var blist = $("#"+bggroup).children();
+        for(var i = 0; i <blist.length;i++){
+            var b = blist[i];
+            console.log($(b).wh());
         }
     });
     
@@ -398,7 +476,17 @@ $(window).load(function(){
     $plposy.val(124);
     
     $bbleft.val(0);
-    $bbright.val(100);    
+    $bbright.val(100);
+    
+    $spsrc.val("content/spacedude.gif");
+    $spwidth.val("50");
+    $spheight.val("50");
+    $spname.val("Sprite1");
+    
+    $spmodw.val(32);
+    $spmodh.val(32);
+    $spmodx.val(10);
+    $spmody.val(20);
     
     //--------------------------------------------------------------------------
     //---   Start code
