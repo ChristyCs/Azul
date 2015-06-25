@@ -15,40 +15,114 @@ and open the template in the editor.
     </head>
     <body>
         <div data-role="page">
-            <div id="playground" style="width: 568; height: 320">
-                <div id="loading" style="width: 100%; height: 100%">
-                    
-                </div>
+            <div id="playground" style="background: rgb(0,0,5); width: 568px; height: 320px">  
+                <div id="left" style="width:150px; height:100%; position: absolute; top:0px; z-index: 1"></div>
+                <div id="right" style="width:150px; height:100%; position: absolute; left: 418px; top:0px; z-index: 1"></div>
             </div>            
         </div>
         <script type="text/javascript">
-            $(window).load(function(){
-                var sessionId = localStorage.getItem('sessionCookie');
+            $(window).load(function(){                 
+                var $playground = $("#playground");
+                var p_width = $playground.width();
+                var p_height = $playground.height();
+                $playground.playground({height: p_height,width: p_width});
                 
-                if(!sessionId){                    
-                    sessionId = uuid.v4();
-                    localStorage.setItem('sessionCookie', sessionId);
-                }
+                var bggroup = "bggroup";
+                var mggroup = "mggroup";
+                var fggroup = "fggroup";
+                var plgroup = "plgroup"; 
                 
-                $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
-                    // if there is data being sent
-                    // add the sessionId to it
-                    if (options.data) {
-                        options.data += '&sessionId=' + sessionId;
+                $.playground().addGroup(bggroup, {width: 32, height: 32}).end();
+                $.playground().addGroup(mggroup, {width: 32, height: 32}).end();
+                $.playground().addGroup(fggroup, {width: 32, height: 32}).end();
+                $.playground().addGroup(plgroup, {width: 32, height: 32}).end();                
+                
+                var json = $.getJSON("json/maptest.json")
+                        .done(function(data){
+                            console.log(data);
+                            startFunc(data);
+                        });
+                var unit_max;
+                var unit_min;
+                var unit_cur;
+                var unit_old = 0;
+                var dir_bgstep;
+                var dir_mgstep;
+                var dir_fgstep;
+                
+                
+                var startFunc = function(data){
+                    unit_max = data.unit_max;
+                    unit_min = data.unit_min;
+                    unit_cur = data.unit_start;
+                    dir_bgstep = data.dir_bgstep;
+                    dir_mgstep = data.dir_mgstep;
+                    dir_fgstep = data.dir_fgstep;
+                    createSprite(data.bg_list,bggroup);
+                    createSprite(data.mg_list,mggroup);
+                    createSprite(data.fg_list,fggroup);
+                    createSprite(data.pl_list,plgroup);
+//                    console.log("here");
+                    $.playground().startGame();
+                };
+                
+                var createSprite = function(list, group){
+                    for(var i = 0; i < list.length; i++){
+                        var item = list[i];
+                        var img = new $.gQ.Animation({imageURL: item.url});
+                        var x = item.x;
+                        var y = item.y;
+                        var w = item.w;
+                        var h = item.h;                        
+                        var id = Math.ceil(Math.random()*1000);
+                        $("#"+group).addSprite(id,{
+                            animation: img,
+                            width: w,
+                            height: h,
+                            posx: x,
+                            posy: y
+                        });
                     }
-
-                    // if there is no data being sent
-                    // create the data and add the sessionId
-                    else {
-                        options.data = 'sessionId=' + sessionId;
-                    }
-
+                };
+                var mousedownR = false;
+                $("#right").on('mousedown', function(){
+                    mousedownR = true;                    
                 });
-//                var $playground = $("#playground");
-//                var p_width = $playground.width();
-//                var p_height = $playground.height();
-//                $playground.playground({height: p_height,width: p_width});
                 
+                $("#right").on('mouseup',function(){
+                    mousedownR = false;
+                });
+                
+                var mousedownL = false;
+                $("#left").on('mousedown', function(){
+                    mousedownL = true;                    
+                });
+                
+                $("#left").on('mouseup',function(){
+                    mousedownL = false;
+                });
+                
+                $.playground().registerCallback(function(){
+                    if(mousedownL){
+                        unit_cur -= 1;
+                        if(unit_cur < unit_min){
+                            unit_cur = unit_min;
+                        }
+                    }
+                    if(mousedownR){
+                        unit_cur += 1;
+                        if(unit_cur > unit_max){
+                            unit_cur = unit_max;
+                        }
+                    }
+                    if(unit_cur !== unit_old){
+                        unit_old = unit_cur;
+                        $("#"+bggroup).x(-dir_bgstep * unit_cur);
+                        $("#"+mggroup).x(-dir_mgstep * unit_cur);
+                        $("#"+fggroup).x(-dir_fgstep * unit_cur);                        
+                        //$("#"+plgroup).x(-dir_bgstep * unit);
+                    }                              
+                },60);
                 
                 
             });            

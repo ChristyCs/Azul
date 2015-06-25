@@ -13,6 +13,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
         <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+        <script src="js/uuid.js"></script>
          <link rel="stylesheet" type="text/css" href="main.css">
     </head>
     <body>
@@ -147,6 +148,27 @@ and open the template in the editor.
                 $.ajaxSetup ({
                     cache: false
                 }); 
+                var sessionId = localStorage.getItem('sessionCookie');
+                
+                if(!sessionId){                    
+                    sessionId = uuid.v4();
+                    localStorage.setItem('sessionCookie', sessionId);
+                }
+                
+                $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+                    // if there is data being sent
+                    // add the sessionId to it
+                    if (options.data) {
+                        options.data += '&sessionId=' + sessionId;
+                    }
+
+                    // if there is no data being sent
+                    // create the data and add the sessionId
+                    else {
+                        options.data = 'sessionId=' + sessionId;
+                    }
+
+                });
                 //URL used for user authentication and creation
                 var URL = "https://rocky-chamber-3053.herokuapp.com";
                 
