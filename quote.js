@@ -91,7 +91,7 @@ app.post('/login', function(request, response){
             'FROM users WHERE username = $1';
         
         client.query(query,[username],function(err, result){
-           done();
+           
            if(err){
                response.statusCode = 500;
                response.send(err);
@@ -108,21 +108,25 @@ app.post('/login', function(request, response){
                             response.statusCode = 401;
                             response.send("Unauthorized access");
                         }else{
-                            client.query("update users set sessionid=$1 where username=$2",[request.sessionID,username],function(){
-                                
-                            }).on('end',function(){
-                                
-                            });
+                            
                             var d = {
                                 "username": username,
                                 "sessionID": request.sessionID
-                            }
-                            response.send(d);
+                            };
+                            response.send(request.sessionID);
                         }
                     });
                 }               
             }
-        });        
+        }); 
+        client.query("update users set sessionid=$1 where username=$2",[request.sessionID,username],function(err, result){
+            if(err){
+                response.statusCode = 500;
+                response.send(err);
+            }
+        });
+        done();
+        response.send(request.sessionID+" : "+username);
     });
 });
 
