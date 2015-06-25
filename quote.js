@@ -76,7 +76,7 @@ app.post('/create', function (request, response) {
                     response.statusCode = 500;
                     response.send(err);
                 } else {                    
-                    response.send(result.rowCount);
+                    response.send(result);
                 }
             });
         });
@@ -94,7 +94,7 @@ app.post('/login', function(request, response){
                 response.statusCode = 500;
                 response.send(err);
             }else{
-                console.log(result);
+                response.send(result.rowCount);
             }            
         });
         
