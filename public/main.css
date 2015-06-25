@@ -293,7 +293,7 @@ p{}
   	top: 40%;
 	font-size:0.8em;
 }
-#mission-facts-0 {
+.mission-facts-0 {
   position: absolute;
   font-size: 0.8em;
   left: 30%;
@@ -302,7 +302,7 @@ p{}
   font-family: monospace;
   color: lightblue;
 }
-#mission-facts-1 {
+.mission-facts-1 {
   position: absolute;
   font-size: 0.8em;
   left: 30%;
@@ -311,7 +311,7 @@ p{}
   font-family: monospace;
   color: lightblue;
 }
-#mission-facts-2 {
+.mission-facts-2 {
   position: absolute;
   font-size: 0.8em;
   left: 30%;
