@@ -34,10 +34,11 @@ and open the template in the editor.
                 
                 $.playground().addGroup(bggroup, {width: 32, height: 32}).end();
                 $.playground().addGroup(mggroup, {width: 32, height: 32}).end();
+                $.playground().addGroup(plgroup, {width: 32, height: 32}).end();
                 $.playground().addGroup(fggroup, {width: 32, height: 32}).end();
-                $.playground().addGroup(plgroup, {width: 32, height: 32}).end();                
+                                
                 
-                var json = $.getJSON("json/maptest.json")
+                var json = $.getJSON("json/map.json")
                         .done(function(data){
                             console.log(data);
                             startFunc(data);
@@ -69,7 +70,7 @@ and open the template in the editor.
                 var createSprite = function(list, group){
                     for(var i = 0; i < list.length; i++){
                         var item = list[i];
-                        var img = new $.gQ.Animation({imageURL: item.url});
+                        var img = new $.gQ.Animation({imageURL: "content/"+item.url});
                         var x = item.x;
                         var y = item.y;
                         var w = item.w;

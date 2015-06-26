@@ -1,53 +1,368 @@
-h1{
-	font-size: 33px;
-	
+@font-face {
+    font-family: BanglaMN;
+    src: url(Bangla-MN.ttc);
 }
-.title{
-	height: 25px;
-	text-align: center;
-	text-transform: uppercase;
-	z-index: 5;
+body{
 	font-family: BanglaMN;
- 	color: rgb(249, 222, 26);
-  	letter-spacing: 15px;
+  overflow: hidden;
 }
-.jupitertitle{
-	letter-spacing: 4px;
+h1{}
+.main-title{
+	font-size: 1.6em;
+	text-transform: uppercase;
+	text-align: center;
+	font-family: url(content/BanglaMN.ttc);
+	letter-spacing: 3.0px;
+	margin:0px;
+	color:yellow;
+	opacity: 0.8;
+  padding-top: 11px;
+}
+.sec-title{
+	font-size: 1.6em;
+	text-transform: uppercase;
+	text-align: center;
+	font-family: url(content/BanglaMN.ttc);
+	letter-spacing: 2.0px;
+	padding-bottom: 0%;
+	color:yellow;
+	opacity: 0.8;
+	margin-top:0px;
+}
+.ui-title{
+	color:blue;
+	font-family: url(content/BanglaMN.ttc);
+	margin-left: 0px;
+	margin-right: 0px;
+}
+.mission-planetname {
+  text-transform: uppercase;
+  position: absolute;
+  left: 29.7%;
+  top: 19%;
+  font-size: 1em;
+  color: lightblue;
+  font-family: BanglaMN;
+}
+a{}
+.ui-btn{
 	font-size: 1em;
-}
-.venustitle{
-	letter-spacing: 4px;
-	font-size: 1em;
-}
-.earthtitle{
-	letter-spacing: 4px;
-	font-size: 1em;
-}
-.primary{
-	height:50px;
-}
-.secndry{
-	letter-spacing: 7px;
+	margin-top: 40px;
+	opacity:0.9;
+
 }
 div{}
-.ui-content{
-	z-index: 0;
-	width:50%;
-	text-align: center;
-	margin-right: 20%;
-	margin-left:20%;
-	z-index: 5;
+.functions{
+  font-size: 0.8em;
+  position:absolute;
+  left: 57%;
+  top: 32.7%;
+font-family: monospace;
+color:lightblue;
 }
-.pgchng{
-	z-index: +1;
+
+/*#page_Main{
+	position: absolute;
+	background: url("content/bground.jpg");
+	background-repeat: no-repeat;
+}*/ 
+#page_Main {
+    position: absolute;
+    background: url("content/mission-bground.png");
+    background-repeat: round;
+}
+
+#page_Create{
+	position: absolute;
+    background: url("content/mission-bground.png");
+	background-repeat: no-repeat;
+}
+#page_Login{
+	position: absolute;
+    background: url("content/mission-bground.png");
+	background-repeat: no-repeat;
+}
+#div_Login{
+	padding:0px;
+}
+#div_Login2{
+  padding:0px;
+}
+#neptune-scroll-left-btn{
+	width:80px;
+	height:80px;
+	position: absolute;
+	left: 20%;
+  	top: 60%;
+}
+
+#neptune-scroll-right-btn{
+	width:80px;
+	height:80px;
+	position: absolute;
+	left: 60%;
+  	top: 60%;
+}
+#uranus-scroll-left-btn{
+  width:80px;
+  height:80px;
+  position: absolute;
+  left: 20%;
+    top: 60%;
+}
+
+#uranus-scroll-right-btn{
+  width:80px;
+  height:80px;
+  position: absolute;
+  left: 60%;
+    top: 60%;
+}
+#saturn-scroll-left-btn{
+  width:80px;
+  height:80px;
+  position: absolute;
+  left: 20%;
+    top: 60%;
+}
+
+#saturn-scroll-right-btn{
+  width:80px;
+  height:80px;
+  position: absolute;
+  left: 60%;
+    top: 60%;
+}
+#mission_ButtonBack_Uranus {
+  width: 69px;
+  height: 11px;
+  position: absolute;
+  left: 16%;
+  top: 0%;
+  text-transform: uppercase;
+  padding: 15px;
+    padding-left: 29px;
+  padding-top: 14px;
+    font-size: 0.6em;
+  color: lightblue;
+
+}
+#mission_ButtonBack_Neptune {
+  width: 69px;
+  height: 11px;
+  position: absolute;
+  left: 16%;
+  top: 0%;
+  text-transform: uppercase;
+  padding: 15px;
+  padding-left: 29px;
+  padding-top: 14px;  
+  font-size: 0.6em;
+  color: lightblue;
+
+}
+#mission_ButtonBack_Saturn {
+  width: 69px;
+  height: 11px;
+  position: absolute;
+  left: 16%;
+  top: 0%;
+  text-transform: uppercase;
+  padding: 15px;
+  padding-left: 29px;
+  padding-top: 14px;
+    font-size: 0.6em;
+  color: lightblue;
+
+}
+#neptune-fact-scroll-up-btn {
+   width: 100px;
+   height: 100px;
+   position: absolute;
+   left: 83%;
+   top: 12%;
+}
+#neptune-fact-scroll-down-btn{
+   width: 100px;
+   height: 100px;
+   position: absolute;
+   left: 83%;
+   top: 43%;
+}
+#saturn-fact-scroll-up-btn {
+   width: 100px;
+   height: 100px;
+   position: absolute;
+   left: 83%;
+   top: 12%;
+}
+#saturn-fact-scroll-down-btn{
+   width: 100px;
+   height: 100px;
+   position: absolute;
+   left: 83%;
+   top: 43%;
+}
+#uranus-fact-scroll-up-btn {
+   width: 100px;
+   height: 100px;
+   position: absolute;
+   left: 83%;
+   top: 12%;
+}
+#uranus-fact-scroll-down-btn{
+   width: 100px;
+   height: 100px;
+   position: absolute;
+   left: 83%;
+   top: 43%;
 }
 img{}
-.bground{
+.spacedude{
+	width:75px;
+	height:75px;
+	border:0;
+	padding-left:38%;
+	padding-right: 38.5%;
+	padding-bottom: 38.5%;
+	padding-top:15%;
+}
+.mission-bg{
 	position: absolute;
-	z-index: -1;	
-	height:320px;
+	padding:0px;
+	width:100%;
+	/*transform: rotate(90deg);*/
 }
+.mission-hud{
+	position: absolute;
+	padding:0px;
+	width:100%;
+  opacity: 0.6;
+	  /*transform: rotate(90deg);*/
+}
+.mission-neptune-planet {
+  animation-name: neptune;
+  animation-iteration-count: infinite;
+  animation-duration: 60s;
+  animation-timing-function: linear;
+  position: absolute;
+  left: 4%;
+  top: 19.5%;
+  width: 22.4%;
+}
+
+@keyframes neptune {
+     0%  {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+.mission-uranus-planet {
+  animation-name: uranus;
+  animation-iteration-count: infinite;
+  animation-duration: 60s;
+  animation-timing-function: linear;
+  position: absolute;
+  left: 4%;
+  top: 19.5%;
+  width: 22.4%;
+}
+
+@keyframes uranus {
+     0%  {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+.mission-saturn-planet {
+  animation-name: saturn;
+  animation-iteration-count: infinite;
+  animation-duration: 60s;
+  animation-timing-function: linear;
+  position: absolute;
+  left: 4%;
+  top: 19.5%;
+  width: 22.4%;
+}
+
+@keyframes saturn {
+     0%  {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+
 p{}
-.warning{
-	font-size: 0.8em;
+.mission-facts{
+	position: absolute;
+	left: 69%;
+  	top: 40%;
+	font-size:0.8em;
 }
+#mission-facts-0 {
+  position: absolute;
+  font-size: 0.8em;
+  left: 30%;
+  top: 29.5%;
+  width: 60%;
+  font-family: monospace;
+  color: lightblue;
+}
+#mission-facts-1 {
+  position: absolute;
+  font-size: 0.8em;
+  left: 30%;
+  top: 29.5%;
+  width: 60%;
+  font-family: monospace;
+  color: lightblue;
+}
+#mission-facts-2 {
+  position: absolute;
+  font-size: 0.8em;
+  left: 30%;
+  top: 29.5%;
+  width: 60%;
+  font-family: monospace;
+  color: lightblue;
+}
+.mission-facts-3{
+  position: absolute;
+  font-size: 0.8em;
+  left: 30%;
+  top: 29.5%;
+  width: 60%;
+  font-family: monospace;
+  color: lightblue;
+}
+
+
+/* Responsive iPhone 5 */
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+    
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+    
+      h1{}
+      .main-title{
+        font-size: 2.8em;
+        padding-top: 27px;
+ 
+      }
+      .sec-title{
+        font-size:2.8em;
+      }
+      a{}
+      .ui-btn{}
+      #main_ButtonLogin{
+        margin-top:-10px;
+      }
+
+}
+

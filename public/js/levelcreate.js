@@ -28,8 +28,8 @@ $(window).load(function(){
     var plgroup = "plgroup";
     $.playground().addGroup(bggroup, {width: 32, height: 32}).end();
     $.playground().addGroup(mggroup, {width: 32, height: 32}).end();
-    $.playground().addGroup(fggroup, {width: 32, height: 32}).end();
-    $.playground().addGroup(plgroup, {width: 32, height: 32}).end().css("background","rgb(100,100,100)");
+    $.playground().addGroup(plgroup, {width: 32, height: 32}).end();
+    $.playground().addGroup(fggroup, {width: 32, height: 32}).end();    
     
     var polyClass = "colPolClass";
     var lineClass = "colLinClass";
@@ -112,6 +112,7 @@ $(window).load(function(){
     var $spmody = $("#sprite_mody");
     var $spmodw = $("#sprite_modw");
     var $spmodh = $("#sprite_modh");
+    var $splayer = $("#sprite_layer");
     var spcur = null;
     
     //save
@@ -214,7 +215,17 @@ $(window).load(function(){
             "name": mgimg,
             "groupname": mggroup,
             "img": img_midground            
-        });                
+        });
+        loadBgFunc({
+            "src":$fgsrc,
+            "w": $fgwidth,
+            "h": $fgheight,
+            "px": $fgposx,
+            "py": $fgposy,
+            "name": fgimg,
+            "groupname": fggroup,
+            "img": img_foreground            
+        });
     });
     
     $plsubmit.on('click',function(){
@@ -269,8 +280,9 @@ $(window).load(function(){
         }else if(spcur != null){
             var $data = $(spcur);
             var name = $data.data("name");
-            var width = $data.data("width");
-            var height = $data.data("height");
+            var width = $data.data("w");
+            var height = $data.data("h");
+            console.log($data);
             var src = $data.data("src");
             var group = $data.data("group");
             var id = Math.ceil(Math.random()*1000)+name;
@@ -304,12 +316,12 @@ $(window).load(function(){
     
     $spsubmit.on('click',function(){
         var name = $spname.val();
-        var url = $spsrc.val();
+        var url = $spsrc.val();        
         var id = Math.ceil(Math.random()*1000)+(Math.random()*10);    
         var width = $spwidth.val();
         var height = $spheight.val();   
-        var groupname = fggroup; 
-        
+        var groupname = $splayer.val();//$splayer.val(); 
+        console.log($splayer.val());
         var data = "data-src="+url+" data-w="+width+" data-h="+height+" data-name="+name+" data-group="+groupname+" data-is-selected=false";
         var style = "style='background-color: rgb(200,200,200); background-image:url("
                 +url+"); background-size: 100%; background-position: center; overflow: auto; text-overflow: ellipsis; float: left;"
@@ -511,7 +523,7 @@ $(window).load(function(){
             $("#"+bggroup).x(-dir_stepbg * unit);
             $("#"+mggroup).x(-dir_stepmg * unit);
             $("#"+fggroup).x(-dir_stepfg * unit);                        
-            $("#"+plgroup).x(-dir_stepfg * unit);
+            $("#"+plgroup).x(-dir_stepmg * unit);
             $colzone.css("left", -dir_stepfg * unit);
         }       
     },60);
