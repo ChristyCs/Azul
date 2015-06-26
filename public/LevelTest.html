@@ -38,11 +38,11 @@ and open the template in the editor.
                 $.playground().addGroup(fggroup, {width: 32, height: 32}).end();
                                 
                 
-                var json = $.getJSON("json/map.json")
-                        .done(function(data){
-                            console.log(data);
-                            startFunc(data);
-                        });
+//                var json = $.getJSON("json/map.json")
+//                        .done(function(data){
+//                            console.log(data);
+//                            startFunc(data);
+//                        });
                 var unit_max;
                 var unit_min;
                 var unit_cur;
@@ -51,21 +51,7 @@ and open the template in the editor.
                 var dir_mgstep;
                 var dir_fgstep;
                 
-                
-                var startFunc = function(data){
-                    unit_max = data.unit_max;
-                    unit_min = data.unit_min;
-                    unit_cur = data.unit_start;
-                    dir_bgstep = data.dir_bgstep;
-                    dir_mgstep = data.dir_mgstep;
-                    dir_fgstep = data.dir_fgstep;
-                    createSprite(data.bg_list,bggroup);
-                    createSprite(data.mg_list,mggroup);
-                    createSprite(data.fg_list,fggroup);
-                    createSprite(data.pl_list,plgroup);
-//                    console.log("here");
-                    $.playground().startGame();
-                };
+                var data = {"unit_max":"500","unit_min":"0","unit_start":0,"col_zone":{"jQuery111306068851705640554":307},"pl_list":[{"url":"spacedude.gif","x":"82","y":"203","w":"40","h":"40"}],"fg_list":[{"url":"l1f.png","x":"0","y":"0","w":"5000","h":"320"}],"mg_list":[{"url":"l1m.png","x":"0","y":"30","w":"5000","h":"320"},{"url":"platform1.png","x":213,"y":209,"w":114,"h":81},{"url":"platform1.png","x":720,"y":177,"w":114,"h":81},{"url":"platform.png","x":1233,"y":178,"w":114,"h":81},{"url":"platform.png","x":1068,"y":250,"w":114,"h":81},{"url":"fuel.png","x":172,"y":183,"w":28,"h":19},{"url":"fuel.png","x":706,"y":263,"w":28,"h":19},{"url":"fuel.png","x":1583,"y":189,"w":28,"h":19},{"url":"fuel.png","x":1015,"y":204,"w":28,"h":19},{"url":"fuel.png","x":1086,"y":250,"w":28,"h":19},{"url":"fuel.png","x":1418,"y":259,"w":28,"h":19},{"url":"fuel.png","x":476,"y":241,"w":28,"h":19}],"bg_list":[{"url":"l1b.png","x":"0","y":"-10","w":"2500","h":"320"}],"dir_bgstep":1,"dir_mgstep":2,"dir_fgstep":4};
                 
                 var createSprite = function(list, group){
                     for(var i = 0; i < list.length; i++){
@@ -85,6 +71,24 @@ and open the template in the editor.
                         });
                     }
                 };
+                
+                var startFunc = function(data){
+                    unit_max = data.unit_max;
+                    unit_min = data.unit_min;
+                    unit_cur = data.unit_start;
+                    dir_bgstep = data.dir_bgstep;
+                    dir_mgstep = data.dir_mgstep;
+                    dir_fgstep = data.dir_fgstep;
+                    createSprite(data.bg_list,bggroup);
+                    createSprite(data.mg_list,mggroup);
+                    createSprite(data.fg_list,fggroup);
+                    createSprite(data.pl_list,plgroup);
+//                    console.log("here");
+                    $.playground().startGame();
+                };
+                startFunc(data);
+                
+                
                 var mousedownR = false;
                 $("#right").on('mousedown', function(){
                     mousedownR = true;                    

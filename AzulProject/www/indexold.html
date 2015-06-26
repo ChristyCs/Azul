@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<html>
+    <head>
+        <title>Main Page</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+        <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+        <script src="js/uuid.js"></script>
+         <link rel="stylesheet" type="text/css" href="main.css">
+    </head>
+    <body>
+        <!--Main div-->
+        <div data-role="page" data-theme="b" style="position:relative;" id="page_Main">
+            <br>
+            
+            <svg width="52%" height="16.5%" 
+            style="
+            position:absolute;
+            padding-top:10%;
+            padding-left:24%;
+            padding-right:24%;
+            left:0px;
+            top:0px;">
+                <rect x="0px" y="0px" width="100%" height="100%" style="fill:none;stroke:rgb(255, 223, 0);stroke-width:5;fill-opacity:0.1;opacity:0.8;stroke-opacity:0.9">
+                Your browser does not support SVG
+                </rect>
+            </svg>
+            <br>
+            <h1 class="main-title">Planet</h1>
+            <h1 class="sec-title">Runner</h1>
+            <a class="ui-btn" id="main_ButtonLogin" 
+                style="">Login</a>
+            <a class="ui-btn" id="main_ButtonCreate"
+                style="margin-top: 13px;">Create Account</a>
+            <img src="content/spacedude.gif" alt="spacedude" class="spacedude">
+        </div>
+        
+        <!--Login Div-->
+        <div data-role="page" data-theme="b" id="page_Login">
+            <div data-role="header" id="login_DivHeader">
+                <a class="ui-btn ui-btn-icon-left ui-icon-carat-l" id="login_ButtonBack" >Back</a>
+                <h1></h1> <!--"Enter Login Details" -->            
+            </div>
+            <div data-role="content" id="div_Login" class="ui-content">
+                <input name="Name" id="login_TextUserN" type="text" 
+                      data-clear-btn="true" placeholder="Name">       
+                <input name="Password" id="login_TextUserPW" type="password" 
+                       data-clear-btn="true" placeholder="Password">                
+                <a class="ui-btn" id="login_ButtonLogin">Login</a>
+                <div id="login_DivResult" class="functions" style="text-align: center"></div>
+            </div>
+        </div>
+        
+        <!--Create Div-->
+        <div data-role="page" data-theme="b" id="page_Create">
+            <div data-role="header" id="create_DivHeader">
+                <a class="ui-btn ui-btn-icon-left ui-icon-carat-l" id="create_ButtonBack">Back</a>
+                <h1></h1> <!--Enter New Details-->
+            </div>
+            <div data-role="content" id="div_Create" class="ui-content">
+                <input name="Name" id="create_TextUserN" placeholder="Name" type="text" 
+                       data-clear-btn="false">       
+                <input name="Password" id="create_TextUserPW" placeholder="Password" type="password" 
+                       data-clear-btn="false">
+                <input name="Confirm Password" id="create_TextUserConPW" placeholder="Confirm Password" type="password" 
+                       data-clear-btn="false">                
+                <a class="ui-btn" id="create_ButtonCreate">Create Account</a>
+                <div id="create_DivResult" class="functions" style="text-align: center"></div>
+            </div>
+        </div> 
+
+        <!--Mission Control Div Neptune-->
+        <div data-role="page" data-theme="b" id="page_MissionControl_Neptune">
+            <div data-role="content" id="div_Login" class="ui-content">
+                <img src="content/mission-bground.png" alt="missionbg" class="mission-bg"/>
+                <img src="content/hud.png" alt="missionhud" class="mission-hud"/>
+                <a href="LevelTest.html">
+                <img src="content/neptune.png" alt="earthplanet" class="mission-neptune-planet"/>
+                 </a>
+                <h1 class="mission-planetname">Planet: Neptune</h1>
+
+                <p id="mission-facts-0">
+                Welcome to Mission Control<br>
+                On your journey to the sun you must retrieve three <b>Fact Fuel</b> on each planet in order to proceed.
+                Good luck on your discovery and happy learning! <br> Click the planet to begin the level
+                <div id="missioncontrol_playerName" class="functions">Captain!</div>
+                </p>
+                <div id="neptune-scroll-left-btn"> </div>
+                <div id="neptune-scroll-right-btn"> </div>
+                <div class="ui-btn-inline ui-icon-carat-l" id="mission_ButtonBack_Neptune">Logout</div>
+                <div id="neptune-fact-scroll-up-btn"> </div>
+                <div id="neptune-fact-scroll-down-btn"> </div>
+                
+            </div>
+        </div>
+        <!--Mission Control Div Uranus-->
+        <div data-role="page" data-theme="b" id="page_MissionControl_Uranus">
+            <div data-role="content" id="div_Login2" class="ui-content">
+                 <img src="content/mission-bground.png" alt="missionbg" class="mission-bg"/>
+                <img src="content/hud.png" alt="missionhud" class="mission-hud"/>
+                <img src="content/uranus.png" alt="earthplanet" class="mission-uranus-planet"/>
+                <h1 class="mission-planetname">Planet: Uranus</h1>
+               <p id="mission-facts-1">Congratulations! You've made it to the second planet, Uranus. <br>
+               Click the planet to begin the level </p>
+            
+               <div id="uranus-scroll-left-btn"> </div>
+                <div id="uranus-scroll-right-btn"> </div>
+                <div class="ui-btn-inline ui-icon-carat-l" id="mission_ButtonBack_Uranus">Logout</div>
+                <div id="uranus-fact-scroll-up-btn"> </div>
+                <div id="uranus-fact-scroll-down-btn"> </div>
+            </div> 
+        </div>
+        <!--Mission Control Div Saturn-->
+        <div data-role="page" data-theme="b" id="page_MissionControl_Saturn">
+            <div data-role="content" id="div_Login2" class="ui-content">
+                 <img src="content/mission-bground.png" alt="missionbg" class="mission-bg"/>
+                <img src="content/hud.png" alt="missionhud" class="mission-hud"/>
+                <img src="content/saturn.png" alt="earthplanet" class="mission-saturn-planet"/>
+                <h1 class="mission-planetname">Planet: Saturn</h1>
+                <p id="mission-facts-2">Congratulations! You've made it to Saturn: the final frontier, for now. <br>
+               Click the planet to begin the level </p>
+               <div id="saturn-scroll-left-btn"> </div>
+                <div id="saturn-scroll-right-btn"> </div>
+                <div class="ui-btn-inline ui-icon-carat-l" id="mission_ButtonBack_Saturn">Logout</div>
+                <div id="saturn-fact-scroll-up-btn"> </div>
+                <div id="saturn-fact-scroll-down-btn"> </div>
+            </div> 
+        </div>
+        <!--Loading Div-->
+        <div data-role="page" id="page_Loading">
+            <br>
+            <br>
+            <img src="ajax-loader.gif" alt="loader image" 
+                 style="display: block; margin-left: auto;margin-right: auto"/>
+        </div>
+        <div data-role="page" id="level1">
+            
+        </div>
+
+        <script>
+            $(function(){
+                
+                $.ajaxSetup ({
+                    cache: false
+                }); 
+                var sessionId = localStorage.getItem('sessionCookie');
+                
+                if(!sessionId){                    
+                    sessionId = uuid.v4();
+                    localStorage.setItem('sessionCookie', sessionId);
+                }
+                
+                $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+                    // if there is data being sent
+                    // add the sessionId to it
+                    if (options.data) {
+                        options.data += '&sessionId=' + sessionId;
+                    }
+
+                    // if there is no data being sent
+                    // create the data and add the sessionId
+                    else {
+                        options.data = 'sessionId=' + sessionId;
+                    }
+
+                });
+                //URL used for user authentication and creation
+                var URL = "https://rocky-chamber-3053.herokuapp.com";
+                
+                //facts array
+                var neptuneFacts = [];
+                neptuneFacts.push("Neptune is the most distant planet from the Sun in our solar system and 17 times larger than Earth. The planets blue hue is a result of the methane in the outer atmosphere absorbing the red from the suns light, allowing the blue to bounce back out.");
+                neptuneFacts.push("The planet's inner core is made from rock and ice, surrounded by a heavy atmosphere of hydrogen, helium and methane gases. Neptune has fierce supersonic winds, resulting from the extremely dense atmosphere, which keep the planet cold and dark. ");
+            neptuneFacts.push("It has 13 official moons and a planetary ring system consisting of mostly ice and small rocks. ");
+                var neptuneFactNumber =0;
+
+                var uranusFacts = [];
+                uranusFacts.push("Uranus is the second farthest planet from the Sun and 15 times the size of Earth. The ice giant is very similar to Neptune and the two are often considered sister planets. ");
+                uranusFacts.push("It's thick atmosphere consists of a complex layer system of mainly water and methane with a baren interior core made from ice and rock. Uranus has a unique axis of rotation which is tilted sideways resulting in it's north and south poles being on the equator.");
+                uranusFacts.push("It's rings are compsed of small dark particles, varying in sizes less than a metre. It has 27 known moons, each being less than half the size of Earth's moon.");
+                var uranusFactNumber = 0;
+
+
+                var saturnFacts = [];
+                saturnFacts.push("Saturn is the third farthest planet from the sun and the second largest in the solar system. It is about 95 times the size of Earth, but has such a low density that if it was put in a large enough body of water, it would float.");
+                saturnFacts.push("The planet's core is made of iron, nickel and rock surrounded by a thick layer of liquid hydrogen and helium which makes up most of Saturn's volume, classing it as a gas giant.");
+                saturnFacts.push("Saturn is predominently famous for it's ring system, the largest and most visible of all the gas giants. The rings extend 120,000 km from the equator and mostly consist of ice particles which range in size from specks of dust up to 10 metres in length.");
+
+                var saturnFactNumber =0;
+                //Main page div
+                var pageMain = "#page_Main";
+                var mainButtonLogin = "#main_ButtonLogin";
+                var mainButtonCreate = "#main_ButtonCreate";
+                
+                //Login page div
+                var pageLogin = "#page_Login";
+                var loginTextUserN = "#login_TextUserN";
+                var loginTextUserPW = "#login_TextUserPW";
+                var loginButtonBack = "#login_ButtonBack";
+                var loginButtonLogin = "#login_ButtonLogin";
+                var loginDivResult = "#login_DivResult";
+
+                
+                //Create Account page div
+                var createLogin = "#page_Create";
+                var createTextUserN = "#create_TextUserN";
+                var createTextUserPW = "#create_TextUserPW";
+                var createTextUserConPW = "#create_TextUserConPW";
+                var createButtonCreate = "#create_ButtonCreate";
+                var createButtonBack = "#create_ButtonBack";
+                var createDivResult = "#create_DivResult";
+                
+                //Loading page div
+                var pageLoading = "#page_Loading";                               
+                //Mission Control divs
+                var neptuneLogoutButton = "#mission_ButtonBack_Neptune";
+                var neptuneLeftButton = "#neptune-scroll-left-btn";
+                var neptuneRightButton = "#neptune-scroll-right-btn";
+                var neptunefactUpButton = "#neptune-fact-scroll-up-btn";
+                var neptunefactDownButton = "#neptune-fact-scroll-down-btn";
+
+                var uranusLogoutButton = "#mission_ButtonBack_Uranus";
+                var uranusLeftButton = "#uranus-scroll-left-btn";
+                var uranusRightButton = "#uranus-scroll-right-btn";
+                var uranusfactUpButton = "#uranus-fact-scroll-up-btn";
+                var uranusfactDownButton = "#uranus-fact-scroll-down-btn";
+
+                var saturnLogoutButton = "#mission_ButtonBack_Saturn";
+                var saturnLeftButton = "#saturn-scroll-left-btn";
+                var saturnRightButton = "#saturn-scroll-right-btn";
+                var saturnfactUpButton = "#saturn-fact-scroll-up-btn";
+                var saturnfactDownButton = "#saturn-fact-scroll-down-btn";
+
+                var missioncontrolplayerName = "#missioncontrol_playerName";
+
+
+                //Button Click functions
+                //Main Buttons
+
+
+                $(mainButtonLogin).on('click', function(){
+                    $.mobile.changePage("#page_Login", { transition: "slide", 
+                        reverse: false, changeHash: false });
+                });                
+                $(mainButtonCreate).on('click', function(){
+                    $.mobile.changePage("#page_Create", { transition: "slide", 
+                        reverse: false, changeHash: false });
+                });
+                //Mission Control switching buttons
+                $(neptuneRightButton).on('click', function(){
+                     $.mobile.changePage("#page_MissionControl_Uranus", { transition: "slide", 
+                        reverse: false, changeHash: false });
+                }); 
+                $(uranusLeftButton).on('click', function(){
+                     $.mobile.changePage("#page_MissionControl_Neptune", { transition: "slide", 
+                        reverse: true, changeHash: false });
+                });
+                $(uranusRightButton).on('click', function(){
+                     $.mobile.changePage("#page_MissionControl_Saturn", { transition: "slide", 
+                        reverse: false, changeHash: false });
+                });
+                 $(saturnLeftButton).on('click', function(){
+                     $.mobile.changePage("#page_MissionControl_Uranus", { transition: "slide", 
+                        reverse: true, changeHash: false });
+                });
+                //Mission control fact buttons
+                $(neptunefactUpButton).on('click', function(){
+                    var fact = document.getElementById('mission-facts-0');
+                    var captain = document.getElementById('missioncontrol_playerName');
+                    captain.innerHTML = "";
+                    if(neptuneFactNumber<2){
+                        neptuneFactNumber+=1;
+                        var a = neptuneFacts[neptuneFactNumber];
+                        fact.innerHTML = a;
+
+                    }
+                });
+                $(neptunefactDownButton).on('click', function(){
+                    var fact = document.getElementById('mission-facts-0');
+                    if(neptuneFactNumber>0){
+                        neptuneFactNumber-=1;
+                        var a = neptuneFacts[neptuneFactNumber];
+                        fact.innerHTML = a;
+                    }
+                });
+                $(uranusfactUpButton).on('click', function(){
+                     var fact = document.getElementById('mission-facts-1');
+                    var captain = document.getElementById('missioncontrol_playerName');
+                    captain.innerHTML = "";
+                    if(uranusFactNumber<2){
+                        uranusFactNumber+=1;
+                        var a = uranusFacts[uranusFactNumber];
+                        fact.innerHTML = a;
+
+                    }
+                });
+                $(uranusfactDownButton).on('click', function(){
+                     var fact = document.getElementById('mission-facts-1');
+                    if(uranusFactNumber>0){
+                        uranusFactNumber-=1;
+                        var a = uranusFacts[uranusFactNumber];
+                        fact.innerHTML = a;
+                    }
+                });
+                $(saturnfactUpButton).on('click', function(){
+                     var fact = document.getElementById('mission-facts-2');
+                    var captain = document.getElementById('missioncontrol_playerName');
+                    captain.innerHTML = "";
+                    if(saturnFactNumber<2){
+                        saturnFactNumber+=1;
+                        var a = saturnFacts[saturnFactNumber];
+                        fact.innerHTML = a;
+
+                    }
+                });
+                $(saturnfactDownButton).on('click', function(){
+                    var fact = document.getElementById('mission-facts-2');
+                    if(saturnFactNumber>0){
+                        saturnFactNumber-=1;
+                        var a = saturnFacts[saturnFactNumber];
+                        fact.innerHTML = a;
+                    }
+                });
+
+                //Login buttons
+                $(neptuneLogoutButton).on('click', function(){
+                    $.mobile.changePage("#page_Main", { transition: "slide", 
+                        reverse: true, changeHash: false });
+                });
+                $(uranusLogoutButton).on('click', function(){
+                    $.mobile.changePage("#page_Main", { transition: "slide", 
+                        reverse: true, changeHash: false });
+                });
+                $(saturnLogoutButton).on('click', function(){
+                    $.mobile.changePage("#page_Main", { transition: "slide", 
+                        reverse: true, changeHash: false });
+                });
+
+                $(loginButtonBack).on('click', function(){
+                    $(loginDivResult).html("");
+                    $.mobile.changePage("#page_Main", { transition: "slide", 
+                        reverse: true, changeHash: false });
+                });
+
+                $(loginButtonLogin).on('click', function(){
+
+                        
+                    var jsonUrl = URL+"/login";
+                    var hasName = $(loginTextUserN).val();
+                    var hasPass = $(loginTextUserPW).val();
+                    if(hasName && hasPass){
+                        var userName = $(loginTextUserN).val();
+                        var playerName = "Captain " + userName + "!";
+                        $(missioncontrolplayerName).html(playerName);
+                            
+                            console.log("User logged in: "+playerName);
+                            var playerNamed = $(missioncontrolplayerName).val();
+                            //$(missioncontrolplayerName).html(playerName);
+                        var userPassword = $(loginTextUserPW).val();
+                        var userDetails = {"username": userName, "password":userPassword};                        
+                        $.mobile.changePage("#page_Loading", { transition: "none", 
+                            reverse: false, changeHash: false });
+                        
+                        $.post(jsonUrl, userDetails)
+                                .success(function(data){
+                                    console.log(data);
+                                })
+                                .error(function(data){
+                                    console.log("Error occured with login");
+                                    var htmlVal = "<p><b>Wrong User Name or Password</b><p>";
+                                    $(loginDivResult)
+                                            .css("color","red")
+                                            .css("font-size","0.8em")
+                                            .html(htmlVal);
+                                    $.mobile.changePage("#page_Login", { transition: "none", 
+                                        reverse: false, changeHash: false });
+                                });
+ 
+                        $.mobile.changePage("#page_MissionControl_Neptune", { 
+                         reverse: false, changeHash: false });
+
+                    }else{
+                        var htmlVal = "<p><b>Please enter User Name and Password</b><p>";
+                        $(loginDivResult)
+                                .css("color","red")
+                                .css("font-size","0.8em")
+                                .html(htmlVal);
+                    }
+                });
+                
+                //Create buttons
+                $(createButtonBack).on('click', function(){
+                   $.mobile.changePage("#page_Main", { transition: "slide", 
+                        reverse: true, changeHash: false });
+                   $(createDivResult).html("");
+                });
+                
+                $(createButtonCreate).on('click', function(){
+                   var jsonUrl = URL+"/create";
+                   var hasName = $(createTextUserN).val();
+                   var hasPass = $(createTextUserPW).val();
+                   var hasConPass = $(createTextUserConPW).val();
+                   
+                   if(hasName && hasPass && hasConPass){
+                       var userName = $(createTextUserN).val();
+                       var userPass = $(createTextUserPW).val();
+                       var userConPass = $(createTextUserConPW).val();
+                       if(!(userPass === userConPass)){
+                           var htmlVal = "<p><b>Passwords Do Not Match</b></p>";
+                           $(createDivResult)
+                                .css("color","red")
+                                .css("font-size","0.8em")
+                                .html(htmlVal);                           
+                       }else{
+
+                           $.mobile.changePage("#page_Loading", { transition: "none", 
+                                reverse: false, changeHash: false });
+                           console.log("need to redirect to home!, Currently sitting on loading!");
+                           var userDetails = {"username":userName,"password":userPass};
+                        /*  $.mobile.changePage("#page_Main") , { transition: "none", 
+                                reverse: false, changeHash: false }); */
+                           $.post(jsonUrl, userDetails)
+                                   .success(function(data){
+                                       console.log(data);
+                                   })
+                                   .error(function(data){
+                                       console.log(data.responseText);
+                                       var htmlVal = "<p><b>User Name Already in Use</b></p>";
+                                       $(createDivResult)
+                                                .css("color","red")
+                                                .css("font-size","0.8em")
+                                                .html(htmlVal);
+                                       $.mobile.changePage("#page_Create", { transition: "none", 
+                                            reverse: false, changeHash: false });
+                                   });
+
+
+                           
+                       }
+                   }else{
+                       var htmlVal = "<p><b>Please Enter Required Details</b></p>";
+                       $(createDivResult)
+                                .css("color","red")
+                                .css("font-size","0.8em")
+                                .html(htmlVal);
+                   }
+                });
+                
+            });
+            
+        </script>
+
+
+
+    </body>
+</html>
